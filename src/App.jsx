@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <NavbarComponent></NavbarComponent>
+      <div style={{width: "100%", height: "300px"}}></div>
       <FooterComponent></FooterComponent>
     </>
   )
