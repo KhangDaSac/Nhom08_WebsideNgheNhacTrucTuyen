@@ -1,0 +1,74 @@
+{
+  "common": {
+    "search": "Tìm kiếm",
+    "login": "Đăng nhập",
+    "signup": "Đăng ký",
+    "logout": "Đăng xuất",
+    "profile": "Hồ sơ",
+    "settings": "Cài đặt",
+    "language": "Ngôn ngữ",
+    "theme": "Giao diện",
+    "dark": "Tối",
+    "light": "Sáng"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "phoneNumber": "Số điện thoại",
+    "forgotPassword": "Quên mật khẩu?",
+    "loginWith": "Đăng nhập bằng {{provider}}",
+    "noAccount": "Chưa có tài khoản?",
+    "haveAccount": "Đã có tài khoản?",
+    "signupNow": "Đăng ký ngay",
+    "loginNow": "Đăng nhập ngay"
+  },
+  "home": {
+    "welcome": "Chào mừng đến với Ứng dụng Nhạc",
+    "trending": "Thịnh hành",
+    "newReleases": "Mới phát hành",
+    "popularArtists": "Nghệ sĩ nổi bật",
+    "featuredPlaylists": "Danh sách phát nổi bật",
+    "exploreMore": "Khám phá thêm"
+  },
+  "player": {
+    "play": "Phát",
+    "pause": "Tạm dừng",
+    "next": "Tiếp theo",
+    "previous": "Trước đó",
+    "shuffle": "Phát ngẫu nhiên",
+    "repeat": "Lặp lại",
+    "queue": "Danh sách chờ",
+    "lyrics": "Lời bài hát",
+    "volume": "Âm lượng",
+    "mute": "Tắt tiếng",
+    "unmute": "Bật tiếng"
+  },
+  "playlist": {
+    "create": "Tạo danh sách phát",
+    "edit": "Chỉnh sửa danh sách phát",
+    "delete": "Xóa danh sách phát",
+    "addTo": "Thêm vào danh sách phát",
+    "removeFrom": "Xóa khỏi danh sách phát",
+    "public": "Công khai",
+    "private": "Riêng tư"
+  },
+  "account": {
+    "personalInfo": "Thông tin cá nhân",
+    "name": "Tên",
+    "dateOfBirth": "Ngày sinh",
+    "accountType": "Loại tài khoản",
+    "premium": "Premium",
+    "free": "Miễn phí",
+    "upgrade": "Nâng cấp lên Premium",
+    "billing": "Thông tin thanh toán",
+    "preferences": "Tùy chọn"
+  },
+  "footer": {
+    "about": "Về chúng tôi",
+    "contact": "Liên hệ",
+    "terms": "Điều khoản dịch vụ",
+    "privacy": "Chính sách bảo mật",
+    "copyright": "© 2024 Ứng dụng Nhạc. Đã đăng ký bản quyền."
+  }
+} 
