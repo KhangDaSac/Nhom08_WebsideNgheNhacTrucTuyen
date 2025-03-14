@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -7,52 +7,64 @@ import { FiMenu } from 'react-icons/fi';
 const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Sidebar for tablet and desktop */}
-      <div className="hidden md:block w-64 flex-shrink-0">
-        <Sidebar />
-      </div>
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsSidebarOpen(false);
+      }
+    };
 
-      {/* Mobile Sidebar */}
-      <div
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
+  return (
+    <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
+      {/* Desktop Sidebar - Fixed */}
+      <aside className="hidden md:block fixed top-0 left-0 h-full w-64 z-30">
+        <Sidebar />
+      </aside>
+
+      {/* Mobile Sidebar - Slide from left */}
+      <div 
         className={`fixed inset-y-0 left-0 transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out z-50 md:hidden`}
+        } transition-transform duration-300 ease-in-out md:hidden z-50 w-64`}
       >
-        <Sidebar />
+        <Sidebar onClose={closeSidebar} />
       </div>
 
-      {/* Mobile Sidebar Overlay */}
+      {/* Overlay for mobile sidebar */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-          onClick={() => setIsSidebarOpen(false)}
-        ></div>
+          className="fixed inset-0 bg-gray-900/50 z-40 md:hidden"
+          onClick={closeSidebar}
+        />
       )}
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
-        {/* Mobile Menu Button */}
-        <div className="md:hidden fixed top-4 left-4 z-30">
-          <button
-            onClick={() => setIsSidebarOpen(true)}
-            className="p-2 rounded-lg bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-lg"
-          >
-            <FiMenu className="w-6 h-6" />
-          </button>
-        </div>
+      {/* Mobile menu button */}
+      <button
+        onClick={toggleSidebar}
+        className="md:hidden fixed top-4 left-4 z-30 p-2 rounded-lg bg-white dark:bg-gray-800 shadow-lg text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+      >
+        <FiMenu className="w-6 h-6" />
+      </button>
 
-        {/* Navbar */}
+      {/* Main content - Adjusted margin for desktop sidebar */}
+      <div className="flex-1 flex flex-col min-h-0 md:ml-64">
         <Navbar />
-
-        {/* Page Content */}
-        <main className="flex-1 overflow-y-auto pb-24 md:pb-36 px-4 sm:px-6 md:px-8">
+        <main className="flex-1 p-4 md:p-6 pt-16 md:pt-6 pb-24 overflow-y-auto">
           {children}
         </main>
-
-        {/* Footer with Player */}
-        <Footer />
+        <Footer className="fixed bottom-0 left-0 right-0 md:left-64" />
       </div>
     </div>
   );

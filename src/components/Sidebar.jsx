@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FiHome, FiSearch, FiMusic, FiRadio, FiHeart, FiPlus, FiMenu } from 'react-icons/fi';
+import { FiHome, FiSearch, FiMusic, FiRadio, FiHeart, FiPlus, FiX } from 'react-icons/fi';
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   const { t } = useTranslation();
   const location = useLocation();
 
@@ -23,9 +23,9 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="flex flex-col w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 h-full">
-      {/* Logo */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-800">
+    <div className="flex flex-col h-full bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800">
+      {/* Logo and Close Button */}
+      <div className="sticky top-0 z-10 p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between bg-white dark:bg-gray-900">
         <Link to="/" className="flex items-center">
           <img
             src="/logo.png"
@@ -36,15 +36,24 @@ const Sidebar = () => {
             Music App
           </span>
         </Link>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="md:hidden p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            <FiX className="w-6 h-6" />
+          </button>
+        )}
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto p-4">
-        <div className="space-y-1">
+      <nav className="flex-1 overflow-y-auto scrollbar-none">
+        <div className="p-4 space-y-1">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.path}
+              onClick={onClose}
               className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                 isActive(item.path)
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-500'
@@ -58,7 +67,7 @@ const Sidebar = () => {
         </div>
 
         {/* Playlists */}
-        <div className="mt-8">
+        <div className="p-4 mt-4">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
               {t('Your Playlists')}
@@ -72,6 +81,7 @@ const Sidebar = () => {
               <Link
                 key={playlist.id}
                 to={`/playlist/${playlist.id}`}
+                onClick={onClose}
                 className="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 <FiHeart className="w-5 h-5 mr-3" />
@@ -85,4 +95,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar; 
+export default Sidebar;
