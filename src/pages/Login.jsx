@@ -44,9 +44,9 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo & Title */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-primary-500 mb-2">Music App</h1>
+          <h1 className="text-4xl font-bold text-primary-500 mb-2">Music for you</h1>
           <p className="text-gray-600 dark:text-gray-400">
-            {t('login.welcome')}
+            {t('Welcome to Music for you')}
           </p>
         </div>
 
@@ -59,7 +59,7 @@ const Login = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('login.email')}
+                {t('Username')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -73,7 +73,7 @@ const Login = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('login.emailPlaceholder')}
+                  placeholder={t('Enter your email or phone number')}
                 />
               </div>
             </div>
@@ -84,7 +84,7 @@ const Login = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('login.password')}
+                {t('Password')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -98,7 +98,7 @@ const Login = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('login.passwordPlaceholder')}
+                  placeholder={t('Enter your password')}
                 />
                 <button
                   type="button"
@@ -131,14 +131,14 @@ const Login = () => {
                   htmlFor="remember"
                   className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
                 >
-                  {t('login.rememberMe')}
+                  {t('Remember me')}
                 </label>
               </div>
               <Link
                 to="/forgot-password"
                 className="text-sm text-primary-500 hover:text-primary-600"
               >
-                {t('login.forgotPassword')}
+                {t('Forgot password')}
               </Link>
             </div>
 
@@ -151,10 +151,10 @@ const Login = () => {
               {isLoading ? (
                 <div className="flex items-center">
                   <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin mr-2"></div>
-                  {t('login.signingIn')}
+                  {t('Logging in...')}
                 </div>
               ) : (
-                t('login.signIn')
+                t('Login')
               )}
             </button>
           </form>
@@ -162,12 +162,12 @@ const Login = () => {
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {t('login.noAccount')}{' '}
+              {t('No account?')}{' '}
               <Link
                 to="/signup"
                 className="font-medium text-primary-500 hover:text-primary-600"
               >
-                {t('login.signUp')}
+                {t('Sign up')}
               </Link>
             </p>
           </div>

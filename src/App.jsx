@@ -15,9 +15,7 @@ import SignUp from './pages/SignUp';
 import Account from './pages/Account';
 import Playlist from './pages/Playlist';
 import Album from './pages/Album';
-// import Track from './pages/Track';
 import Artist from './pages/Artist';
-// import Explore from './pages/Explore';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
 function App() {

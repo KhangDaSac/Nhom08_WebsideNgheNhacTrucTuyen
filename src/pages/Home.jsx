@@ -97,10 +97,10 @@ const Home = () => {
         <div className="relative h-full flex items-center">
           <div className="container mx-auto px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-              {t('home.hero.title')}
+              {t('Welcome music for you')}
             </h1>
             <p className="text-xl text-gray-200 mb-8 max-w-2xl">
-              {t('home.hero.subtitle')}
+              {t('Âm nhạc kết nối mọi người')}
             </p>
             <button className="flex items-center gap-2 px-8 py-4 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
               <FiPlay className="w-5 h-5" />
