@@ -116,30 +116,20 @@ const Library = () => {
               {t('library.description')}
             </p>
           </div>
-          <button className="btn-primary">
-            <FiPlus className="w-4 h-4" />
-            {t('library.createPlaylist')}
-          </button>
         </div>
 
         {/* Search & Filter */}
-        <div className="flex items-center gap-4 mb-6">
-          <div className="relative flex-1">
+        <div className="flex-1 max-w-lg">
+          <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiSearch className="h-5 w-5 text-gray-400" />
             </div>
             <input
               type="text"
-              placeholder={t('library.search')}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="input-primary"
+              placeholder={t('Search for songs, artists, or albums')}
+              className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
             />
           </div>
-          <button className="btn-secondary">
-            <FiFilter className="w-4 h-4" />
-            {t('library.filter')}
-          </button>
         </div>
 
         {/* Tabs */}

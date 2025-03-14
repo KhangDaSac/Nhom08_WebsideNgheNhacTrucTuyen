@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiHome, FiSearch, FiMusic, FiRadio, FiHeart, FiPlus, FiX } from 'react-icons/fi';
+import logo from '../assets/navigation/Logo.svg';
 
 const Sidebar = ({ onClose }) => {
   const { t } = useTranslation();
@@ -28,7 +29,7 @@ const Sidebar = ({ onClose }) => {
       <div className="sticky top-0 z-10 p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between bg-white dark:bg-gray-900">
         <Link to="/" className="flex items-center">
           <img
-            src="/logo.png"
+            src={logo}
             alt="Logo"
             className="h-8 w-8 rounded-lg"
           />

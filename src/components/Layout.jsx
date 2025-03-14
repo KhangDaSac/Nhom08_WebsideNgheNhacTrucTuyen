@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { FiMenu } from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
 const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -33,29 +33,40 @@ const Layout = ({ children }) => {
         <Sidebar />
       </aside>
 
-      {/* Mobile Sidebar - Slide from left */}
+      {/* Mobile Sidebar - Slide from left with shadow */}
       <div 
         className={`fixed inset-y-0 left-0 transform ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out md:hidden z-50 w-64`}
+          isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+        } transition-all duration-300 ease-in-out md:hidden z-50 w-64`}
       >
         <Sidebar onClose={closeSidebar} />
       </div>
 
       {/* Overlay for mobile sidebar */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-gray-900/50 z-40 md:hidden"
-          onClick={closeSidebar}
-        />
-      )}
+      <div
+        className={`fixed inset-0 bg-gray-900/50 transition-opacity duration-300 md:hidden ${
+          isSidebarOpen ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={closeSidebar}
+      />
 
-      {/* Mobile menu button */}
+      {/* Mobile toggle button - Centered on left edge */}
       <button
         onClick={toggleSidebar}
-        className="md:hidden fixed top-4 left-4 z-30 p-2 rounded-lg bg-white dark:bg-gray-800 shadow-lg text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+        className={`md:hidden fixed left-0 top-1/2 -translate-y-1/2 z-50 
+          h-12 w-6 flex items-center justify-center
+          rounded-r-lg shadow-lg 
+          ${isSidebarOpen 
+            ? 'bg-gray-800 text-white hover:bg-gray-700' 
+            : 'bg-white dark:bg-gray-800 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+          } transition-colors duration-200`}
+        aria-label={isSidebarOpen ? 'Close sidebar' : 'Open sidebar'}
       >
-        <FiMenu className="w-6 h-6" />
+        {isSidebarOpen ? (
+          <FiChevronLeft className="w-5 h-5" />
+        ) : (
+          <FiChevronRight className="w-5 h-5" />
+        )}
       </button>
 
       {/* Main content - Adjusted margin for desktop sidebar */}
