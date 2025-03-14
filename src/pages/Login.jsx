@@ -46,7 +46,7 @@ const Login = () => {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-primary-500 mb-2">Music for you</h1>
           <p className="text-gray-600 dark:text-gray-400">
-            {t('Welcome to Music for you')}
+            {t('Login')}
           </p>
         </div>
 

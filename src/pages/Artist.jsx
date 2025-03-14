@@ -141,10 +141,10 @@ const Artist = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={() => play(artist.popularSongs[0])}
-            className="flex items-center px-6 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors"
+            className="flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors"
           >
-            <FiPlay className="w-5 h-5 mr-2" />
-            {t('common.play')}
+            <FiPlay className="w-5 h-5 relative left-[1px]" />
+            {t('Play')}
           </button>
           <button
             onClick={() => setIsFollowing(!isFollowing)}
@@ -154,7 +154,7 @@ const Artist = () => {
                 : 'border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300'
             }`}
           >
-            {isFollowing ? t('artist.following') : t('artist.follow')}
+            {isFollowing ? t('Unfollow') : t('Follow')}
           </button>
           <button className="p-2 rounded-full text-gray-400 hover:text-gray-500">
             <FiShare2 className="w-6 h-6" />
@@ -164,7 +164,7 @@ const Artist = () => {
         {/* Popular Songs */}
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('artist.popularSongs')}
+            {t('Popular songs')}
           </h2>
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
             <table className="w-full">
@@ -192,13 +192,9 @@ const Artist = () => {
                       <td className="px-4 py-3 w-12">
                         <button
                           onClick={() => play(song)}
-                          className="p-2 rounded-full group-hover:bg-primary-500 group-hover:text-white"
+                          className="p-2 rounded-full bg-primary-500 text-white flex items-center justify-center"
                         >
-                          {isCurrentSong && isPlaying ? (
-                            <span className="block w-4 h-4 bg-primary-500" />
-                          ) : (
-                            <FiPlay className="w-4 h-4" />
-                          )}
+                          <FiPlay className="w-4 h-4 relative left-[1px]" />
                         </button>
                       </td>
                       <td className="px-4 py-3">
@@ -232,7 +228,7 @@ const Artist = () => {
         {/* Albums */}
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('artist.albums')}
+            {t('Albums')}
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {artist.albums.map((album) => (
@@ -253,9 +249,9 @@ const Artist = () => {
                         e.preventDefault();
                         // Play album
                       }}
-                      className="p-3 bg-primary-500 rounded-full text-white"
+                      className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
                     >
-                      <FiPlay className="h-6 w-6" />
+                      <FiPlay className="h-6 w-6 relative left-[1px]" />
                     </button>
                   </div>
                 </div>
@@ -273,7 +269,7 @@ const Artist = () => {
         {/* About */}
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('artist.about')}
+            {t('About artist')}
           </h2>
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6">
             <p className="text-gray-700 dark:text-gray-300 mb-4">

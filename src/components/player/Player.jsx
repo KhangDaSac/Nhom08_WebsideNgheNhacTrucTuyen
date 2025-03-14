@@ -103,12 +103,12 @@ const Player = () => {
             </button>
             <button
               onClick={togglePlay}
-              className="p-3 rounded-full bg-primary-500 hover:bg-primary-600 text-white"
+              className="p-3 rounded-full bg-primary-500 hover:bg-primary-600 text-white flex items-center justify-center"
             >
               {isPlaying ? (
                 <FiPause className="h-6 w-6" />
               ) : (
-                <FiPlay className="h-6 w-6" />
+                <FiPlay className="h-6 w-6 relative left-[1px]" />
               )}
             </button>
             <button

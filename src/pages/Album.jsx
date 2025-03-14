@@ -126,10 +126,10 @@ const Album = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => play(album.songs[0])}
-              className="flex items-center px-6 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors"
+              className="flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors"
             >
-              <FiPlay className="w-5 h-5 mr-2" />
-              {t('common.play')}
+              <FiPlay className="w-5 h-5 relative left-[1px]" />
+              {t('Play')}
             </button>
             <button
               onClick={() => setIsFavorite(!isFavorite)}
@@ -177,13 +177,9 @@ const Album = () => {
                   <td className="px-4 py-3 w-12">
                     <button
                       onClick={() => play(song)}
-                      className="p-2 rounded-full group-hover:bg-primary-500 group-hover:text-white"
+                      className="p-2 rounded-full bg-primary-500 text-white flex items-center justify-center"
                     >
-                      {isCurrentSong && isPlaying ? (
-                        <span className="block w-4 h-4 bg-primary-500" />
-                      ) : (
-                        <FiPlay className="w-4 h-4" />
-                      )}
+                      <FiPlay className="w-4 h-4 relative left-[1px]" />
                     </button>
                   </td>
                   <td className="px-4 py-3">
@@ -215,19 +211,19 @@ const Album = () => {
       {/* Album Info */}
       <div className="mt-8">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-          {t('album.about')}
+          {t('About album')}
         </h2>
         <p className="text-gray-700 dark:text-gray-300">{album.description}</p>
         <div className="mt-4 grid grid-cols-2 gap-4">
           <div>
             <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {t('album.genre')}
+              {t('Genre')}
             </h3>
             <p className="mt-1 text-gray-900 dark:text-white">{album.genre}</p>
           </div>
           <div>
             <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {t('album.releaseDate')}
+              {t('Release date')}
             </h3>
             <p className="mt-1 text-gray-900 dark:text-white">
               {album.releaseYear}

@@ -129,12 +129,11 @@ const Search = () => {
                 <td className="px-4 py-3 w-12">
                   <button
                     onClick={() => play(song)}
-                    className="p-2 rounded-full group-hover:bg-primary-500 group-hover:text-white"
-                  >
+                    className="p-2 rounded-full bg-primary-500 text-white">
                     {isCurrentSong && isPlaying ? (
                       <span className="block w-4 h-4 bg-primary-500" />
                     ) : (
-                      <FiPlay className="w-4 h-4" />
+                      <FiPlay className="w-4 h-4 relative left-[1px]" />
                     )}
                   </button>
                 </td>
@@ -190,8 +189,8 @@ const Search = () => {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-              <button className="p-3 bg-primary-500 rounded-full text-white">
-                <FiPlay className="h-6 w-6" />
+              <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center">
+                <FiPlay className="h-6 w-6 relative left-[1px]" />
               </button>
             </div>
           </div>
@@ -247,8 +246,8 @@ const Search = () => {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-              <button className="p-3 bg-primary-500 rounded-full text-white">
-                <FiPlay className="h-6 w-6" />
+              <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center">
+                <FiPlay className="h-6 w-6 relative left-[1px]" />
               </button>
             </div>
           </div>

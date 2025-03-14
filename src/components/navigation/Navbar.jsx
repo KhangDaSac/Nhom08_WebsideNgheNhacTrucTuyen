@@ -73,11 +73,12 @@ const Navbar = () => {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
-                  <div className="py-1">
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50">
+                  <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                     <Link
                       to="/account"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      role="menuitem"
                     >
                       <FiUser className="mr-3 h-5 w-5" />
                       {t('common.profile')}
@@ -85,6 +86,7 @@ const Navbar = () => {
                     <button
                       onClick={logout}
                       className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      role="menuitem"
                     >
                       <FiLogOut className="mr-3 h-5 w-5" />
                       {t('common.logout')}

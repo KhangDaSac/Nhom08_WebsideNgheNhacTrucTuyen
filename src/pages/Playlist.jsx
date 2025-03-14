@@ -92,14 +92,14 @@ const Playlist = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          {t('playlist.myPlaylists')}
+          {t('My playlists')}
         </h1>
         <button
           onClick={() => setShowCreateModal(true)}
           className="flex items-center px-4 py-2 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors"
         >
           <FiPlus className="w-5 h-5 mr-2" />
-          {t('playlist.createNew')}
+          {t('Create playlist')}
         </button>
       </div>
 

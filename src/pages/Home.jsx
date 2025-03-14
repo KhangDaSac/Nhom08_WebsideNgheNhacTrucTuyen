@@ -103,7 +103,7 @@ const Home = () => {
               {t('Âm nhạc kết nối mọi người')}
             </p>
             <button className="flex items-center gap-2 px-8 py-4 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
-              <FiPlay className="w-5 h-5" />
+              <FiPlay className="w-5 h-5 relative left-[1px]" />
               {t('home.hero.cta')}
             </button>
           </div>
@@ -115,13 +115,13 @@ const Home = () => {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('home.recentSongs')}
+              {t('Songs')}
             </h2>
             <Link
               to="/songs"
               className="text-primary-500 hover:text-primary-600 font-medium"
             >
-              {t('common.viewAll')}
+              {t('View all')}
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -141,12 +141,12 @@ const Home = () => {
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
                       <button
                         onClick={() => play(song)}
-                        className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300"
+                        className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
                       >
                         {isCurrentSong && isPlaying ? (
                           <span className="block w-6 h-6 bg-white rounded-full" />
                         ) : (
-                          <FiPlay className="w-6 h-6" />
+                          <FiPlay className="w-6 h-6 relative left-[1px]" />
                         )}
                       </button>
                     </div>
@@ -171,13 +171,13 @@ const Home = () => {
         <section>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('home.featuredAlbums')}
+              {t('Albums')}
             </h2>
             <Link
               to="/albums"
               className="text-primary-500 hover:text-primary-600 font-medium"
             >
-              {t('common.viewAll')}
+              {t('View all')}
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -194,8 +194,8 @@ const Home = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                      <FiPlay className="w-6 h-6" />
+                    <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center">
+                      <FiPlay className="w-6 h-6 relative left-[1px]" />
                     </button>
                   </div>
                 </div>
@@ -220,7 +220,7 @@ const Home = () => {
               to="/artists"
               className="text-primary-500 hover:text-primary-600 font-medium"
             >
-              {t('common.viewAll')}
+              {t('View all')}
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -237,8 +237,8 @@ const Home = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                      <FiPlay className="w-6 h-6" />
+                    <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center">
+                      <FiPlay className="w-6 h-6 relative left-[1px]" />
                     </button>
                   </div>
                 </div>

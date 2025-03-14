@@ -41,7 +41,7 @@ const Sidebar = () => {
         {/* Logo */}
         <div className="flex items-center mb-8">
           <img src={logo} alt="Logo" className="h-8 w-8" />
-          <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Music App</span>
+          <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Music for you</span>
         </div>
 
         {/* Main Menu */}

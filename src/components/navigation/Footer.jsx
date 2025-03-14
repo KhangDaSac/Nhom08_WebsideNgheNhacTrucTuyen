@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiFacebook, FiTwitter, FiInstagram, FiYoutube } from 'react-icons/fi';
+import logo from '../../assets/navigation/Logo.svg';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -47,9 +48,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1">
             <div className="flex items-center">
-              <img src="/logo.png" alt="Logo" className="h-8 w-8" />
+              <img src={logo} alt="Logo" className="h-8 w-8" />
               <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">
-                Music App
+                Music for you
               </span>
             </div>
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
