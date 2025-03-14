@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
 import { FiPlay, FiHeart, FiShare2, FiClock, FiMusic } from 'react-icons/fi';
+import SongList from '../components/basic-component/song/SongList';
+import AlbumCardList from '../components/basic-component/album-card/AlbumCardList';
 
 const Artist = () => {
   const { id } = useParams();
@@ -170,104 +172,19 @@ const Artist = () => {
           </h2>
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm -mx-4 sm:mx-0">
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[640px]">
-                <thead>
-                  <tr className="text-left text-sm text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
-                    <th className="px-4 py-3 font-medium w-16">#</th>
-                    <th className="px-4 py-3 font-medium">Title</th>
-                    <th className="px-4 py-3 font-medium hidden md:table-cell">Album</th>
-                    <th className="px-4 py-3 font-medium hidden md:table-cell">Plays</th>
-                    <th className="px-4 py-3 font-medium text-right w-20">
-                      <FiClock className="inline-block w-4 h-4" />
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {artist.popularSongs.map((song, index) => {
-                    const isCurrentSong = currentSong?.id === song.id;
-                    return (
-                      <tr
-                        key={song.id}
-                        className={`group hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
-                          isCurrentSong ? 'bg-primary-100 text-primary-900 dark:bg-primary-900 dark:text-primary-100' : ''
-                        }`}
-                      >
-                        <td className="px-4 py-3 w-16">
-                          <button
-                            onClick={() => play(song)}
-                            className="p-2 rounded-full bg-primary-500 text-white flex items-center justify-center w-8 h-8"
-                          >
-                            <FiPlay className="w-4 h-4 relative left-[1px]" />
-                          </button>
-                        </td>
-                        <td className="px-4 py-3">
-                          <span
-                            className={`font-medium truncate ${
-                              isCurrentSong
-                                ? 'text-primary-500'
-                                : 'text-gray-900 dark:text-white'
-                            }`}
-                          >
-                            {song.title}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell truncate">
-                          {song.album}
-                        </td>
-                        <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell">
-                          {song.plays}
-                        </td>
-                        <td className="px-4 py-3 text-gray-700 dark:text-gray-300 text-right w-20">
-                          {formatDuration(song.duration)}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+              <SongList
+                artist={artist}
+                currentSong={currentSong}
+                play={play}
+                formatDuration={formatDuration}
+              />
             </div>
           </div>
         </div>
 
         {/* Albums */}
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('Albums')}
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
-            {artist.albums.map((album) => (
-              <Link
-                key={album.id}
-                to={`/album/${album.id}`}
-                className="group"
-              >
-                <div className="relative aspect-square rounded-lg overflow-hidden mb-2 bg-gray-100 dark:bg-gray-800">
-                  <img
-                    src={album.coverUrl}
-                    alt={album.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        // Play album
-                      }}
-                      className="p-2 sm:p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
-                    >
-                      <FiPlay className="h-4 sm:h-5 w-4 sm:w-5 relative left-[1px]" />
-                    </button>
-                  </div>
-                </div>
-                <h3 className="font-medium text-sm text-gray-900 dark:text-white truncate">
-                  {album.title}
-                </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                  {album.releaseYear} • {album.songCount} songs
-                </p>
-              </Link>
-            ))}
-          </div>
+            <AlbumCardList artist={artist} />
         </div>
 
         {/* About */}

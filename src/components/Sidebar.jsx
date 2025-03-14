@@ -34,7 +34,7 @@ const Sidebar = ({ onClose }) => {
             className="h-8 w-8 rounded-lg"
           />
           <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">
-            Music App
+            Music for you
           </span>
         </Link>
         {onClose && (
