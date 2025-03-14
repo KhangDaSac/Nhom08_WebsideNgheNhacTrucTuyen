@@ -2,13 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
+import SongCardList from '../components/basic-component/song-card/SongCardList';
+import AlbumCardList from '../components/basic-component/album-card/AlbumCardList';
 import {
-  FiPlay,
-  FiHeart,
-  FiClock,
-  FiMusic,
-  FiTrendingUp,
-  FiStar,
+  FiPlay
 } from 'react-icons/fi';
 
 const Home = () => {
@@ -31,7 +28,48 @@ const Home = () => {
             coverUrl: 'https://picsum.photos/200',
             duration: 180,
           },
-          // Add more songs...
+          {
+            id: 2,
+            title: 'Song Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/200',
+            duration: 180,
+          },
+          {
+            id: 3,
+            title: 'Song Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/200',
+            duration: 180,
+          },
+          {
+            id: 4,
+            title: 'Song Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/200',
+            duration: 180,
+          },
+          {
+            id: 5,
+            title: 'Song Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/200',
+            duration: 180,
+          },
+          {
+            id: 6,
+            title: 'Song Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/200',
+            duration: 180,
+          },
+          {
+            id: 7,
+            title: 'Song Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/200',
+            duration: 180,
+          }
         ];
 
         const albums = [
@@ -151,101 +189,12 @@ const Home = () => {
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Recent Songs */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('Songs')}
-            </h2>
-            <Link
-              to="/songs"
-              className="text-primary-500 hover:text-primary-600 font-medium"
-            >
-              {t('View all')}
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recentSongs.map((song) => {
-              const isCurrentSong = currentSong?.id === song.id;
-              return (
-                <div
-                  key={song.id}
-                  className="group bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300"
-                >
-                  <div className="relative aspect-square rounded-lg overflow-hidden mb-4">
-                    <img
-                      src={song.coverUrl}
-                      alt={song.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-                      <button
-                        onClick={() => play(song)}
-                        className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
-                      >
-                        {isCurrentSong && isPlaying ? (
-                          <span className="block w-6 h-6 bg-white rounded-full" />
-                        ) : (
-                          <FiPlay className="w-6 h-6 relative left-[1px]" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-1">
-                    {song.title}
-                  </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {song.artist}
-                  </p>
-                  <div className="flex items-center gap-2 mt-2 text-sm text-gray-500 dark:text-gray-400">
-                    <FiClock className="w-4 h-4" />
-                    <span>{formatDuration(song.duration)}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <SongCardList songList={recentSongs} currentSong={currentSong} play={play} formatDuration={formatDuration} />
         </section>
 
         {/* Featured Albums */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('Albums')}
-            </h2>
-            <Link
-              to="/albums"
-              className="text-primary-500 hover:text-primary-600 font-medium"
-            >
-              {t('View all')}
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {featuredAlbums.map((album) => (
-              <Link
-                key={album.id}
-                to={`/album/${album.id}`}
-                className="group"
-              >
-                <div className="relative aspect-square rounded-xl overflow-hidden mb-3">
-                  <img
-                    src={album.coverUrl}
-                    alt={album.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center">
-                      <FiPlay className="w-6 h-6 relative left-[1px]" />
-                    </button>
-                  </div>
-                </div>
-                <h3 className="font-medium text-gray-900 dark:text-white">
-                  {album.title}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {album.artist} • {album.year}
-                </p>
-              </Link>
-            ))}
-          </div>
+          <AlbumCardList albumList={featuredAlbums} />
         </section>
 
         {/* Popular Artists */}

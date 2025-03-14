@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import Player from './Player';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
@@ -65,13 +66,14 @@ const Layout = ({ children }) => {
         </button>
       }
 
-
+      
       {/* Main content - Adjusted margin for desktop sidebar */}
       <div className="flex-1 flex flex-col min-h-0 md:ml-64">
         <Navbar />
-        <main className="flex-1 p-4 md:p-6 pt-16 md:pt-6 pb-24 overflow-y-auto">
+        <main className="flex-1 p-4 md:p-6 pt-16 md:pt-6 pb-24 overflow-y-auto md:mb-20">
           {children}
         </main>
+        
         <Player className="fixed bottom-0 left-0 right-0 md:left-64" />
       </div>
     </div>

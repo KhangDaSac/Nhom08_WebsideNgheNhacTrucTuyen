@@ -27,10 +27,10 @@ const AlbumCard = ({ album }) => {
                     </button>
                 </div>
             </div>
-            <h3 className="font-medium text-sm text-gray-900 dark:text-white truncate">
+            <h3 className="font-medium text-gray-900 dark:text-white mb-1">
                 {album.title}
             </h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
                 {album.releaseYear} • {album.songCount} songs
             </p>
         </Link>
