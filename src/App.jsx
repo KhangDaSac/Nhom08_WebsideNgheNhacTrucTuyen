@@ -4,9 +4,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { PlayerProvider } from './contexts/PlayerContext';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './locales/i18n';
-
-// Layouts
-import MainLayout from './layouts/MainLayout';
+import Layout from './components/Layout';
 
 // Pages
 import Home from './pages/Home';
@@ -17,6 +15,8 @@ import Playlist from './pages/Playlist';
 import Album from './pages/Album';
 import Artist from './pages/Artist';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import Search from './pages/Search';
+import Library from './pages/Library';
 
 function App() {
   return (
@@ -26,22 +26,27 @@ function App() {
           <PlayerProvider>
             <Router>
               <Routes>
-                {/* Public routes */}
+                {/* Auth Routes */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
 
-                {/* Protected routes with MainLayout */}
-                <Route element={<ProtectedRoute />}>
-                  <Route element={<MainLayout />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/account" element={<Account />} />
-                    <Route path="/playlist/:id" element={<Playlist />} />
-                    <Route path="/album/:id" element={<Album />} />
-                    {/* <Route path="/track/:id" element={<Track />} /> */}
-                    <Route path="/artist/:id" element={<Artist />} />
-                    {/* <Route path="/explore" element={<Explore />} /> */}
-                  </Route>
-                </Route>
+                {/* Protected Routes */}
+                <Route
+                  path="/*"
+                  element={
+                    <Layout>
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/account" element={<Account />} />
+                        <Route path="/playlist/:id" element={<Playlist />} />
+                        <Route path="/album/:id" element={<Album />} />
+                        <Route path="/artist/:id" element={<Artist />} />
+                        <Route path="/search" element={<Search />} />
+                        <Route path="/library" element={<Library />} />
+                      </Routes>
+                    </Layout>
+                  }
+                />
               </Routes>
             </Router>
           </PlayerProvider>

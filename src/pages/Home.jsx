@@ -42,6 +42,48 @@ const Home = () => {
             coverUrl: 'https://picsum.photos/300',
             year: 2024,
           },
+          {
+            id: 2,
+            title: 'Album Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/300',
+            year: 2024,
+          },
+          {
+            id: 3,
+            title: 'Album Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/300',
+            year: 2024,
+          },
+          {
+            id: 4,
+            title: 'Album Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/300',
+            year: 2024,
+          },
+          {
+            id: 5,
+            title: 'Album Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/300',
+            year: 2024,
+          },
+          {
+            id: 6,
+            title: 'Album Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/300',
+            year: 2024,
+          },
+          {
+            id: 7,
+            title: 'Album Title 1',
+            artist: 'Artist Name',
+            coverUrl: 'https://picsum.photos/300',
+            year: 2024,
+          },
           // Add more albums...
         ];
 
@@ -102,7 +144,6 @@ const Home = () => {
             <p className="text-xl text-gray-200 mb-8 max-w-2xl">
               {t('Âm nhạc kết nối mọi người')}
             </p>
-
           </div>
         </div>
       </div>

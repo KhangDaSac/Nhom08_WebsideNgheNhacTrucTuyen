@@ -95,40 +95,42 @@ const Album = () => {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto">
       {/* Album Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-end gap-8 mb-8">
-        <img
-          src={album.coverUrl}
-          alt={album.title}
-          className="w-48 h-48 object-cover rounded-lg shadow-lg"
-        />
-        <div className="flex-1">
+      <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
+        <div className="w-48 sm:w-48 md:w-56 shrink-0">
+          <img
+            src={album.coverUrl}
+            alt={album.title}
+            className="w-full aspect-square object-cover rounded-lg shadow-lg"
+          />
+        </div>
+        <div className="flex-1 w-full text-center sm:text-left">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
             {t('album.album')}
           </p>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
             {album.title}
           </h1>
-          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start text-sm text-gray-500 dark:text-gray-400 mb-4 gap-2">
             <Link
               to={`/artist/${album.artistId}`}
               className="font-medium hover:text-primary-500"
             >
               {album.artist}
             </Link>
-            <span className="mx-2">•</span>
+            <span className="hidden sm:inline mx-2">•</span>
             <span>{album.releaseYear}</span>
-            <span className="mx-2">•</span>
+            <span className="hidden sm:inline mx-2">•</span>
             <span>{album.songs.length} songs,</span>
             <span className="ml-1">{getTotalDuration()}</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 md:gap-4">
             <button
               onClick={() => play(album.songs[0])}
-              className="flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors"
+              className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors text-sm sm:text-base"
             >
-              <FiPlay className="w-5 h-5 relative left-[1px]" />
+              <FiPlay className="w-4 sm:w-5 h-4 sm:h-5 relative left-[1px]" />
               {t('Play')}
             </button>
             <button
@@ -139,93 +141,95 @@ const Album = () => {
                   : 'text-gray-400 hover:text-gray-500'
               }`}
             >
-              <FiHeart className="w-6 h-6" />
+              <FiHeart className="w-5 sm:w-6 h-5 sm:h-6" />
             </button>
             <button className="p-2 rounded-full text-gray-400 hover:text-gray-500">
-              <FiShare2 className="w-6 h-6" />
+              <FiShare2 className="w-5 sm:w-6 h-5 sm:h-6" />
             </button>
             <button className="p-2 rounded-full text-gray-400 hover:text-gray-500">
-              <FiMoreHorizontal className="w-6 h-6" />
+              <FiMoreHorizontal className="w-5 sm:w-6 h-5 sm:h-6" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Songs List */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-        <table className="w-full">
-          <thead>
-            <tr className="text-left text-sm text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
-              <th className="px-4 py-3 font-medium">#</th>
-              <th className="px-4 py-3 font-medium">Title</th>
-              <th className="px-4 py-3 font-medium hidden md:table-cell">Artist</th>
-              <th className="px-4 py-3 font-medium text-right">
-                <FiClock className="inline-block w-4 h-4" />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {album.songs.map((song) => {
-              const isCurrentSong = currentSong?.id === song.id;
-              return (
-                <tr
-                  key={song.id}
-                  className={`group hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
-                    isCurrentSong ? 'bg-primary-50 dark:bg-primary-900/20' : ''
-                  }`}
-                >
-                  <td className="px-4 py-3 w-12">
-                    <button
-                      onClick={() => play(song)}
-                      className="p-2 rounded-full bg-primary-500 text-white flex items-center justify-center"
-                    >
-                      <FiPlay className="w-4 h-4 relative left-[1px]" />
-                    </button>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex flex-col">
-                      <span
-                        className={`font-medium ${
-                          isCurrentSong
-                            ? 'text-primary-500'
-                            : 'text-gray-900 dark:text-white'
-                        }`}
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm -mx-4 sm:mx-0">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px]">
+            <thead>
+              <tr className="text-left text-sm text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
+                <th className="px-4 py-3 font-medium w-16">#</th>
+                <th className="px-4 py-3 font-medium">Title</th>
+                <th className="px-4 py-3 font-medium hidden md:table-cell">Artist</th>
+                <th className="px-4 py-3 font-medium text-right w-20">
+                  <FiClock className="inline-block w-4 h-4" />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {album.songs.map((song) => {
+                const isCurrentSong = currentSong?.id === song.id;
+                return (
+                  <tr
+                    key={song.id}
+                    className={`group hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
+                      isCurrentSong ? 'bg-primary-50 dark:bg-primary-900/20' : ''
+                    }`}
+                  >
+                    <td className="px-4 py-3 w-16">
+                      <button
+                        onClick={() => play(song)}
+                        className="p-2 rounded-full bg-primary-500 text-white flex items-center justify-center w-8 h-8"
                       >
-                        {song.title}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell">
-                    {song.artist}
-                  </td>
-                  <td className="px-4 py-3 text-gray-700 dark:text-gray-300 text-right">
-                    {formatDuration(song.duration)}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                        <FiPlay className="w-4 h-4 relative left-[1px]" />
+                      </button>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex flex-col">
+                        <span
+                          className={`font-medium truncate ${
+                            isCurrentSong
+                              ? 'text-primary-500'
+                              : 'text-gray-900 dark:text-white'
+                          }`}
+                        >
+                          {song.title}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell truncate">
+                      {song.artist}
+                    </td>
+                    <td className="px-4 py-3 text-gray-700 dark:text-gray-300 text-right w-20">
+                      {formatDuration(song.duration)}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Album Info */}
-      <div className="mt-8">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+      <div className="mt-6 sm:mt-8">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-4">
           {t('About album')}
         </h2>
-        <p className="text-gray-700 dark:text-gray-300">{album.description}</p>
-        <div className="mt-4 grid grid-cols-2 gap-4">
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+        <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base">{album.description}</p>
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
               {t('Genre')}
             </h3>
-            <p className="mt-1 text-gray-900 dark:text-white">{album.genre}</p>
+            <p className="text-gray-900 dark:text-white">{album.genre}</p>
           </div>
-          <div>
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
               {t('Release date')}
             </h3>
-            <p className="mt-1 text-gray-900 dark:text-white">
+            <p className="text-gray-900 dark:text-white">
               {album.releaseYear}
             </p>
           </div>
