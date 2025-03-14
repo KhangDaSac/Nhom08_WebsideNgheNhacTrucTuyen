@@ -102,10 +102,7 @@ const Home = () => {
             <p className="text-xl text-gray-200 mb-8 max-w-2xl">
               {t('Âm nhạc kết nối mọi người')}
             </p>
-            <button className="flex items-center gap-2 px-8 py-4 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors">
-              <FiPlay className="w-5 h-5 relative left-[1px]" />
-              {t('home.hero.cta')}
-            </button>
+
           </div>
         </div>
       </div>
