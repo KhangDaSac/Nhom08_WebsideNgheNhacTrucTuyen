@@ -23,7 +23,7 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="hidden md:flex flex-col w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 h-full">
+    <div className="flex flex-col w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 h-full">
       {/* Logo */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-800">
         <Link to="/" className="flex items-center">
@@ -81,13 +81,6 @@ const Sidebar = () => {
           </div>
         </div>
       </nav>
-
-      {/* Mobile Menu Button */}
-      <div className="md:hidden fixed bottom-4 right-4 z-50">
-        <button className="p-3 bg-primary-500 text-white rounded-full shadow-lg">
-          <FiMenu className="w-6 h-6" />
-        </button>
-      </div>
     </div>
   );
 };
