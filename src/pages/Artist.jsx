@@ -189,7 +189,7 @@ const Artist = () => {
                       <tr
                         key={song.id}
                         className={`group hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
-                          isCurrentSong ? 'bg-primary-50 dark:bg-primary-900/20' : ''
+                          isCurrentSong ? 'bg-primary-100 text-primary-900 dark:bg-primary-900 dark:text-primary-100' : ''
                         }`}
                       >
                         <td className="px-4 py-3 w-16">

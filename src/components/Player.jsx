@@ -14,12 +14,13 @@ import {
   FiHeart,
 } from 'react-icons/fi';
 
-const Footer = () => {
+const Player = () => {
   const { t } = useTranslation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(80);
   const [progress, setProgress] = useState(30);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 z-40">
@@ -55,10 +56,16 @@ const Footer = () => {
               >
                 Artist Name
               </Link>
+              
             </div>
-            <button className="shrink-0 p-2 text-gray-400 hover:text-red-500">
-              <FiHeart className="w-5 h-5" />
-            </button>
+            <button
+                onClick={() => setIsFavorite(!isFavorite)}
+                className={`ml-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                  isFavorite ? 'text-red-500' : 'text-gray-400'
+                }`}
+              >
+                <FiHeart className="h-5 w-5" />
+              </button>
           </div>
 
           {/* Player Controls */}
@@ -181,4 +188,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Player; 
