@@ -1,7 +1,7 @@
 import React from 'react';
 import Song from './Song';
 import { FiClock } from 'react-icons/fi';
-const SongList = ({ artist, currentSong, play, formatDuration }) => {
+const SongList = ({ songList, currentSong, play, formatDuration }) => {
     return (
         <table className="w-full min-w-[640px]">
             <thead>
@@ -16,7 +16,7 @@ const SongList = ({ artist, currentSong, play, formatDuration }) => {
                 </tr>
             </thead>
             <tbody>
-                {artist.popularSongs.map((song, index) => {
+                {songList.map((song, index) => {
                     const isCurrentSong = currentSong?.id === song.id;
                     return (
                         <Song

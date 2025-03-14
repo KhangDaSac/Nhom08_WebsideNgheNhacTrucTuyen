@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiHome, FiSearch, FiMusic, FiRadio, FiHeart, FiPlus, FiX } from 'react-icons/fi';
-import logo from '../assets/navigation/Logo.svg';
+import logo from '../../assets/navigation/Logo.svg';
 
 const Sidebar = ({ onClose }) => {
   const { t } = useTranslation();

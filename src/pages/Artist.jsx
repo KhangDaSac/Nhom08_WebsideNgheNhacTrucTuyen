@@ -173,7 +173,7 @@ const Artist = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm -mx-4 sm:mx-0">
             <div className="overflow-x-auto">
               <SongList
-                artist={artist}
+                songList={artist.popularSongs}
                 currentSong={currentSong}
                 play={play}
                 formatDuration={formatDuration}
@@ -184,7 +184,7 @@ const Artist = () => {
 
         {/* Albums */}
         <div>
-            <AlbumCardList artist={artist} />
+            <AlbumCardList albumList={artist.albums} />
         </div>
 
         {/* About */}
