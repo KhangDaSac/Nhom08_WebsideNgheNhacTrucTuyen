@@ -24,7 +24,7 @@ const Navbar = () => {
             </div>
             <input
               type="text"
-              placeholder={t('Search for songs, artists, or albums')}
+              placeholder={t('navigation.placeholder')}
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
             />
           </div>

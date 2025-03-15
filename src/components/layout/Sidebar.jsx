@@ -11,6 +11,8 @@ const Sidebar = ({ onClose }) => {
     { name: 'Home', icon: FiHome, path: '/', label: t('navigation.home') },
     { name: 'Search', icon: FiSearch, path: '/search', label: t('navigation.search') },
     { name: 'Library', icon: FiMusic, path: '/library', label: t('navigation.library') },
+    { name: 'Artists', icon: FiMusic, path: '/artists', label: t('navigation.artists') },
+    { name: 'Albums', icon: FiMusic, path: '/albums', label: t('navigation.albums') }
   ];
 
   const playlists = [
@@ -66,30 +68,6 @@ const Sidebar = ({ onClose }) => {
           ))}
         </div>
 
-        {/* Playlists */}
-        <div className="p-4 mt-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
-              {t('Your Playlists')}
-            </h2>
-            <button className="p-1 rounded-md text-gray-400 hover:text-gray-500">
-              <FiPlus className="w-5 h-5" />
-            </button>
-          </div>
-          <div className="space-y-1">
-            {playlists.map((playlist) => (
-              <Link
-                key={playlist.id}
-                to={`/playlist/${playlist.id}`}
-                onClick={onClose}
-                className="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-              >
-                <FiHeart className="w-5 h-5 mr-3" />
-                {playlist.name}
-              </Link>
-            ))}
-          </div>
-        </div>
       </nav>
     </div>
   );

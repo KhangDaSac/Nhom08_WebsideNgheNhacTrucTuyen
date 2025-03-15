@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
 import SongCards from '../components/basic-component/song-card/SongCards';
-import AlbumCardList from '../components/basic-component/album-card/AlbumCardList';
+import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
 import {
   FiPlay
 } from 'react-icons/fi';
@@ -189,12 +189,12 @@ const Home = () => {
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Recent Songs */}
         <section>
-          <SongCards songList={recentSongs} currentSong={currentSong} play={play} formatDuration={formatDuration} />
+          <SongCards songs={recentSongs} collectionTitle={t('collection.song.popularSongs')} currentSong={currentSong} play={play} formatDuration={formatDuration} />
         </section>
 
         {/* Featured Albums */}
         <section>
-          <AlbumCardList albumList={featuredAlbums} />
+          <AlbumCards albums={featuredAlbums} collectionTitle={t('collection.album.popularAlbums')} />
         </section>
 
         {/* Popular Artists */}

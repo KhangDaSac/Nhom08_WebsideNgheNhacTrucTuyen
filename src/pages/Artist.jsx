@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
 import { FiPlay, FiHeart, FiShare2, FiClock, FiMusic } from 'react-icons/fi';
 import Songs from '../components/basic-component/song/Songs';
-import AlbumCardList from '../components/basic-component/album-card/AlbumCardList';
+import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
 
 const Artist = () => {
   const { id } = useParams();
@@ -148,7 +148,7 @@ const Artist = () => {
             className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors text-sm sm:text-base"
           >
             <FiPlay className="w-4 sm:w-5 h-4 sm:h-5 relative left-[1px]" />
-            {t('Play')}
+            {t('artist.play')}
           </button>
           <button
             onClick={() => setIsFollowing(!isFollowing)}
@@ -158,7 +158,7 @@ const Artist = () => {
                 : 'border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300'
             }`}
           >
-            {isFollowing ? t('Unfollow') : t('Follow')}
+            {isFollowing ? t('artist.unfollow') : t('artist.follow')}
           </button>
           <button className="p-2 rounded-full text-gray-400 hover:text-gray-500">
             <FiShare2 className="w-5 sm:w-6 h-5 sm:h-6" />
@@ -167,30 +167,18 @@ const Artist = () => {
 
         {/* Popular Songs */}
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('Popular songs')}
-          </h2>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm -mx-4 sm:mx-0">
-            <div className="overflow-x-auto">
-              <Songs
-                songList={artist.popularSongs}
-                currentSong={currentSong}
-                play={play}
-                formatDuration={formatDuration}
-              />
-            </div>
-          </div>
+            <Songs songs={artist.popularSongs} collectionTitle={'collection.song.popularSongs'} currentSong={currentSong} play={play} formatDuration={formatDuration} />
         </div>
 
         {/* Albums */}
         <div>
-            <AlbumCardList albumList={artist.albums} />
+            <AlbumCards albums={artist.albums} />
         </div>
 
         {/* About */}
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('About artist')}
+            {t('artist.about')}
           </h2>
           <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6">
             <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 line-clamp-4 sm:line-clamp-none">

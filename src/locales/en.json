@@ -5,7 +5,8 @@
     "library": "Library",
     "account": "Account",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "placeholder": "What do you want to play?"
   },
   "common": {
     "search": "Search",
@@ -39,6 +40,31 @@
     "popularArtists": "Popular Artists",
     "featuredPlaylists": "Featured Playlists",
     "exploreMore": "Explore More"
+  },
+  "artist": {
+    "play": "Play",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "about": "About",
+    "biography": "Biography"
+  },
+  "search": {
+    "placeholder": "Search for songs, artists, albums, playlists",
+    "noResults": "No results found",
+    "all": "All",
+    "artists": "Artists",
+    "albums": "Albums",
+    "playlists": "Playlists",
+    "songs": "Songs"
+  },
+  "library": {
+    "title": "Your Library",
+    "description": "Your music collection, playlists, and artists",
+    "search": "Search for songs, artists, albums, playlists",
+    "yourPlaylists": "Your Playlists",
+    "likedSongs": "Liked Songs",
+    "followingArtists": "Following Artists",
+    "placeholder": "Search for your songs, artists, albums, playlists"
   },
   "player": {
     "play": "Play",
@@ -83,13 +109,15 @@
   "collection": {
     "song": {
       "songs": "Songs",
+      "popularSongs": "Popular songs",
       "title": "Title",
       "album": "Album",
       "plays": "Plays",
       "duration": "Duration"
     },
     "album": {
-      "albums": "Albums"
+      "albums": "Albums",
+      "popularAlbums": "Popular albums"
     },
     "artist": {
       "artists": "Artists"

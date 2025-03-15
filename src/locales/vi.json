@@ -5,7 +5,10 @@
     "library": "Thư viện",
     "account": "Tài khoản",
     "settings": "Cài đặt",  
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "placeholder": "Bạn muốn nghe gì?",
+    "artists": "Nghệ sĩ",
+    "albums": "Album"
   },
 
   "common": {
@@ -40,6 +43,30 @@
     "popularArtists": "Nghệ sĩ nổi bật",
     "featuredPlaylists": "Danh sách phát nổi bật",
     "exploreMore": "Khám phá thêm"
+  },
+  "artist": {
+    "play": "Phát",
+    "follow": "Theo dõi",
+    "unfollow": "Bỏ theo dõi",
+    "about": "Thông tin về nghệ sĩ"
+  },
+  "library": {
+    "title": "Thư viện của bạn",
+    "description": "Bài hát, danh sách phát, và nghệ sĩ của bạn",
+    "search": "Tìm kiếm bài hát, nghệ sĩ, album, danh sách phát",
+    "yourPlaylists": "Danh sách phát của bạn",
+    "likedSongs": "Bài hát đã thích",
+    "followingArtists": "Nghệ sĩ đang theo dõi",
+    "placeholder": "Tìm kiếm bài hát, nghệ sĩ, album, danh sách phát của bạn"
+  },
+  "search": {
+    "placeholder": "Tìm kiếm bài hát, nghệ sĩ, album, danh sách phát",
+    "noResults": "Không tìm thấy kết quả",
+    "all": "Tất cả",
+    "artists": "Nghệ sĩ",
+    "albums": "Album",
+    "playlists": "Danh sách phát",
+    "songs": "Bài hát"
   },
   "player": {
     "play": "Phát",
@@ -83,10 +110,16 @@
   },
   "collection": {
     "song": {
-      "songs": "Bài hát"
+      "songs": "Bài hát",
+      "popularSongs": "Bài hát nổi bật",
+      "title": "Tiêu đề",
+      "album": "Album",
+      "plays": "Lượt nghe",
+      "duration": "Thời lượng"
     },
     "album": {
-      "albums": "Album"
+      "albums": "Album",
+      "popularAlbums": "Album nổi bật"
     },
     "artist": {
       "artists": "Nghệ sĩ"

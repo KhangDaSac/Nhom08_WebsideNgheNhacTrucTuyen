@@ -3,13 +3,13 @@ import SongCard from './SongCard';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-const SongCards = ({ songs, currentSong, play, formatDuration }) => {
+const SongCards = ({ songs, collectionTitle, currentSong, play, formatDuration }) => {
     const { t } = useTranslation();
     return (
         <>
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {t('Songs')}
+                    {t(collectionTitle)}
                 </h2>
                 <Link
                     to="/songs"
