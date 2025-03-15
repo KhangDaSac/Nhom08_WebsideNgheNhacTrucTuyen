@@ -1,4 +1,12 @@
 {
+  "navigation": {
+    "home": "Home",
+    "search": "Search",
+    "library": "Library",
+    "account": "Account",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
   "common": {
     "search": "Search",
     "login": "Login",
@@ -25,6 +33,7 @@
   },
   "home": {
     "welcome": "Welcome to Music App",
+    "title": "Music for everyone",
     "trending": "Trending Now",
     "newReleases": "New Releases",
     "popularArtists": "Popular Artists",
@@ -70,5 +79,24 @@
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
     "copyright": "© 2025 Music App. All rights reserved."
+  },
+  "collection": {
+    "song": {
+      "songs": "Songs",
+      "title": "Title",
+      "album": "Album",
+      "plays": "Plays",
+      "duration": "Duration"
+    },
+    "album": {
+      "albums": "Albums"
+    },
+    "artist": {
+      "artists": "Artists"
+    },
+    "playlist": {
+      "playlists": "Playlists"
+    },
+    "viewAll": "View All"
   }
-} 
+}

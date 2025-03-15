@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
 import { FiPlay, FiHeart, FiShare2, FiClock, FiMusic } from 'react-icons/fi';
-import SongList from '../components/basic-component/song/SongList';
+import Songs from '../components/basic-component/song/Songs';
 import AlbumCardList from '../components/basic-component/album-card/AlbumCardList';
 
 const Artist = () => {
@@ -172,7 +172,7 @@ const Artist = () => {
           </h2>
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm -mx-4 sm:mx-0">
             <div className="overflow-x-auto">
-              <SongList
+              <Songs
                 songList={artist.popularSongs}
                 currentSong={currentSong}
                 play={play}

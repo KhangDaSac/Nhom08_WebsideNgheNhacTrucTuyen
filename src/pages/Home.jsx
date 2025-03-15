@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
-import SongCardList from '../components/basic-component/song-card/SongCardList';
+import SongCards from '../components/basic-component/song-card/SongCards';
 import AlbumCardList from '../components/basic-component/album-card/AlbumCardList';
 import {
   FiPlay
@@ -177,10 +177,10 @@ const Home = () => {
         <div className="relative h-full flex items-center">
           <div className="container mx-auto px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-              {t('Welcome music for you')}
+              {t('home.welcome')}
             </h1>
             <p className="text-xl text-gray-200 mb-8 max-w-2xl">
-              {t('Âm nhạc kết nối mọi người')}
+              {t('home.title')}
             </p>
           </div>
         </div>
@@ -189,7 +189,7 @@ const Home = () => {
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Recent Songs */}
         <section>
-          <SongCardList songList={recentSongs} currentSong={currentSong} play={play} formatDuration={formatDuration} />
+          <SongCards songList={recentSongs} currentSong={currentSong} play={play} formatDuration={formatDuration} />
         </section>
 
         {/* Featured Albums */}
@@ -207,7 +207,7 @@ const Home = () => {
               to="/artists"
               className="text-primary-500 hover:text-primary-600 font-medium"
             >
-              {t('View all')}
+              {t('home.viewAll')}
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">

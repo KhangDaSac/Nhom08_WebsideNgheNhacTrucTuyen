@@ -96,11 +96,11 @@ const Search = () => {
   };
 
   const tabs = [
-    { id: 'all', label: t('search.all') },
-    { id: 'songs', label: t('search.songs') },
-    { id: 'albums', label: t('search.albums') },
-    { id: 'artists', label: t('search.artists') },
-    { id: 'playlists', label: t('search.playlists') },
+    { id: 'all', label: t('All') },
+    { id: 'songs', label: t('Songs') },
+    { id: 'albums', label: t('Albums') },
+    { id: 'artists', label: t('Artists') },
+    { id: 'playlists', label: t('Playlists') },
   ];
 
   const renderSongs = () => (
@@ -274,7 +274,7 @@ const Search = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-full shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-          placeholder={t('search.placeholder')}
+          placeholder={t('What do you want to play?')}
         />
       </div>
 
@@ -339,7 +339,7 @@ const Search = () => {
         </div>
       ) : (
         <div className="text-center text-gray-500 dark:text-gray-400">
-          {t('search.startTyping')}
+          
         </div>
       )}
     </div>

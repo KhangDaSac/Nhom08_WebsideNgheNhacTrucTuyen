@@ -1,4 +1,13 @@
 {
+  "navigation": {
+    "home": "Trang chủ",
+    "search": "Tìm kiếm",
+    "library": "Thư viện",
+    "account": "Tài khoản",
+    "settings": "Cài đặt",  
+    "logout": "Đăng xuất"
+  },
+
   "common": {
     "search": "Tìm kiếm",
     "login": "Đăng nhập",
@@ -24,7 +33,8 @@
     "loginNow": "Đăng nhập ngay"
   },
   "home": {
-    "welcome": "Chào mừng đến với Ứng dụng Nhạc",
+    "welcome": "Chào mừng đến với Music for you",
+    "title": "Âm nhạc kết nối mọi người",
     "trending": "Thịnh hành",
     "newReleases": "Mới phát hành",
     "popularArtists": "Nghệ sĩ nổi bật",
@@ -70,5 +80,20 @@
     "terms": "Điều khoản dịch vụ",
     "privacy": "Chính sách bảo mật",
     "copyright": "© 2025 Ứng dụng Nhạc. Đã đăng ký bản quyền."
+  },
+  "collection": {
+    "song": {
+      "songs": "Bài hát"
+    },
+    "album": {
+      "albums": "Album"
+    },
+    "artist": {
+      "artists": "Nghệ sĩ"
+    },
+    "playlist": {
+      "playlists": "Danh sách phát"
+    },
+    "viewAll": "Xem tất cả"
   }
 } 

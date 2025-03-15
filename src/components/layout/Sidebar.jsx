@@ -8,10 +8,9 @@ const Sidebar = ({ onClose }) => {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', icon: FiHome, path: '/' },
-    { name: 'Search', icon: FiSearch, path: '/search' },
-    { name: 'Library', icon: FiMusic, path: '/library' },
-    { name: 'Radio', icon: FiRadio, path: '/radio' },
+    { name: 'Home', icon: FiHome, path: '/', label: t('navigation.home') },
+    { name: 'Search', icon: FiSearch, path: '/search', label: t('navigation.search') },
+    { name: 'Library', icon: FiMusic, path: '/library', label: t('navigation.library') },
   ];
 
   const playlists = [
@@ -62,7 +61,7 @@ const Sidebar = ({ onClose }) => {
               }`}
             >
               <item.icon className="w-5 h-5 mr-3" />
-              {t(item.name)}
+              {t(item.label)}
             </Link>
           ))}
         </div>

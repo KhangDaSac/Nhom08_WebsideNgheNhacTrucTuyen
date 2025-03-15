@@ -1,7 +1,9 @@
 import { FiPlay } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 
 const Song = ({ song, isCurrentSong, play, formatDuration }) => {
+    const { t } = useTranslation();
     return (
         <>
             <tr

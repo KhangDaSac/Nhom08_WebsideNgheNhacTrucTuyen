@@ -3,7 +3,7 @@ import SongCard from './SongCard';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-const SongCardList = ({ songList, currentSong, play, formatDuration }) => {
+const SongCards = ({ songs, currentSong, play, formatDuration }) => {
     const { t } = useTranslation();
     return (
         <>
@@ -15,11 +15,11 @@ const SongCardList = ({ songList, currentSong, play, formatDuration }) => {
                     to="/songs"
                     className="text-primary-500 hover:text-primary-600 font-medium"
                 >
-                    {t('View all')}
+                    {t('collection.viewAll')}
                 </Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {songList.map((song) => {
+                {songs.map((song) => {
                     return <SongCard key={song.id} song={song} currentSong={currentSong} play={play} formatDuration={formatDuration} />
                 })}
             </div>
@@ -27,4 +27,4 @@ const SongCardList = ({ songList, currentSong, play, formatDuration }) => {
     );
 }
 
-export default SongCardList;
+export default SongCards;

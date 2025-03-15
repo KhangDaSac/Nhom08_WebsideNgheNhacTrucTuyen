@@ -30,7 +30,7 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      await login(formData.email, formData.password);
+      await login({email: formData.email, password: formData.password});
       navigate('/');
     } catch (error) {
       setError(error.message);

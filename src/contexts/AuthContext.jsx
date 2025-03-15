@@ -23,14 +23,15 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (credentials) => {
+  const login = async ({email, password}) => {
     try {
       // Simulate API call
       const response = {
         user: {
           id: '1',
           name: 'John Doe',
-          email: credentials.email,
+          email,
+          password,
           accountType: 'premium',
           avatar: 'https://i.pravatar.cc/150?img=3'
         },

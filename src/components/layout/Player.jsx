@@ -106,6 +106,9 @@ const Player = () => {
                   value={progress}
                   onChange={(e) => setProgress(parseInt(e.target.value))}
                   className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm"
+                  style={{
+                    background: `linear-gradient(to right, var(--primary-500) ${progress}%, #ccc ${progress}%)`
+                  }}
                 />
               </div>
               <span className="text-xs text-gray-500 dark:text-gray-400 w-12">
@@ -154,6 +157,9 @@ const Player = () => {
                 value={volume}
                 onChange={(e) => setVolume(parseInt(e.target.value))}
                 className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm"
+                style={{
+                  background: `linear-gradient(to right, var(--primary-500) ${volume}%, #ccc ${volume}%)`
+                }}
               />
             </div>
             <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
@@ -177,6 +183,7 @@ const Player = () => {
               value={progress}
               onChange={(e) => setProgress(parseInt(e.target.value))}
               className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm"
+              
             />
           </div>
           <span className="text-xs text-gray-500 dark:text-gray-400 w-8">

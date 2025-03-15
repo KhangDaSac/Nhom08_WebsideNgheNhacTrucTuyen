@@ -34,17 +34,19 @@ function App() {
                 <Route
                   path="/*"
                   element={
-                    <Layout>
-                      <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/account" element={<Account />} />
-                        <Route path="/playlist/:id" element={<Playlist />} />
-                        <Route path="/album/:id" element={<Album />} />
-                        <Route path="/artist/:id" element={<Artist />} />
-                        <Route path="/search" element={<Search />} />
-                        <Route path="/library" element={<Library />} />
-                      </Routes>
-                    </Layout>
+                    <ProtectedRoute>
+                      <Layout>
+                        <Routes>
+                          <Route path="/" element={<Home />} />
+                          <Route path="/account" element={<Account />} />
+                          <Route path="/playlist/:id" element={<Playlist />} />
+                          <Route path="/album/:id" element={<Album />} />
+                          <Route path="/artist/:id" element={<Artist />} />
+                          <Route path="/search" element={<Search />} />
+                          <Route path="/library" element={<Library />} />
+                        </Routes>
+                      </Layout>
+                    </ProtectedRoute>
                   }
                 />
               </Routes>
