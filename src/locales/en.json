@@ -6,7 +6,9 @@
     "account": "Account",
     "settings": "Settings",
     "logout": "Logout",
-    "placeholder": "What do you want to play?"
+    "placeholder": "What do you want to play?",
+    "artists": "Artists",
+    "albums": "Albums"
   },
   "common": {
     "search": "Search",
@@ -56,6 +58,53 @@
     "albums": "Albums",
     "playlists": "Playlists",
     "songs": "Songs"
+  },
+  "login": {
+      "title": "Login",
+      "username": {
+        "username": "Username",
+        "placeholder": "Enter your email or phone number"
+      },
+      "password": {
+        "password": "Password",
+        "placeholder": "Enter your password"
+      },
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot Password?",
+      "login": "Login",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+  },
+  "signUp": {
+    "title": "Sign up",
+    "displayName": {
+      "displayName": "Display name",
+      "placeholder": "Enter your displayname"
+    },
+    "email": {
+      "email": "Email",
+      "placeholder": "Enter your email"
+    },
+    "phone": {
+      "phone": "Phone",
+      "placeholder": "Enter your phone"
+    },
+    "dateOfBirth": {
+      "dateOfBirth": "Date of birth"
+    },
+    "password": {
+      "password": "Password",
+      "placeholder": "Enter your password"
+    },
+    "confirmPassword": {
+      "confirmPassword": "Confirm password",
+      "placeholder": "Confirm password"
+    },
+    "agreeTo": "Agree to",
+    "terms": "terms",
+    "signUp": "Sign up",
+    "haveAccount":"Already have an account?",
+    "login": "Login"
   },
   "library": {
     "title": "Your Library",

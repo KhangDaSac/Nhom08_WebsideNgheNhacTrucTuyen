@@ -65,7 +65,7 @@ const SignUp = () => {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-primary-500 mb-2">Music for you</h1>
           <p className="text-gray-600 dark:text-gray-400">
-            {t('Sign up')}
+            {t('signUp.title')}
           </p>
         </div>
 
@@ -78,7 +78,7 @@ const SignUp = () => {
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('Display name')}
+                {t('signUp.displayName.displayName')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -92,7 +92,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('Enter your display name')}
+                  placeholder={t('signUp.displayName.placeholder')}
                 />
               </div>
             </div>
@@ -103,7 +103,7 @@ const SignUp = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('Email')}
+                {t('signUp.email.email')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -117,7 +117,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('Enter your email')}
+                  placeholder={t('signUp.email.placeholder')}
                 />
               </div>
             </div>
@@ -128,7 +128,7 @@ const SignUp = () => {
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('Phone number')}
+                {t('signUp.phone.phone')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -142,7 +142,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('Enter your phone number')}
+                  placeholder={t('signUp.phone.placeholder')}
                 />
               </div>
             </div>
@@ -153,7 +153,7 @@ const SignUp = () => {
                 htmlFor="dateOfBirth"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('Date of birth')}
+                {t('signUp.dateOfBirth.dateOfBirth')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -177,7 +177,7 @@ const SignUp = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('Password')}
+                {t('signUp.password.password')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -191,7 +191,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('Enter your password')}
+                  placeholder={t('signUp.password.placeholder')}
                 />
                 <button
                   type="button"
@@ -213,7 +213,7 @@ const SignUp = () => {
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('Confirm password')}
+                {t('signUp.confirmPassword.confirmPassword')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -227,7 +227,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('Confirm password')}
+                  placeholder={t('signUp.confirmPassword.placeholder')}
                 />
                 <button
                   type="button"
@@ -260,12 +260,12 @@ const SignUp = () => {
                 htmlFor="terms"
                 className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
               >
-                {t('Agree to')}{' '}
+                {t('signUp.agreeTo')}{' '}
                 <Link
                   to="/terms"
                   className="text-primary-500 hover:text-primary-600"
                 >
-                  {t('terms')}
+                  {t('signUp.terms')}
                 </Link>
               </label>
             </div>
@@ -279,10 +279,9 @@ const SignUp = () => {
               {isLoading ? (
                 <div className="flex items-center">
                   <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin mr-2"></div>
-                  {t('signup.creatingAccount')}
                 </div>
               ) : (
-                t('Signup')
+                t('signUp.signUp')
               )}
             </button>
           </form>
@@ -290,12 +289,12 @@ const SignUp = () => {
           {/* Login Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {t('Have account?')}{' '}
+              {t('signUp.haveAccount')}{' '}
               <Link
                 to="/login"
                 className="font-medium text-primary-500 hover:text-primary-600"
               >
-                {t('Log in')}
+                {t('signUp.login')}
               </Link>
             </p>
           </div>
