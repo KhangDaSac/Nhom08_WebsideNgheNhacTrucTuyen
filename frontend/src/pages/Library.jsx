@@ -1,356 +1,212 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { usePlayer } from '../contexts/PlayerContext';
-import {
-  FiMusic,
-  FiHeart,
-  FiClock,
-  FiFolder,
-  FiSearch,
-  FiFilter,
-  FiPlus,
-  FiPlay,
-  FiPause,
-  FiMoreVertical,
-  FiTrash2,
-  FiEdit2,
-  FiShare2,
-} from 'react-icons/fi';
+import { Tab } from '@headlessui/react';
+import { FiClock, FiMusic, FiUser, FiDisc } from 'react-icons/fi';
 
 const Library = () => {
   const { t } = useTranslation();
-  const { currentSong, isPlaying, play, pause } = usePlayer();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('playlists');
-  const [showMenu, setShowMenu] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // Mock data
-  const playlists = [
+  // Mock data - thay thế bằng dữ liệu thực từ API sau
+  const recentlyPlayed = [
     {
       id: 1,
-      name: 'Favorites',
-      cover: 'https://picsum.photos/200/200?random=1',
-      songCount: 25,
-      duration: '1h 30m',
+      title: 'Shape of You',
+      artist: 'Ed Sheeran',
+      album: '÷ (Divide)',
+      duration: '3:53',
+      image: '/album-covers/1.jpg'
     },
-    {
-      id: 2,
-      name: 'Workout Mix',
-      cover: 'https://picsum.photos/200/200?random=2',
-      songCount: 15,
-      duration: '45m',
-    },
-    {
-      id: 3,
-      name: 'Chill Vibes',
-      cover: 'https://picsum.photos/200/200?random=3',
-      songCount: 30,
-      duration: '2h 15m',
-    },
+    // Thêm các bài hát khác...
   ];
 
   const likedSongs = [
     {
       id: 1,
-      title: 'Song One',
-      artist: 'Artist One',
-      album: 'Album One',
-      duration: '3:45',
-      cover: 'https://picsum.photos/200/200?random=4',
+      title: 'Blinding Lights',
+      artist: 'The Weeknd',
+      album: 'After Hours',
+      duration: '3:20',
+      image: '/album-covers/2.jpg'
     },
-    {
-      id: 2,
-      title: 'Song Two',
-      artist: 'Artist Two',
-      album: 'Album Two',
-      duration: '4:20',
-      cover: 'https://picsum.photos/200/200?random=5',
-    },
+    // Thêm các bài hát khác...
   ];
 
-  const recentlyPlayed = [
+  const playlists = [
     {
       id: 1,
-      title: 'Recent Song One',
-      artist: 'Artist One',
-      album: 'Album One',
-      duration: '3:30',
-      cover: 'https://picsum.photos/200/200?random=6',
+      name: 'My Playlist #1',
+      songCount: 15,
+      image: '/playlist-covers/1.jpg'
+    },
+    // Thêm các playlist khác...
+  ];
+
+  const albums = [
+    {
+      id: 1,
+      name: 'Future Nostalgia',
+      artist: 'Dua Lipa',
+      year: 2020,
+      image: '/album-covers/3.jpg'
+    },
+    // Thêm các album khác...
+  ];
+
+  const categories = [
+    {
+      name: t('Recently Played'),
+      icon: FiClock,
+      content: (
+        <div className="grid gap-4">
+          {recentlyPlayed.map((song) => (
+            <div
+              key={song.id}
+              className="flex items-center space-x-4 p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            >
+              <img
+                src={song.image}
+                alt={song.title}
+                className="w-12 h-12 rounded-md object-cover"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                  {song.title}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                  {song.artist}
+                </p>
+              </div>
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                {song.duration}
+              </span>
+            </div>
+          ))}
+        </div>
+      ),
     },
     {
-      id: 2,
-      title: 'Recent Song Two',
-      artist: 'Artist Two',
-      album: 'Album Two',
-      duration: '4:15',
-      cover: 'https://picsum.photos/200/200?random=7',
+      name: t('Liked Songs'),
+      icon: FiMusic,
+      content: (
+        <div className="grid gap-4">
+          {likedSongs.map((song) => (
+            <div
+              key={song.id}
+              className="flex items-center space-x-4 p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            >
+              <img
+                src={song.image}
+                alt={song.title}
+                className="w-12 h-12 rounded-md object-cover"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                  {song.title}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                  {song.artist}
+                </p>
+              </div>
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                {song.duration}
+              </span>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      name: t('Playlists'),
+      icon: FiUser,
+      content: (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {playlists.map((playlist) => (
+            <div
+              key={playlist.id}
+              className="flex flex-col space-y-2 p-4 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              <img
+                src={playlist.image}
+                alt={playlist.name}
+                className="w-full aspect-square rounded-md object-cover"
+              />
+              <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                {playlist.name}
+              </h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {playlist.songCount} {t('songs')}
+              </p>
+            </div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      name: t('Albums'),
+      icon: FiDisc,
+      content: (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {albums.map((album) => (
+            <div
+              key={album.id}
+              className="flex flex-col space-y-2 p-4 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              <img
+                src={album.image}
+                alt={album.name}
+                className="w-full aspect-square rounded-md object-cover"
+              />
+              <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                {album.name}
+              </h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {album.artist} • {album.year}
+              </p>
+            </div>
+          ))}
+        </div>
+      ),
     },
   ];
 
-  const handlePlay = (song) => {
-    if (currentSong?.id === song.id) {
-      if (isPlaying) {
-        pause();
-      } else {
-        play();
-      }
-    } else {
-      play(song);
-    }
-  };
-
-  const toggleMenu = (id) => {
-    setShowMenu(showMenu === id ? null : id);
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              {t('library.title')}
-            </h1>
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-              {t('library.description')}
-            </p>
-          </div>
-        </div>
+    <div className="container mx-auto px-4 py-6">
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+        {t('Your Library')}
+      </h1>
 
-        {/* Search & Filter */}
-        <div className="flex-1 max-w-lg">
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder={t('library.placeholder')}
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
-            />
-          </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="flex items-center gap-4 mb-6 border-b border-gray-200 dark:border-gray-700">
-          <button
-            onClick={() => setActiveTab('playlists')}
-            className={`px-4 py-2 text-sm ${
-              activeTab === 'playlists' ? 'tab-active' : 'tab-inactive'
-            }`}
-          >
-            {t('library.yourPlaylists')}
-          </button>
-          <button
-            onClick={() => setActiveTab('liked')}
-            className={`px-4 py-2 text-sm ${
-              activeTab === 'liked' ? 'tab-active' : 'tab-inactive'
-            }`}
-          >
-            {t('library.likedSongs')}
-          </button>
-          <button
-            onClick={() => setActiveTab('recent')}
-            className={`px-4 py-2 text-sm ${
-              activeTab === 'recent' ? 'tab-active' : 'tab-inactive'
-            }`}
-          >
-            {t('library.followingArtists')}
-          </button>
-        </div>
-
-        {/* Content */}
-        <div className="grid gap-6">
-          {activeTab === 'playlists' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {playlists.map((playlist) => (
-                <div key={playlist.id} className="card group">
-                  <div className="relative aspect-square">
-                    <img
-                      src={playlist.cover}
-                      alt={playlist.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center">
-                      <button className="icon-button opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all bg-white dark:bg-gray-800">
-                        <FiPlay className="w-8 h-8 text-primary-600 dark:text-primary-500" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-medium text-gray-900 dark:text-white">
-                      {playlist.name}
-                    </h3>
-                    <div className="mt-1 flex items-center gap-2">
-                      <span className="badge">{playlist.songCount} songs</span>
-                      <span className="badge-secondary">{playlist.duration}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {activeTab === 'liked' && (
-            <div className="card">
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/20">
-                    <FiHeart className="w-5 h-5 text-red-500" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                      {t('library.likedSongs')}
-                    </h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {likedSongs.length} songs
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {likedSongs.map((song) => (
-                  <div
-                    key={song.id}
-                    className="group flex items-center gap-4 p-4 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
-                  >
-                    <div className="relative w-12 h-12">
-                      <img
-                        src={song.cover}
-                        alt={song.title}
-                        className="w-full h-full object-cover rounded-lg shadow-sm"
-                      />
-                      <button
-                        onClick={() => handlePlay(song)}
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-40 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        {currentSong?.id === song.id && isPlaying ? (
-                          <FiPause className="w-6 h-6 text-white" />
-                        ) : (
-                          <FiPlay className="w-6 h-6 text-white" />
-                        )}
-                      </button>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 dark:text-white truncate">
-                        {song.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                        {song.artist} • {song.album}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="badge">{song.duration}</span>
-                      <button
-                        onClick={() => toggleMenu(song.id)}
-                        className="icon-button"
-                      >
-                        <FiMoreVertical className="w-5 h-5" />
-                      </button>
-                      {showMenu === song.id && (
-                        <div className="absolute right-4 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1 z-10">
-                          <button className="menu-item">
-                            <FiEdit2 className="w-4 h-4" />
-                            {t('library.edit')}
-                          </button>
-                          <button className="menu-item">
-                            <FiShare2 className="w-4 h-4" />
-                            {t('library.share')}
-                          </button>
-                          <button className="menu-item-danger">
-                            <FiTrash2 className="w-4 h-4" />
-                            {t('library.delete')}
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'recent' && (
-            <div className="card">
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary-50 dark:bg-primary-900/20">
-                    <FiClock className="w-5 h-5 text-primary-500" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                      {t('library.recentlyPlayed')}
-                    </h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {recentlyPlayed.length} songs
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                {recentlyPlayed.map((song) => (
-                  <div
-                    key={song.id}
-                    className="group flex items-center gap-4 p-4 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors"
-                  >
-                    <div className="relative w-12 h-12">
-                      <img
-                        src={song.cover}
-                        alt={song.title}
-                        className="w-full h-full object-cover rounded-lg shadow-sm"
-                      />
-                      <button
-                        onClick={() => handlePlay(song)}
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-40 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                      >
-                        {currentSong?.id === song.id && isPlaying ? (
-                          <FiPause className="w-6 h-6 text-white" />
-                        ) : (
-                          <FiPlay className="w-6 h-6 text-white" />
-                        )}
-                      </button>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 dark:text-white truncate">
-                        {song.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                        {song.artist} • {song.album}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="badge">{song.duration}</span>
-                      <button
-                        onClick={() => toggleMenu(song.id)}
-                        className="icon-button"
-                      >
-                        <FiMoreVertical className="w-5 h-5" />
-                      </button>
-                      {showMenu === song.id && (
-                        <div className="absolute right-4 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1 z-10">
-                          <button className="menu-item">
-                            <FiEdit2 className="w-4 h-4" />
-                            {t('library.edit')}
-                          </button>
-                          <button className="menu-item">
-                            <FiShare2 className="w-4 h-4" />
-                            {t('library.share')}
-                          </button>
-                          <button className="menu-item-danger">
-                            <FiTrash2 className="w-4 h-4" />
-                            {t('library.delete')}
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+      <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+        <Tab.List className="flex space-x-2 rounded-xl bg-gray-100 dark:bg-gray-800 p-1 mb-6">
+          {categories.map((category, index) => (
+            <Tab
+              key={index}
+              className={({ selected }) =>
+                `flex items-center space-x-2 w-full rounded-lg py-2.5 px-3 text-sm font-medium leading-5
+                ${
+                  selected
+                    ? 'bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 shadow'
+                    : 'text-gray-700 dark:text-gray-400 hover:bg-white/[0.12] hover:text-gray-900 dark:hover:text-white'
+                }`
+              }
+            >
+              <category.icon className="w-5 h-5" />
+              <span>{category.name}</span>
+            </Tab>
+          ))}
+        </Tab.List>
+        <Tab.Panels className="mt-2">
+          {categories.map((category, index) => (
+            <Tab.Panel
+              key={index}
+              className={`rounded-xl bg-white dark:bg-gray-900 p-3
+                ring-white/60 ring-offset-2 ring-offset-primary-400 focus:outline-none focus:ring-2`}
+            >
+              {category.content}
+            </Tab.Panel>
+          ))}
+        </Tab.Panels>
+      </Tab.Group>
     </div>
   );
 };

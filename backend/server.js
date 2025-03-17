@@ -2,41 +2,38 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
-// Load env vars
 dotenv.config();
+const MongoConfig = require('./config/MongoConfig');
+const Songs = require('./model/Songs');
 
 const app = express();
 
-// Body parser
-app.use(express.json());
 
-// Enable CORS
-app.use(cors());
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB Connected'))
-.catch(err => console.log('MongoDB Connection Error:', err));
-
-// Routes
-app.use('/api/auth', require('./routes/auth'));
-
-// Error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: 'Lỗi server',
-    error: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
-  });
+app.get('/api/songs', async (req, res) => {
+  try {
+    const songs = await Songs.create({
+      title: 'Song 1',
+      artist_id: ['1', '2'],
+      album_id: '1',
+      duration: 180,
+      genre: ['Pop', 'Rock'],
+      releaseDate: new Date(),
+      likes: 100,
+      audioUrl: 'https://example.com/song1.mp3',
+      imageUrl: 'https://example.com/song1.jpg'
+    });
+    res.json(songs);
+  } catch (err) {
+    res.status(500).json({  
+      success: false,
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
 });
 
-const PORT = process.env.PORT || 5000;
+app.listen(5000, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-}); 
