@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
 import SongCards from '../components/basic-component/song-card/SongCards';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
-import {
-  FiPlay
-} from 'react-icons/fi';
+import ArtistCards from '../components/basic-component/artist-card/ArtistCards.jsx';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -199,45 +197,7 @@ const Home = () => {
 
         {/* Popular Artists */}
         <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              {t('home.popularArtists')}
-            </h2>
-            <Link
-              to="/artists"
-              className="text-primary-500 hover:text-primary-600 font-medium"
-            >
-              {t('home.viewAll')}
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {popularArtists.map((artist) => (
-              <Link
-                key={artist.id}
-                to={`/artist/${artist.id}`}
-                className="group text-center"
-              >
-                <div className="relative aspect-square rounded-full overflow-hidden mb-3">
-                  <img
-                    src={artist.imageUrl}
-                    alt={artist.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center">
-                      <FiPlay className="w-6 h-6 relative left-[1px]" />
-                    </button>
-                  </div>
-                </div>
-                <h3 className="font-medium text-gray-900 dark:text-white">
-                  {artist.name}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {artist.followers} followers
-                </p>
-              </Link>
-            ))}
-          </div>
+          <ArtistCards artists={popularArtists} collectionTitle={t('collection.artist.popularArtists')} />
         </section>
       </div>
     </div>

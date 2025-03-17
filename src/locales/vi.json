@@ -68,6 +68,53 @@
     "playlists": "Danh sách phát",
     "songs": "Bài hát"
   },
+  "login": {
+      "title": "Đăng nhập",
+      "username": {
+        "username": "Tên đăng nhập",
+        "placeholder": "Nhập email hoặc số điện thoại"
+      },
+      "password": {
+        "password": "Mật khẩu",
+        "placeholder": "Nhập mật khẩu"
+      },
+      "rememberMe": "Lưu đăng nhập",
+      "forgotPassword": "Quên mật khẩu?",
+      "login": "Đăng nhập",
+      "noAccount": "Chưa có tài khoản?",
+      "signUp": "Đăng ký"
+  },
+  "signUp": {
+    "title": "Đăng ký",
+    "displayName": {
+      "displayName": "Tên hiển thị",
+      "placeholder": "Nhập tên hiển thị"
+    },
+    "email": {
+      "email": "Email",
+      "placeholder": "Nhập email"
+    },
+    "phone": {
+      "phone": "Số điện thoại",
+      "placeholder": "Nhập số điện thoại"
+    },
+    "dateOfBirth": {
+      "dateOfBirth": "Ngày sinh"
+    },
+    "password": {
+      "password": "Mật khẩu",
+      "placeholder": "Nhập mật khẩu"
+    },
+    "confirmPassword": {
+      "confirmPassword": "Xác nhận mật khẩu",
+      "placeholder": "Xác nhận mật khẩu"
+    },
+    "agreeTo": "Đồng ý với",
+    "terms": "Điều khoản",
+    "signUp": "Đăng ký",
+    "haveAccount":"Đã có tài khoản?",
+    "login": "Đăng nhập"
+  },
   "player": {
     "play": "Phát",
     "pause": "Tạm dừng",
@@ -89,24 +136,6 @@
     "removeFrom": "Xóa khỏi danh sách phát",
     "public": "Công khai",
     "private": "Riêng tư"
-  },
-  "account": {
-    "personalInfo": "Thông tin cá nhân",
-    "name": "Tên",
-    "dateOfBirth": "Ngày sinh",
-    "accountType": "Loại tài khoản",
-    "premium": "Premium",
-    "free": "Miễn phí",
-    "upgrade": "Nâng cấp lên Premium",
-    "billing": "Thông tin thanh toán",
-    "preferences": "Tùy chọn"
-  },
-  "footer": {
-    "about": "Về chúng tôi",
-    "contact": "Liên hệ",
-    "terms": "Điều khoản dịch vụ",
-    "privacy": "Chính sách bảo mật",
-    "copyright": "© 2025 Ứng dụng Nhạc. Đã đăng ký bản quyền."
   },
   "collection": {
     "song": {

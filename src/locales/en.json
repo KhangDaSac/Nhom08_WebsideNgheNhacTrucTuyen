@@ -169,7 +169,8 @@
       "popularAlbums": "Popular albums"
     },
     "artist": {
-      "artists": "Artists"
+      "artists": "Artists",
+      "popularArtists": "Popular artists"
     },
     "playlist": {
       "playlists": "Playlists"

@@ -21,14 +21,27 @@ const Song = ({ song, isCurrentSong, play, formatDuration }) => {
                     </button>
                 </td>
                 <td className="px-4 py-3">
-                    <span
-                        className={`font-medium truncate ${isCurrentSong
-                                ? 'text-primary-500'
-                                : 'text-gray-900 dark:text-white'
-                            }`}
-                    >
+                  <div className="flex items-center">
+                    <img
+                      src={song.coverUrl}
+                      alt={song.title}
+                      className="w-10 h-10 rounded mr-3"
+                    />
+                    <div>
+                      <span
+                        className={`font-medium block ${
+                          isCurrentSong
+                            ? 'text-primary-500'
+                            : 'text-gray-900 dark:text-white'
+                        }`}
+                      >
                         {song.title}
-                    </span>
+                      </span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {song.artist}
+                      </span>
+                    </div>
+                  </div>
                 </td>
                 <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell truncate">
                     {song.album}

@@ -35,6 +35,7 @@ const Artist = () => {
               album: 'Album 1',
               plays: '1.5M',
               duration: 180,
+              coverUrl: 'https://picsum.photos/100',
             },
             {
               id: 2,
@@ -42,6 +43,7 @@ const Artist = () => {
               album: 'Album 2',
               plays: '1.2M',
               duration: 210,
+              coverUrl: 'https://picsum.photos/100',
             },
             // Add more songs...
           ],
