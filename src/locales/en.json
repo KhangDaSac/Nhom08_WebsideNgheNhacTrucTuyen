@@ -137,24 +137,6 @@
     "public": "Public",
     "private": "Private"
   },
-  "account": {
-    "personalInfo": "Personal Information",
-    "name": "Name",
-    "dateOfBirth": "Date of Birth",
-    "accountType": "Account Type",
-    "premium": "Premium",
-    "free": "Free",
-    "upgrade": "Upgrade to Premium",
-    "billing": "Billing Information",
-    "preferences": "Preferences"
-  },
-  "footer": {
-    "about": "About Us",
-    "contact": "Contact",
-    "terms": "Terms of Service",
-    "privacy": "Privacy Policy",
-    "copyright": "© 2025 Music App. All rights reserved."
-  },
   "collection": {
     "song": {
       "songs": "Songs",
