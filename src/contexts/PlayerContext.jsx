@@ -1,6 +1,123 @@
-import { createContext, useContext, useState, useRef } from 'react';
+import { createContext, useState, useContext, useRef } from 'react';
 
 const PlayerContext = createContext();
+
+export const PlayerProvider = ({ children }) => {
+  const audioRef = useRef(null);
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isRepeat, setIsRepeat] = useState(false);
+  const [isShuffle, setIsShuffle] = useState(false);
+  const [queue, setQueue] = useState([]);
+
+  const playTrack = (track) => {
+    setCurrentTrack(track);
+    setIsPlaying(true);
+  };
+
+  const pauseTrack = () => {
+    setIsPlaying(false);
+  };
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const toggleRepeat = () => {
+    setIsRepeat(!isRepeat);
+  };
+
+  const toggleShuffle = () => {
+    setIsShuffle(!isShuffle);
+  };
+
+  const nextTrack = () => {
+    if (queue.length > 0) {
+      const currentIndex = queue.findIndex(track => track.id === currentTrack?.id);
+      if (isShuffle) {
+        const nextIndex = Math.floor(Math.random() * queue.length);
+        setCurrentTrack(queue[nextIndex]);
+      } else if (currentIndex < queue.length - 1) {
+        setCurrentTrack(queue[currentIndex + 1]);
+      } else if (isRepeat) {
+        setCurrentTrack(queue[0]);
+      }
+    }
+  };
+
+  const previousTrack = () => {
+    if (queue.length > 0) {
+      const currentIndex = queue.findIndex(track => track.id === currentTrack?.id);
+      if (currentIndex > 0) {
+        setCurrentTrack(queue[currentIndex - 1]);
+      } else if (isRepeat) {
+        setCurrentTrack(queue[queue.length - 1]);
+      }
+    }
+  };
+
+  const updateProgress = (time) => {
+    setProgress(time);
+  };
+
+  const updateVolume = (value) => {
+    setVolume(value);
+    if (audioRef.current) {
+      audioRef.current.volume = value;
+    }
+  };
+
+  const seekTo = (time) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = time;
+      setProgress(time);
+    }
+  };
+
+  const addToQueue = (tracks) => {
+    setQueue(prevQueue => [...prevQueue, ...tracks]);
+  };
+
+  const clearQueue = () => {
+    setQueue([]);
+    setCurrentTrack(null);
+    setIsPlaying(false);
+  };
+
+  return (
+    <PlayerContext.Provider
+      value={{
+        audioRef,
+        currentTrack,
+        isPlaying,
+        volume,
+        progress,
+        duration,
+        isRepeat,
+        isShuffle,
+        queue,
+        playTrack,
+        pauseTrack,
+        togglePlay,
+        toggleRepeat,
+        toggleShuffle,
+        nextTrack,
+        previousTrack,
+        updateProgress,
+        updateVolume,
+        seekTo,
+        addToQueue,
+        clearQueue,
+        setDuration
+      }}
+    >
+      {children}
+    </PlayerContext.Provider>
+  );
+};
 
 export const usePlayer = () => {
   const context = useContext(PlayerContext);
@@ -10,139 +127,4 @@ export const usePlayer = () => {
   return context;
 };
 
-export const PlayerProvider = ({ children }) => {
-  const audioRef = useRef(new Audio());
-  const [currentSong, setCurrentSong] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [queue, setQueue] = useState([]);
-  const [isRepeat, setIsRepeat] = useState(false);
-  const [isShuffle, setIsShuffle] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [lyrics, setLyrics] = useState(null);
-
-  const play = (song) => {
-    if (song) {
-      setCurrentSong(song);
-      audioRef.current.src = song.url;
-    }
-    audioRef.current.play();
-    setIsPlaying(true);
-  };
-
-  const pause = () => {
-    audioRef.current.pause();
-    setIsPlaying(false);
-  };
-
-  const togglePlay = () => {
-    if (isPlaying) {
-      pause();
-    } else {
-      play();
-    }
-  };
-
-  const setAudioVolume = (value) => {
-    audioRef.current.volume = value;
-    setVolume(value);
-  };
-
-  const toggleMute = () => {
-    audioRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
-
-  const seek = (time) => {
-    audioRef.current.currentTime = time;
-    setCurrentTime(time);
-  };
-
-  const skipToNext = () => {
-    if (queue.length > 0) {
-      const nextSong = queue[0];
-      setQueue(queue.slice(1));
-      play(nextSong);
-    }
-  };
-
-  const skipToPrevious = () => {
-    // Implementation depends on history tracking
-    console.log('Skip to previous');
-  };
-
-  const toggleRepeat = () => {
-    setIsRepeat(!isRepeat);
-    audioRef.current.loop = !isRepeat;
-  };
-
-  const toggleShuffle = () => {
-    setIsShuffle(!isShuffle);
-  };
-
-  const addToQueue = (song) => {
-    setQueue([...queue, song]);
-  };
-
-  const removeFromQueue = (index) => {
-    const newQueue = [...queue];
-    newQueue.splice(index, 1);
-    setQueue(newQueue);
-  };
-
-  const clearQueue = () => {
-    setQueue([]);
-  };
-
-  const loadLyrics = async (songId) => {
-    try {
-      // Simulate API call to fetch lyrics
-      const response = {
-        lyrics: [
-          { time: 0, text: 'Sample lyrics line 1' },
-          { time: 30, text: 'Sample lyrics line 2' },
-          // ... more lyrics
-        ]
-      };
-      setLyrics(response.lyrics);
-    } catch (error) {
-      console.error('Failed to load lyrics:', error);
-      setLyrics(null);
-    }
-  };
-
-  return (
-    <PlayerContext.Provider
-      value={{
-        currentSong,
-        isPlaying,
-        volume,
-        duration,
-        currentTime,
-        queue,
-        isRepeat,
-        isShuffle,
-        isMuted,
-        lyrics,
-        play,
-        pause,
-        togglePlay,
-        setAudioVolume,
-        toggleMute,
-        seek,
-        skipToNext,
-        skipToPrevious,
-        toggleRepeat,
-        toggleShuffle,
-        addToQueue,
-        removeFromQueue,
-        clearQueue,
-        loadLyrics
-      }}
-    >
-      {children}
-    </PlayerContext.Provider>
-  );
-}; 
+export default PlayerContext; 

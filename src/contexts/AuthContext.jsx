@@ -1,135 +1,55 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext();
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Check if user is logged in from localStorage
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+    setUser(localStorage.getItem('user')); 
+  }, [user]);
 
-  const login = async ({email, password}) => {
+  const login = async (email, password) => {
+    setLoading(true);
     try {
-      // Simulate API call
-      const response = {
-        user: {
-          id: '1',
-          name: 'John Doe',
-          email,
-          password,
-          accountType: 'premium',
-          avatar: 'https://i.pravatar.cc/150?img=3'
-        },
-        token: 'dummy_token'
+      const newUser = {
+        email: email,
+        password: password,
       };
 
-      setUser(response.user);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      localStorage.setItem('token', response.token);
-      return response.user;
+      setUser(newUser);
+      localStorage.setItem('user', JSON.stringify(newUser));
+
+      return { success: true };
     } catch (error) {
-      throw new Error('Login failed');
+      setLoading(false);
+      return { success: false, error: error.message };
     }
   };
 
-  const loginWithGoogle = async () => {
+  const register = async (userData) => {
     try {
-      // Simulate Google login
-      const response = {
-        user: {
-          id: '2',
-          name: 'Google User',
-          email: 'google@example.com',
-          accountType: 'free',
-          avatar: 'https://i.pravatar.cc/150?img=4'
-        },
-        token: 'dummy_google_token'
-      };
-
-      setUser(response.user);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      localStorage.setItem('token', response.token);
-      return response.user;
+      localStorage.setItem('user', userData);
+      setUser(userData);
+      return { success: true };
     } catch (error) {
-      throw new Error('Google login failed');
-    }
-  };
-
-  const loginWithFacebook = async () => {
-    try {
-      // Simulate Facebook login
-      const response = {
-        user: {
-          id: '3',
-          name: 'Facebook User',
-          email: 'facebook@example.com',
-          accountType: 'free',
-          avatar: 'https://i.pravatar.cc/150?img=5'
-        },
-        token: 'dummy_facebook_token'
-      };
-
-      setUser(response.user);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      localStorage.setItem('token', response.token);
-      return response.user;
-    } catch (error) {
-      throw new Error('Facebook login failed');
-    }
-  };
-
-  const signup = async (userData) => {
-    try {
-      // Simulate API call
-      const response = {
-        user: {
-          id: '4',
-          ...userData,
-          accountType: 'free',
-          avatar: 'https://i.pravatar.cc/150?img=6'
-        },
-        token: 'dummy_token'
-      };
-
-      setUser(response.user);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      localStorage.setItem('token', response.token);
-      return response.user;
-    } catch (error) {
-      throw new Error('Signup failed');
+      return { success: false, error: error.message };
     }
   };
 
   const logout = () => {
-    setUser(null);
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    setUser(null);
   };
 
   const updateProfile = async (userData) => {
     try {
-      // Simulate API call
-      const updatedUser = { ...user, ...userData };
-      setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      return updatedUser;
+      setUser({ ...user, ...userData });
+      return { success: true };
     } catch (error) {
-      throw new Error('Profile update failed');
+      return { success: false, error: error.message };
     }
   };
 
@@ -139,14 +59,22 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         login,
-        loginWithGoogle,
-        loginWithFacebook,
-        signup,
+        register,
         logout,
-        updateProfile
+        updateProfile,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-}; 
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+export default AuthContext; 

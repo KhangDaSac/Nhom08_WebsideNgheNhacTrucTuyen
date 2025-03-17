@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { PlayerProvider } from './contexts/PlayerContext';
 import { I18nextProvider } from 'react-i18next';
@@ -21,9 +22,10 @@ import Library from './pages/Library';
 function App() {
   return (
     <I18nextProvider i18n={i18n}>
-      <ThemeProvider>
-        <AuthProvider>
-          <PlayerProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <PlayerProvider>
             <Router>
               <Routes>
                 {/* Auth Routes */}
@@ -52,8 +54,9 @@ function App() {
               </Routes>
             </Router>
           </PlayerProvider>
-        </AuthProvider>
-      </ThemeProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </LanguageProvider>
     </I18nextProvider>
   );
 }

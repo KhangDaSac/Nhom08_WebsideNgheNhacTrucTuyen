@@ -3,17 +3,15 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiSearch, FiSun, FiMoon, FiBell, FiChevronDown } from 'react-icons/fi';
 import { IoLanguage } from "react-icons/io5";
-
+import { useTheme } from '../../contexts/ThemeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 const Navbar = () => {
   const { t } = useTranslation();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
-  };
-
+  const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage } = useLanguage();
   return (
     <div className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
@@ -34,51 +32,31 @@ const Navbar = () => {
         {/* Right Section */}
         <div className="flex items-center space-x-4">
           {/* Theme Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg"
-          >
-            {isDarkMode ? (
-              <FiSun className="h-5 w-5" />
-            ) : (
-              <FiMoon className="h-5 w-5" />
-            )}
-          </button>
+          <div className="flex items-center mx-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg"
+            >
+              {theme === 'light' ? (
+                <FiSun className="h-5 w-5" />
+              ) : (
+                <FiMoon className="h-5 w-5" />
+              )}
+            </button>
+          </div>
 
-          {/* Language Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg"
-          >
-            {isDarkMode ? (
-              <div className="flex items-center min-w-[100px] ">
-                <IoLanguage className="h-5 w-5" />
-                <span className="ml-2">English</span>
-              </div>
-            ) : (
-              <div className="flex items-center min-w-[100px]">
-                <IoLanguage className="h-5 w-5" />
-                <span className="ml-2">Tiếng Việt</span>
-              </div>
-
-            )}
-          </button>
 
           {/* Profile Dropdown */}
           <div className="relative">
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="flex items-center space-x-3 focus:outline-none"
+              className="flex items-center focus:outline-none"
             >
               <img
                 src="https://picsum.photos/32"
                 alt="Profile"
-                className="h-8 w-8 rounded-full"
+                className="rounded-full"
               />
-              <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">
-                John Doe
-              </span>
-              <FiChevronDown className="h-4 w-4 text-gray-400" />
             </button>
 
             {/* Dropdown Menu */}
