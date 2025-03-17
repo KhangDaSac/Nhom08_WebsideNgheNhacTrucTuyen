@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiSearch, FiSun, FiMoon, FiBell, FiChevronDown } from 'react-icons/fi';
+import { IoLanguage } from "react-icons/io5";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -44,10 +45,23 @@ const Navbar = () => {
             )}
           </button>
 
-          {/* Notifications */}
-          <button className="p-2 text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg relative">
-            <FiBell className="h-5 w-5" />
-            <span className="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-400"></span>
+          {/* Language Toggle */}
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg"
+          >
+            {isDarkMode ? (
+              <div className="flex items-center min-w-[100px] ">
+                <IoLanguage className="h-5 w-5" />
+                <span className="ml-2">English</span>
+              </div>
+            ) : (
+              <div className="flex items-center min-w-[100px]">
+                <IoLanguage className="h-5 w-5" />
+                <span className="ml-2">Tiếng Việt</span>
+              </div>
+
+            )}
           </button>
 
           {/* Profile Dropdown */}
@@ -85,7 +99,7 @@ const Navbar = () => {
                   </Link>
                   <button
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                    onClick={() => {/* Handle logout */}}
+                    onClick={() => {/* Handle logout */ }}
                   >
                     {t('Sign out')}
                   </button>
