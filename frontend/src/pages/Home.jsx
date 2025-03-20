@@ -5,6 +5,7 @@ import { usePlayer } from '../contexts/PlayerContext';
 import SongCards from '../components/basic-component/song-card/SongCards';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
 import ArtistCards from '../components/basic-component/artist-card/ArtistCards.jsx';
+import axios from 'axios';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -13,6 +14,22 @@ const Home = () => {
   const [recentSongs, setRecentSongs] = useState([]);
   const [featuredAlbums, setFeaturedAlbums] = useState([]);
   const [popularArtists, setPopularArtists] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/songs');
+        setRecentSongs(response.data.data);
+        console.log(response.data.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {

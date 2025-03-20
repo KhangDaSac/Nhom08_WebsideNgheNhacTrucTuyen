@@ -1,29 +1,34 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const dotenv = require('dotenv');
-dotenv.config();
-const MongoConfig = require('./config/MongoConfig');
+const cors = require('cors');
 const Song = require('./model/Song');
+const MongoConfig = require('./config/MongoConfig');
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// MongoDB Connection
 
 
+// Routes
 app.get('/api/songs', async (req, res) => {
   try {
-    const songs = await Song.create({
-      song_name: 'Song 1',
-      likes: 100,
-      views: 100,
-      genres: ['Pop', 'Rock'],
-      release_date: new Date(),
-      image_url: 'https://example.com/song1.jpg',
-      audio_url: 'https://example.com/song1.mp3'
+    const songs = await Song.find()
+      .populate('artist_id', 'artist_name image_url')
+      .populate('album_id', 'album_name image_url');
+    res.json({
+      success: true,
+      data: songs
     });
-    res.json(songs);
   } catch (err) {
-    res.status(500).json({  
+    res.status(500).json({
       success: false,
       message: 'Lỗi server',
       error: err.message
@@ -31,7 +36,9 @@ app.get('/api/songs', async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
