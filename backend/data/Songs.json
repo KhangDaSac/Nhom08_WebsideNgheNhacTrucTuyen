@@ -1,0 +1,39 @@
+[
+    {
+        "_id": { "$oid": "67dc00e5009bf012ef627d42" },
+        "song_name": "Nơi này có anh",
+        "likes": 5000,
+        "views": 1000000,
+        "genres": [
+            "Tình cảm",
+            "Lãng mạng"
+        ],
+        "release_date": { "$date": "2017-02-13" },
+        "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/3/a/3a9e48bc4df7bbde3acea30cc267f609_1487066528.jpg",
+        "audio_url": "https://vnso-pt-15-tf-a128-z3.zmdcdn.me/d17d79105dfcbf67208389c9e8fc9c42?authen=exp=1742579622~acl=/d17d79105dfcbf67208389c9e8fc9c42*~hmac=65e209eceb4205da4761f9cf0f45e30f",
+        "artists": [
+            {
+                "_id": { "$oid": "67dc00cd009bf012ef627d40" },
+                "artist_name": "Sơn Tùng M-TP"
+            }
+        ]
+    },
+    {
+        "_id": { "$oid": "67dc0190009bf012ef627d43" },
+        "song_name": "Ấn nút thả giất mơ",
+        "likes": 5000,
+        "views": 1000000,
+        "genres": [
+            "Gia đình"
+        ],
+        "release_date": { "$date": "2015-06-17" },
+        "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/1/9/5/3/1953845641e396f5a7273b2c3655f280.jpg",
+        "audio_url": "https://vnso-pt-15-tf-a128-z3.zmdcdn.me/d17d79105dfcbf67208389c9e8fc9c42?authen=exp=1742642921~acl=/d17d79105dfcbf67208389c9e8fc9c42*~hmac=8d1cc1c1031f2bdd59312007b780f94a",
+        "artists": [
+            {
+                "_id": { "$oid": "67dc00cd009bf012ef627d40" },
+                "artist_name": "Sơn Tùng M-TP"
+            }
+        ]
+    }
+]

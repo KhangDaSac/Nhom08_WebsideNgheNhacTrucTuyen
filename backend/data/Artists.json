@@ -1,0 +1,29 @@
+[
+    {
+        "_id": { "$oid": "67dc00cd009bf012ef627d40" },
+        "artist_name": "Sơn Tùng M-TP",
+        "date_of_birth": "1994-07-05",
+        "followers": 1000000,
+        "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/avatars/5/9/6/9/59696c9dba7a914d587d886049c10df6.jpg",
+        "description": "Nguyễn Thanh Tùng (sinh ngày 5 tháng 7 năm 1994), thường được biết đến với nghệ danh Sơn Tùng M-TP, là một nam ca sĩ kiêm nhạc sĩ sáng tác bài hát, nhà sản xuất thu âm, rapper và diễn viên người Việt Nam. Nổi tiếng vì tầm ảnh hưởng sâu rộng đối với âm nhạc Việt Nam, anh được mệnh danh là \"Hoàng tử V-pop\" bởi Giải thưởng Âm nhạc Thế giới và BroadwayWorld, cũng như được nhiều nhà báo âm nhạc, nhà lý luận phê bình và tác giả đánh giá là một trong những nghệ sĩ âm nhạc Việt Nam xuất sắc nhất trong thế hệ của mình",
+        "songs": [
+            {
+                "_id": { "$oid": "67dc00e5009bf012ef627d42" },
+                "song_name": "Nơi này có anh",
+                "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/3/a/3a9e48bc4df7bbde3acea30cc267f609_1487066528.jpg"
+            },
+            {
+                "_id": { "$oid": "67dc00e5009bf012ef627d43" },
+                "song_name": "Ấn nút thả giất mơ",
+                "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/1/9/5/3/1953845641e396f5a7273b2c3655f280.jpg"
+            }
+        ],
+        "albums": [
+            {
+                "_id": "",
+                "album_name": "",
+                "image_url": ""
+            }
+        ]
+    }
+]

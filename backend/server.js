@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
 const MongoConfig = require('./config/MongoConfig');
-const Songs = require('./model/Songs');
+const Song = require('./model/Song');
 
 const app = express();
 
@@ -12,16 +12,14 @@ const app = express();
 
 app.get('/api/songs', async (req, res) => {
   try {
-    const songs = await Songs.create({
-      title: 'Song 1',
-      artist_id: ['1', '2'],
-      album_id: '1',
-      duration: 180,
-      genre: ['Pop', 'Rock'],
-      releaseDate: new Date(),
+    const songs = await Song.create({
+      song_name: 'Song 1',
       likes: 100,
-      audioUrl: 'https://example.com/song1.mp3',
-      imageUrl: 'https://example.com/song1.jpg'
+      views: 100,
+      genres: ['Pop', 'Rock'],
+      release_date: new Date(),
+      image_url: 'https://example.com/song1.jpg',
+      audio_url: 'https://example.com/song1.mp3'
     });
     res.json(songs);
   } catch (err) {
