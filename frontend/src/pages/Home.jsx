@@ -163,12 +163,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const formatDuration = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
-
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -204,7 +198,7 @@ const Home = () => {
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Recent Songs */}
         <section>
-          <SongCards songs={recentSongs} collectionTitle={t('collection.song.popularSongs')} currentSong={currentSong} play={play} formatDuration={formatDuration} />
+          <SongCards songs={recentSongs} collectionTitle={t('collection.song.popularSongs')} />
         </section>
 
         {/* Featured Albums */}

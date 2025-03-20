@@ -28,7 +28,7 @@
         ],
         "release_date": { "$date": "2015-06-17" },
         "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/1/9/5/3/1953845641e396f5a7273b2c3655f280.jpg",
-        "audio_url": "https://vnso-pt-15-tf-a128-z3.zmdcdn.me/d17d79105dfcbf67208389c9e8fc9c42?authen=exp=1742642921~acl=/d17d79105dfcbf67208389c9e8fc9c42*~hmac=8d1cc1c1031f2bdd59312007b780f94a",
+        "audio_url": "https://vnso-pt-15-tf-a128-z3.zmdcdn.me/3e20777e82114a6970bca99e94db9795?authen=exp=1742659875~acl=/3e20777e82114a6970bca99e94db9795*~hmac=d9964db4070108807ce9f4b5333bb6e9",
         "artists": [
             {
                 "_id": { "$oid": "67dc00cd009bf012ef627d40" },

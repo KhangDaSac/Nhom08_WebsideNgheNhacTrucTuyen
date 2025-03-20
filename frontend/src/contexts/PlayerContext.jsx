@@ -4,17 +4,18 @@ const PlayerContext = createContext();
 
 export const PlayerProvider = ({ children }) => {
   const audioRef = useRef(null);
-  const [currentTrack, setCurrentTrack] = useState(null);
+  const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(100);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isRepeat, setIsRepeat] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
   const [queue, setQueue] = useState([]);
+  const [isMuted, setIsMuted] = useState(false);
 
-  const playTrack = (track) => {
-    setCurrentTrack(track);
+  const playSong = (song) => {
+    setCurrentSong(song);
     setIsPlaying(true);
   };
 
@@ -34,27 +35,33 @@ export const PlayerProvider = ({ children }) => {
     setIsShuffle(!isShuffle);
   };
 
-  const nextTrack = () => {
+  const formatDuration = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.round(seconds % 60);
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
+
+  const nextSong = () => {
     if (queue.length > 0) {
-      const currentIndex = queue.findIndex(track => track.id === currentTrack?.id);
+      const currentIndex = queue.findIndex(song => song.id === currentSong?.id);
       if (isShuffle) {
         const nextIndex = Math.floor(Math.random() * queue.length);
-        setCurrentTrack(queue[nextIndex]);
+        setCurrentSong(queue[nextIndex]);
       } else if (currentIndex < queue.length - 1) {
-        setCurrentTrack(queue[currentIndex + 1]);
+        setCurrentSong(queue[currentIndex + 1]);
       } else if (isRepeat) {
-        setCurrentTrack(queue[0]);
+        setCurrentSong(queue[0]);
       }
     }
   };
 
-  const previousTrack = () => {
+  const previousSong = () => {
     if (queue.length > 0) {
-      const currentIndex = queue.findIndex(track => track.id === currentTrack?.id);
+      const currentIndex = queue.findIndex(song => song.id === currentSong?.id);
       if (currentIndex > 0) {
-        setCurrentTrack(queue[currentIndex - 1]);
+        setCurrentSong(queue[currentIndex - 1]);
       } else if (isRepeat) {
-        setCurrentTrack(queue[queue.length - 1]);
+        setCurrentSong(queue[queue.length - 1]);
       }
     }
   };
@@ -83,7 +90,7 @@ export const PlayerProvider = ({ children }) => {
 
   const clearQueue = () => {
     setQueue([]);
-    setCurrentTrack(null);
+    setCurrentSong(null);
     setIsPlaying(false);
   };
 
@@ -91,7 +98,7 @@ export const PlayerProvider = ({ children }) => {
     <PlayerContext.Provider
       value={{
         audioRef,
-        currentTrack,
+        currentSong,
         isPlaying,
         volume,
         progress,
@@ -99,19 +106,25 @@ export const PlayerProvider = ({ children }) => {
         isRepeat,
         isShuffle,
         queue,
-        playTrack,
+        playSong,
         pauseTrack,
         togglePlay,
         toggleRepeat,
         toggleShuffle,
-        nextTrack,
-        previousTrack,
+        nextSong,
+        previousSong,
         updateProgress,
         updateVolume,
         seekTo,
         addToQueue,
         clearQueue,
-        setDuration
+        setDuration,
+        setProgress,
+        setIsPlaying,
+        formatDuration,
+        setVolume,
+        isMuted,
+        setIsMuted
       }}
     >
       {children}

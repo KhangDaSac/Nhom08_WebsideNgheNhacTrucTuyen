@@ -1,8 +1,10 @@
 import React from 'react';
 import { FiPlay, FiClock } from 'react-icons/fi';
+import { usePlayer } from '../../../contexts/PlayerContext';
 
-const SongCard = ({ song, currentSong, play, formatDuration, isPlaying }) => {
-    const isCurrentSong = currentSong?.id === song.id;
+const SongCard = ({ song }) => {
+    const { currentSong, isPlaying, playSong } = usePlayer();
+    const isCurrentSong = currentSong?._id === song._id;
 
     return (
         <>
@@ -18,7 +20,7 @@ const SongCard = ({ song, currentSong, play, formatDuration, isPlaying }) => {
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <button
-                            onClick={() => play(song)}
+                            onClick={() => playSong(song)}
                             className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
                         >
                             {isCurrentSong && isPlaying ? (
@@ -33,12 +35,8 @@ const SongCard = ({ song, currentSong, play, formatDuration, isPlaying }) => {
                     {song.song_name}
                 </h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {song.artist_name}
+                    {song.artists?.map(artist => artist.artist_name).join(', ')}
                 </p>
-                <div className="flex items-center gap-2 mt-2 text-sm text-gray-500 dark:text-gray-400">
-                    <FiClock className="w-4 h-4" />
-                    <span>{formatDuration(song.duration)}</span>
-                </div>
             </div>
         </>
     );

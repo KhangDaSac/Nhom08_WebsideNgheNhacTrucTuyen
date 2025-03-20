@@ -23,7 +23,7 @@ const SongCards = ({ songs, collectionTitle, currentSong, play, formatDuration, 
             </div>
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {songs.map((song) => {
-                    return <SongCard key={song.id} song={song} currentSong={currentSong} play={play} formatDuration={formatDuration} />
+                    return <SongCard key={song._id} song={song}/>
                 })}
             </div>
         </>
