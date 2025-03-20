@@ -3,7 +3,7 @@ import Song from './Song';
 import { FiClock } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 
-const Songs = ({ songs, collectionTitle, currentSong, play, formatDuration }) => {
+const Songs = ({ songs, collectionTitle}) => {
     const { t } = useTranslation();
     return (
         <>
@@ -26,14 +26,10 @@ const Songs = ({ songs, collectionTitle, currentSong, play, formatDuration }) =>
                         </thead>
                         <tbody>
                             {songs.map((song) => {
-                                const isCurrentSong = currentSong?.id === song.id;
                                 return (
                                     <Song
-                                        key={song.id}
+                                        key={song._id}
                                         song={song}
-                                        isCurrentSong={isCurrentSong}
-                                        play={play}
-                                        formatDuration={formatDuration}
                                     />
                                 );
                             })}

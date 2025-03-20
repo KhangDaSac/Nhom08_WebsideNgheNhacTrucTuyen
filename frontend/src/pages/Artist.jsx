@@ -5,83 +5,54 @@ import { usePlayer } from '../contexts/PlayerContext';
 import { FiPlay, FiHeart, FiShare2, FiClock, FiMusic } from 'react-icons/fi';
 import Songs from '../components/basic-component/song/Songs';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
+import axios from 'axios';
 
 const Artist = () => {
   const { id } = useParams();
   const { t } = useTranslation();
-  const { play, currentSong, isPlaying } = usePlayer();
+  const {playSong, currentSong, formatDuration} = usePlayer();
   const [artist, setArtist] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [isFollowing, setIsFollowing] = useState(false);
+  const [popularSongs, setPopularSongs] = useState([]);
 
   useEffect(() => {
-    const fetchArtist = async () => {
+    const fetchData = async () => { 
       try {
-        // In a real app, this would be an API call
-        const data = {
-          id: parseInt(id),
-          name: 'Artist Name',
-          imageUrl: 'https://picsum.photos/400',
-          coverUrl: 'https://picsum.photos/1200/400',
-          monthlyListeners: '2.5M',
-          followers: '1.2M',
-          biography: 'Artist biography and description goes here...',
-          genres: ['Pop', 'R&B', 'Soul'],
-          popularSongs: [
-            {
-              id: 1,
-              title: 'Popular Song 1',
-              album: 'Album 1',
-              plays: '1.5M',
-              duration: 180,
-              coverUrl: 'https://picsum.photos/100',
-            },
-            {
-              id: 2,
-              title: 'Popular Song 2',
-              album: 'Album 2',
-              plays: '1.2M',
-              duration: 210,
-              coverUrl: 'https://picsum.photos/100',
-            },
-            // Add more songs...
-          ],
-          albums: [
-            {
-              id: 1,
-              title: 'Album 1',
-              coverUrl: 'https://picsum.photos/200',
-              releaseYear: 2024,
-              songCount: 12,
-            },
-            {
-              id: 2,
-              title: 'Album 2',
-              coverUrl: 'https://picsum.photos/201',
-              releaseYear: 2023,
-              songCount: 10,
-            },
-            // Add more albums...
-          ],
-        };
-
-        setArtist(data);
-        setIsLoading(false);
+        await fetchArtist();
+        await fetchSongs();
       } catch (error) {
         console.error('Error fetching artist:', error);
-        setError('Failed to load artist');
+      setError('Failed to load artist');
         setIsLoading(false);
       }
     };
 
-    fetchArtist();
-  }, [id]);
+    fetchData();
+  }, []);
 
-  const formatDuration = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  const fetchArtist = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/artist/${id}`);
+      console.log(response.data.data);
+
+      setArtist(response.data.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching artist:', error);
+      setError('Failed to load artist');
+      setIsLoading(false);
+    }
+  };
+
+  const fetchSongs = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/songs/artist=${artist._id}`);
+      setPopularSongs(response.data.data);
+    } catch (error) {
+      console.error('Error fetching songs:', error);  
+    }
   };
 
   if (isLoading) {
@@ -114,8 +85,8 @@ const Artist = () => {
       <div className="relative">
         <div className="h-40 sm:h-56 md:h-72 overflow-hidden">
           <img
-            src={artist.coverUrl}
-            alt={artist.name}
+            src={artist.image_url}
+            alt={artist.artist_name}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/50 to-gray-900"></div>
@@ -123,18 +94,18 @@ const Artist = () => {
         <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8">
           <div className="flex flex-col items-center sm:flex-row sm:items-end gap-4 sm:gap-6 md:gap-8">
             <img
-              src={artist.imageUrl}
-              alt={artist.name}
+              src={artist.image_url}
+              alt={artist.artist_name}
               className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-gray-800 shadow-lg"
             />
             <div className="flex-1 text-center sm:text-left">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-3">
-                {artist.name}
+                {artist.artist_name}
               </h1>
               <div className="flex flex-col sm:flex-row items-center text-sm sm:text-base space-y-1 sm:space-y-0 sm:space-x-4 text-gray-300">
-                <span>{artist.monthlyListeners} monthly listeners</span>
+                <span>{artist.followers} {t('collection.artist.followers')}</span>
                 <span className="hidden sm:inline">•</span>
-                <span>{artist.followers} followers</span>
+                <span>{artist.followers} {t('collection.artist.followers')}</span>
               </div>
             </div>
           </div>
@@ -169,13 +140,13 @@ const Artist = () => {
 
         {/* Popular Songs */}
         <div>
-            <Songs songs={artist.popularSongs} collectionTitle={'collection.song.popularSongs'} currentSong={currentSong} play={play} formatDuration={formatDuration} />
+            <Songs songs={popularSongs} collectionTitle={'collection.song.popularSongs'} />
         </div>
 
         {/* Albums */}
-        <div>
+        {/* <div>
             <AlbumCards albums={artist.albums} />
-        </div>
+        </div> */}
 
         {/* About */}
         <div>

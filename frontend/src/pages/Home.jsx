@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { usePlayer } from '../contexts/PlayerContext';
 import SongCards from '../components/basic-component/song-card/SongCards';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
 import ArtistCards from '../components/basic-component/artist-card/ArtistCards.jsx';
@@ -9,83 +7,42 @@ import axios from 'axios';
 
 const Home = () => {
   const { t } = useTranslation();
-  const { play, currentSong, isPlaying } = usePlayer();
   const [isLoading, setIsLoading] = useState(true);
-  const [recentSongs, setRecentSongs] = useState([]);
-  const [featuredAlbums, setFeaturedAlbums] = useState([]);
+  const [popularSongs, setPopularSongs] = useState([]);
+  const [popularAlbums, setPopularAlbums] = useState([]);
   const [popularArtists, setPopularArtists] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/songs');
-        setRecentSongs(response.data.data);
-        console.log(response.data.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      }
+      await fetchSongs();
+      await fetchArtists();
     };
 
     fetchData();
   }, []);
 
+  const fetchSongs = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/songs');
+      setPopularSongs(response.data.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
+  }
 
+  const fetchArtists = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/artists');
+      setPopularArtists(response.data.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Simulate API calls
-        const songs = [
-          {
-            id: 1,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            duration: 180,
-          },
-          {
-            id: 2,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            duration: 180,
-          },
-          {
-            id: 3,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            duration: 180,
-          },
-          {
-            id: 4,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            duration: 180,
-          },
-          {
-            id: 5,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            duration: 180,
-          },
-          {
-            id: 6,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            duration: 180,
-          },
-          {
-            id: 7,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            duration: 180,
-          }
-        ];
 
         const albums = [
           {
@@ -137,22 +94,9 @@ const Home = () => {
             coverUrl: 'https://picsum.photos/300',
             year: 2024,
           },
-          // Add more albums...
-        ];
+        ]
 
-        const artists = [
-          {
-            id: 1,
-            name: 'Artist Name 1',
-            imageUrl: 'https://picsum.photos/200',
-            followers: '1.2M',
-          },
-          // Add more artists...
-        ];
-
-        setRecentSongs(songs);
-        setFeaturedAlbums(albums);
-        setPopularArtists(artists);
+        setPopularAlbums(albums);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -198,12 +142,12 @@ const Home = () => {
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Recent Songs */}
         <section>
-          <SongCards songs={recentSongs} collectionTitle={t('collection.song.popularSongs')} />
+            <SongCards songs={popularSongs} collectionTitle={t('collection.song.popularSongs')} />
         </section>
 
         {/* Featured Albums */}
         <section>
-          <AlbumCards albums={featuredAlbums} collectionTitle={t('collection.album.popularAlbums')} />
+          <AlbumCards albums={popularAlbums} collectionTitle={t('collection.album.popularAlbums')} />
         </section>
 
         {/* Popular Artists */}

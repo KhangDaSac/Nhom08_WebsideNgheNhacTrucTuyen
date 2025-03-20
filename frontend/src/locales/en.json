@@ -152,7 +152,8 @@
     },
     "artist": {
       "artists": "Artists",
-      "popularArtists": "Popular artists"
+      "popularArtists": "Popular artists",
+      "followers": "Followers"
     },
     "playlist": {
       "playlists": "Playlists"

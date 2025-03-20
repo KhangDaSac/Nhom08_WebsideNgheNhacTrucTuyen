@@ -151,7 +151,8 @@
       "popularAlbums": "Album nổi bật"
     },
     "artist": {
-      "artists": "Nghệ sĩ"
+      "artists": "Nghệ sĩ",
+      "followers": "Người theo dõi"
     },
     "playlist": {
       "playlists": "Danh sách phát"

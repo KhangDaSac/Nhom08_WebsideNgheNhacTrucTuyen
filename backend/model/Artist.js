@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const artistSchema = new mongoose.Schema({
     artist_name: {
@@ -12,20 +13,25 @@ const artistSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    genres: {
+        type: [String]
+    },
     image_url: {
         type: String
     },
     description: {
         type: String
     },
-    songs: [{
+    song_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Song'
-    }],
-    albums: [{
+        ref: 'Song',
+        required: true
+    },
+    album_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Album'
-    }]
+        ref: 'Album',
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Artist', artistSchema); 
