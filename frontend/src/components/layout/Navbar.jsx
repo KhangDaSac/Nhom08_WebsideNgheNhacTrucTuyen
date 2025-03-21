@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation  } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiSearch, FiSun, FiMoon, FiBell, FiChevronDown } from 'react-icons/fi';
-import { IoLanguage } from "react-icons/io5";
 import { useTheme } from '../../contexts/ThemeContext';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useSearch } from '../../contexts/SearchContext';
+
 const Navbar = () => {
   const { t } = useTranslation();
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-
+  const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
-  const { language, toggleLanguage } = useLanguage();
+  const { keyword, setKeyword } = useSearch();
+
   return (
     <div className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
       <div className="flex items-center justify-between h-16 px-4 sm:px-6">
@@ -24,6 +25,13 @@ const Navbar = () => {
             <input
               type="text"
               placeholder={t('navigation.placeholder')}
+              value={keyword}
+              onChange={(e) => {
+                setKeyword(e.target.value);
+                if (location.pathname !== "/search") {
+                  navigate(`/search`);
+                }
+              }}
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
             />
           </div>

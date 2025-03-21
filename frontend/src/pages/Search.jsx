@@ -6,96 +6,60 @@ import { FiSearch, FiPlay, FiClock } from 'react-icons/fi';
 import Songs from '../components/basic-component/song/Songs';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
 import ArtistCards from '../components/basic-component/artist-card/ArtistCards.jsx';
+import axios from 'axios';
+import { useSearch } from '../contexts/SearchContext';
+
 const Search = () => {
   const { t } = useTranslation();
-  const { play, currentSong, isPlaying } = usePlayer();
-  const [searchQuery, setSearchQuery] = useState('');
+  const { playSong, currentSong, isPlaying } = usePlayer();
+  const { keyword, setKeyword } = useSearch();
   const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState({
-    songs: [],
-    albums: [],
-    artists: [],
-    playlists: [],
-  });
   const [activeTab, setActiveTab] = useState('all');
+  const [songs, setSongs] = useState([]);
+  const [artists, setArtists] = useState([]);
+  const [albums, setAlbums] = useState([]);
+
 
   useEffect(() => {
-    const searchTimeout = setTimeout(() => {
-      if (searchQuery.trim()) {
-        performSearch();
-      } else {
-        setResults({
-          songs: [],
-          albums: [],
-          artists: [],
-          playlists: [],
-        });
-      }
-    }, 300);
+    const fetchData = async () => {
+      await fetchSongs();
+      await fetchArtists();
+      await fetchAlbums();
+      setIsLoading(false);
+    };
 
-    return () => clearTimeout(searchTimeout);
-  }, [searchQuery]);
+    fetchData();
+  }, [keyword]);
 
-  const performSearch = async () => {
-    setIsLoading(true);
+  const fetchSongs = async () => {
     try {
-      // In a real app, this would be an API call
-      const data = {
-        songs: [
-          {
-            id: 1,
-            title: 'Song Title 1',
-            artist: 'Artist Name',
-            album: 'Album Name',
-            duration: 180,
-            coverUrl: 'https://picsum.photos/100',
-          },
-          // Add more songs...
-        ],
-        albums: [
-          {
-            id: 1,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/200',
-            year: 2024,
-          },
-          // Add more albums...
-        ],
-        artists: [
-          {
-            id: 1,
-            name: 'Artist Name 1',
-            imageUrl: 'https://picsum.photos/200',
-            followers: '1.2M',
-          },
-          // Add more artists...
-        ],
-        playlists: [
-          {
-            id: 1,
-            name: 'Playlist Name 1',
-            coverUrl: 'https://picsum.photos/200',
-            songCount: 25,
-            creator: 'User Name',
-          },
-          // Add more playlists...
-        ],
-      };
-
-      setResults(data);
+      const response = await axios.get('http://localhost:5000/api/songs/search?keyword=' + keyword);
+      setSongs(response.data.data);
     } catch (error) {
-      console.error('Error searching:', error);
-    } finally {
+      console.error('Error fetching data:', error);
       setIsLoading(false);
     }
-  };
+  }
 
-  const formatDuration = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
+  const fetchArtists = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/artists/search?keyword=' + keyword);
+      setArtists(response.data.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
+  }
+
+  const fetchAlbums = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/albums/search?keyword=' + keyword);
+      setAlbums(response.data.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
+  }
 
   const tabs = [
     { id: 'all', label: t('search.all') },
@@ -105,32 +69,19 @@ const Search = () => {
   ];
 
   const renderSongs = () => (
-    <Songs songs={results.songs} collectionTitle={t('collection.song.songs')} currentSong={currentSong} play={play} formatDuration={formatDuration} />
+    songs.length > 0 ? <Songs songs={songs} collectionTitle={t('collection.song.songs')} /> : <></>
   );
 
   const renderAlbums = () => (
-    <AlbumCards albums={results.albums} collectionTitle={t('collection.album.albums')} />
+    albums.length > 0 ? <AlbumCards albums={albums} collectionTitle={t('collection.album.albums')} /> : <></>
   );
 
   const renderArtists = () => (
-    <ArtistCards artists={results.artists} collectionTitle={t('collection.artist.artists')} />
+    artists.length > 0 ? <ArtistCards artists={artists} collectionTitle={t('collection.artist.artists')} /> : <></>
   );
 
   return (
     <div className="p-8">
-      {/* Search Input */}
-      <div className="relative max-w-2xl mx-auto mb-8">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <FiSearch className="h-5 w-5 text-gray-400" />
-        </div>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-full shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-          placeholder={t('search.placeholder')}
-        />
-      </div>
 
       {/* Tabs */}
       <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
@@ -156,7 +107,7 @@ const Search = () => {
         <div className="flex items-center justify-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
         </div>
-      ) : searchQuery ? (
+      ) : songs.length > 0 || albums.length > 0 || artists.length > 0 ? (
         <div className="space-y-8">
           {(activeTab === 'all' || activeTab === 'songs') && (
             <section>
@@ -176,7 +127,7 @@ const Search = () => {
         </div>
       ) : (
         <div className="text-center text-gray-500 dark:text-gray-400">
-          
+          {t('search.noResults')}
         </div>
       )}
     </div>

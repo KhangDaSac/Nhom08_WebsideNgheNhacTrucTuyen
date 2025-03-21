@@ -67,7 +67,7 @@ app.get('/api/songs/album=:id', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      success: false, 
+      success: false,
       message: 'Lỗi server',
       error: err.message
     });
@@ -114,7 +114,7 @@ app.get('/api/albums', async (req, res) => {
   try {
     const albums = await Album.find()
       .populate('song_id', 'song_name image_url')
-      .populate('artist_id', 'artist_name image_url');  
+      .populate('artist_id', 'artist_name image_url');
     res.json({
       success: true,
       data: albums
@@ -138,7 +138,7 @@ app.get('/api/albums/artist=:id', async (req, res) => {
       data: albums
     });
   } catch (err) {
-    res.status(500).json({  
+    res.status(500).json({
       success: false,
       message: 'Lỗi server',
       error: err.message
@@ -150,7 +150,7 @@ app.get('/api/album/:id', async (req, res) => {
   try {
     const album = await Album.findById(req.params.id)
       .populate('song_id', 'song_name image_url')
-      .populate('artist_id', 'artist_name image_url');  
+      .populate('artist_id', 'artist_name image_url');
     res.json({
       success: true,
       data: album
@@ -163,6 +163,83 @@ app.get('/api/album/:id', async (req, res) => {
     });
   }
 });
+
+app.get('/api/albums/search/', async (req, res) => {
+  try {
+    const keyword = req.query.keyword || '';
+    const albums = await Album.find({
+      "$or": [
+        { "album_name": { "$regex": keyword, "$options": "i" } },
+        { "artists.artist_name": { "$regex": keyword, "$options": "i" } }
+      ]
+    })
+      .populate('song_id', 'song_name image_url')
+      .populate('artist_id', 'artist_name image_url');
+
+    res.json({
+      success: true,
+      data: albums
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
+});
+
+app.get('/api/songs/search/', async (req, res) => {
+  try {
+    const keyword = req.query.keyword || ''; // Lấy keyword từ query
+
+    const songs = await Song.find({
+      "$or": [
+        { "song_name": { "$regex": keyword, "$options": "i" } },
+        { "artists.artist_name": { "$regex": keyword, "$options": "i" } }
+      ]
+    })
+      .populate('artist_id', 'artist_name image_url');
+
+    res.json({
+      success: true,
+      data: songs
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
+});
+
+app.get('/api/artists/search/', async (req, res) => {
+  try {
+    const keyword = req.query.keyword || ''; // Lấy keyword từ query
+
+    const artists = await Artist.find({
+      "$or": [
+        { "artist_name": { "$regex": keyword, "$options": "i" } },
+        { "song_id.song_name": { "$regex": keyword, "$options": "i" } }
+      ]
+    })
+
+    res.json({
+      success: true,
+      data: artists
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
+});
+
+
+
 
 // Start server
 const PORT = process.env.PORT || 5000;

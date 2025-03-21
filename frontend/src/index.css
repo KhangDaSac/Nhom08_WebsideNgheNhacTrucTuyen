@@ -55,6 +55,4 @@
   .focus\:ring-primary-500\/20 {
     @apply focus:ring-primary-500 focus:ring-opacity-20;
   }
-
-  /* Continue with your other styles... */
 }
