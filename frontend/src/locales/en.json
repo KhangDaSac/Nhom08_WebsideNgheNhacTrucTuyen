@@ -142,9 +142,8 @@
       "songs": "Songs",
       "popularSongs": "Popular songs",
       "title": "Title",
-      "album": "Album",
-      "plays": "Plays",
-      "duration": "Duration"
+      "view": "View",
+      "like": "Like"
     },
     "album": {
       "albums": "Albums",

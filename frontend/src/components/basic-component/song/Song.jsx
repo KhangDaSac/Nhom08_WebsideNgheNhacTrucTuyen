@@ -1,26 +1,45 @@
 import { FiPlay } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../../../contexts/PlayerContext';
+import { FaPlay } from "react-icons/fa6";
+import { FaCompactDisc } from "react-icons/fa";
+import './Song.css';
 
 
 const Song = ({ song }) => {
     const { t } = useTranslation();
-    const { currentSong, playSong } = usePlayer();
+    const { currentSong, playSong, isPlaying, setIsPlaying } = usePlayer();
     const isCurrentSong = currentSong && currentSong._id === song._id;
+    const formatNumber = (number) => {
+      if (number >= 1000000) {
+          return (number / 1000000).toFixed(1) + 'M';
+      } else if (number >= 1000) {
+          return (number / 1000).toFixed(1) + 'K';
+      }
+      return number;
+    }
     return (
         <>
             <tr
                 key={song.id}
-                className={`group hover:bg-gray-50 dark:hover:bg-gray-700/50 
-                    ${isCurrentSong ? 'bg-primary-100 text-primary-900 dark:bg-primary-900 dark:text-primary-100' : ''
+                className={`group 
+                    ${isCurrentSong ? 'bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-100' : 'dark:hover:bg-gray-700/50 hover:bg-gray-50'
                     }`}
             >
-                <td className="px-4 py-3 w-16">
+                <td className="px-4 py-3 w-16 text-center">
                     <button
-                        onClick={() => playSong(song)}
-                        className="p-2 rounded-full bg-primary-500 text-white flex items-center justify-center w-8 h-8"
+                        onClick={() => {
+                            if (isCurrentSong) {
+                                setIsPlaying(!isPlaying);
+                            } else {
+                                playSong(song);
+                            }
+                        } }
+                        className=" d-flex items-center justify-center p-3"
                     >
-                        <FiPlay className="w-4 h-4 relative left-[1px]" />
+                        {isCurrentSong && isPlaying
+                        ? <FaCompactDisc className="w-6 h-6 spin-animation" /> 
+                        : <FaPlay className="w-6 h-6 " />}
                     </button>
                 </td>
                 <td className="px-4 py-3">
@@ -46,14 +65,11 @@ const Song = ({ song }) => {
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell truncate">
-                    {song.album.album_name}
+                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell">
+                    {formatNumber(song.views)}
                 </td>
                 <td className="px-4 py-3 text-gray-700 dark:text-gray-300 hidden md:table-cell">
-                    {song.plays}
-                </td>
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 text-right w-20">
-                    {formatDuration(song.duration)}
+                    {formatNumber(song.likes)}
                 </td>
             </tr>
         </>

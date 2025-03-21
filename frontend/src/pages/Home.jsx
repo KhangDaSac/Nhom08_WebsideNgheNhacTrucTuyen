@@ -16,6 +16,8 @@ const Home = () => {
     const fetchData = async () => {
       await fetchSongs();
       await fetchArtists();
+      await fetchAlbums();
+      setIsLoading(false);
     };
 
     fetchData();
@@ -40,72 +42,16 @@ const Home = () => {
       setIsLoading(false);
     }
   }
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
 
-        const albums = [
-          {
-            id: 1,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/300',
-            year: 2024,
-          },
-          {
-            id: 2,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/300',
-            year: 2024,
-          },
-          {
-            id: 3,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/300',
-            year: 2024,
-          },
-          {
-            id: 4,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/300',
-            year: 2024,
-          },
-          {
-            id: 5,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/300',
-            year: 2024,
-          },
-          {
-            id: 6,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/300',
-            year: 2024,
-          },
-          {
-            id: 7,
-            title: 'Album Title 1',
-            artist: 'Artist Name',
-            coverUrl: 'https://picsum.photos/300',
-            year: 2024,
-          },
-        ]
-
-        setPopularAlbums(albums);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const fetchAlbums = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/albums');
+      setPopularAlbums(response.data.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
+  }
 
   if (isLoading) {
     return (

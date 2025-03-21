@@ -15,13 +15,10 @@ const Songs = ({ songs, collectionTitle}) => {
                     <table className="w-full min-w-[640px]">
                         <thead>
                             <tr className="text-left text-sm text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
-                                <th className="px-4 py-3 font-medium w-16">#</th>
+                                <th className="px-4 py-3 font-medium w-16"></th>
                                 <th className="px-4 py-3 font-medium">{t('collection.song.title')}</th>
-                                <th className="px-4 py-3 font-medium hidden md:table-cell">{t('collection.song.album')}</th>
-                                <th className="px-4 py-3 font-medium hidden md:table-cell">{t('collection.song.plays')}</th>
-                                <th className="px-4 py-3 font-medium text-right w-20">
-                                    <FiClock className="inline-block w-4 h-4" />
-                                </th>
+                                <th className="px-4 py-3 font-medium hidden md:table-cell">{t('collection.song.view')}</th>
+                                <th className="px-4 py-3 font-medium hidden md:table-cell">{t('collection.song.like')}</th>
                             </tr>
                         </thead>
                         <tbody>

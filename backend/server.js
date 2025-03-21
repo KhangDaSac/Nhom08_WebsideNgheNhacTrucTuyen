@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const Song = require('./model/Song');
 const Artist = require('./model/Artist');
+const Album = require('./model/Album');
 const MongoConfig = require('./config/MongoConfig');
 
 // Load environment variables
@@ -84,6 +85,42 @@ app.get('/api/artist/:id', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
+      success: false,
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
+});
+
+app.get('/api/albums', async (req, res) => {
+  try {
+    const albums = await Album.find()
+      .populate('song_id', 'song_name image_url')
+      .populate('artist_id', 'artist_name image_url');  
+    res.json({
+      success: true,
+      data: albums
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
+});
+
+app.get('/api/albums/artist=:id', async (req, res) => {
+  try {
+    const albums = await Album.find({ "artists._id": new mongoose.Types.ObjectId(req.params.id) })
+      .populate('song_id', 'song_name image_url')
+      .populate('artist_id', 'artist_name image_url');
+    res.json({
+      success: true,
+      data: albums
+    });
+  } catch (err) {
+    res.status(500).json({  
       success: false,
       message: 'Lỗi server',
       error: err.message

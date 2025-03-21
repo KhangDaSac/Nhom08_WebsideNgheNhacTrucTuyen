@@ -142,9 +142,8 @@
       "songs": "Bài hát",
       "popularSongs": "Bài hát nổi bật",
       "title": "Tiêu đề",
-      "album": "Album",
-      "plays": "Lượt nghe",
-      "duration": "Thời lượng"
+      "view": "Lượt nghe",
+      "like": "Thích"
     },
     "album": {
       "albums": "Album",

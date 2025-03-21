@@ -2,7 +2,7 @@
     {
         "_id": { "$oid": "3c1337ab3187ea3b485919fb" },
         "artist_name": "Sơn Tùng M-TP",
-        "date_of_birth": "1994-07-05",
+        "date_of_birth": { "$date": "1994-07-05" },
         "followers": 1000000,
         "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/avatars/5/9/6/9/59696c9dba7a914d587d886049c10df6.jpg",
         "genres": [

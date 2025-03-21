@@ -11,14 +11,16 @@ const albumSchema = new mongoose.Schema({
     image_url: {
         type: String
     },
-    songs: [{
+    song_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Song'
-    }],
-    artists: [{
+        ref: 'Song',
+        required: true
+    },
+    artist_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Artist'
-    }]
+        ref: 'Artist',
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Album', albumSchema); 

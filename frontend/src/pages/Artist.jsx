@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
-import { FiPlay, FiHeart, FiShare2, FiClock, FiMusic } from 'react-icons/fi';
+import { FiHeart, FiShare2, FiClock, FiMusic } from 'react-icons/fi';
+import { FaPlay } from "react-icons/fa6";
 import Songs from '../components/basic-component/song/Songs';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
 import axios from 'axios';
@@ -15,16 +16,19 @@ const Artist = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [isFollowing, setIsFollowing] = useState(false);
-  const [popularSongs, setPopularSongs] = useState([]);
+  const [songs, setSongs] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => { 
       try {
         await fetchArtist();
         await fetchSongs();
+        await fetchAlbums();
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching artist:', error);
-      setError('Failed to load artist');
+        setError('Failed to load artist');
         setIsLoading(false);
       }
     };
@@ -35,10 +39,8 @@ const Artist = () => {
   const fetchArtist = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/api/artist/${id}`);
-      console.log(response.data.data);
 
       setArtist(response.data.data);
-      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching artist:', error);
       setError('Failed to load artist');
@@ -48,12 +50,32 @@ const Artist = () => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/songs/artist=${artist._id}`);
-      setPopularSongs(response.data.data);
+      const response = await axios.get(`http://localhost:5000/api/songs/artist=${id}`);
+      setSongs(response.data.data);
     } catch (error) {
       console.error('Error fetching songs:', error);  
     }
   };
+
+  const fetchAlbums = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/albums/artist=${id}`);
+      setAlbums(response.data.data);
+    } catch (error) {
+      console.error('Error fetching albums:', error);  
+    }
+  };
+
+
+  const formatNumber = (number) => {
+    if (number >= 1000000) {
+        return (number / 1000000).toFixed(1) + 'M';
+    } else if (number >= 1000) {
+        return (number / 1000).toFixed(1) + 'K';
+    }
+    return number;
+  }
+  
 
   if (isLoading) {
     return (
@@ -103,9 +125,7 @@ const Artist = () => {
                 {artist.artist_name}
               </h1>
               <div className="flex flex-col sm:flex-row items-center text-sm sm:text-base space-y-1 sm:space-y-0 sm:space-x-4 text-gray-300">
-                <span>{artist.followers} {t('collection.artist.followers')}</span>
-                <span className="hidden sm:inline">•</span>
-                <span>{artist.followers} {t('collection.artist.followers')}</span>
+                <span>{formatNumber(artist.followers)} {t('collection.artist.followers')}</span>
               </div>
             </div>
           </div>
@@ -117,10 +137,10 @@ const Artist = () => {
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4">
           <button
-            onClick={() => play(artist.popularSongs[0])}
+            onClick={() => playSong(popularSongs[0])}
             className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors text-sm sm:text-base"
           >
-            <FiPlay className="w-4 sm:w-5 h-4 sm:h-5 relative left-[1px]" />
+            <FaPlay className="w-4 sm:w-5 h-4 sm:h-5 relative left-[1px]" />
             {t('artist.play')}
           </button>
           <button
@@ -140,13 +160,13 @@ const Artist = () => {
 
         {/* Popular Songs */}
         <div>
-            <Songs songs={popularSongs} collectionTitle={'collection.song.popularSongs'} />
+            <Songs songs={songs} collectionTitle={'collection.song.songs'} />
         </div>
 
         {/* Albums */}
-        {/* <div>
-            <AlbumCards albums={artist.albums} />
-        </div> */}
+        <div>
+            <AlbumCards albums={albums} collectionTitle={'collection.album.albums'}/>
+        </div>
 
         {/* About */}
         <div>
@@ -155,7 +175,7 @@ const Artist = () => {
           </h2>
           <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6">
             <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4 line-clamp-4 sm:line-clamp-none">
-              {artist.biography}
+              {artist.description}
             </p>
             <div className="flex flex-wrap gap-2">
               {artist.genres.map((genre) => (
