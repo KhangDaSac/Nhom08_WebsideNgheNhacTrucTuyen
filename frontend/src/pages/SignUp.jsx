@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../contexts/AuthContext';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useAuth } from "../contexts/AuthContext";
 import {
   FiMail,
   FiLock,
@@ -10,24 +10,24 @@ import {
   FiEyeOff,
   FiCalendar,
   FiPhone,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
 const SignUp = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { signup } = useAuth();
+  const { register } = useAuth(); // Sử dụng hàm register thay vì signup
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-    dateOfBirth: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    dateOfBirth: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,20 +39,25 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError(t('signup.passwordMismatch'));
+      setError(t("signup.passwordMismatch"));
       return;
     }
 
     setIsLoading(true);
 
     try {
-      await signup(formData);
-      navigate('/');
+      const response = await register(formData); // Gọi hàm register từ AuthContext
+      if (response.success) {
+        alert(t("signup.success")); // Hiển thị thông báo thành công
+        navigate("/"); // Điều hướng về trang chủ
+      } else {
+        setError(response.error);
+      }
     } catch (error) {
-      setError(error.message);
+      setError(t("signup.error"));
     } finally {
       setIsLoading(false);
     }
@@ -63,9 +68,11 @@ const SignUp = () => {
       <div className="w-full max-w-md">
         {/* Logo & Title */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-primary-500 mb-2">Music for you</h1>
+          <h1 className="text-4xl font-bold text-primary-500 mb-2">
+            Music for you
+          </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            {t('signUp.title')}
+            {t("signUp.title")}
           </p>
         </div>
 
@@ -78,7 +85,7 @@ const SignUp = () => {
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('signUp.displayName.displayName')}
+                {t("signUp.displayName.displayName")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -92,7 +99,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('signUp.displayName.placeholder')}
+                  placeholder={t("signUp.displayName.placeholder")}
                 />
               </div>
             </div>
@@ -103,7 +110,7 @@ const SignUp = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('signUp.email.email')}
+                {t("signUp.email.email")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -117,7 +124,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('signUp.email.placeholder')}
+                  placeholder={t("signUp.email.placeholder")}
                 />
               </div>
             </div>
@@ -128,7 +135,7 @@ const SignUp = () => {
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('signUp.phone.phone')}
+                {t("signUp.phone.phone")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -142,7 +149,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('signUp.phone.placeholder')}
+                  placeholder={t("signUp.phone.placeholder")}
                 />
               </div>
             </div>
@@ -153,7 +160,7 @@ const SignUp = () => {
                 htmlFor="dateOfBirth"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('signUp.dateOfBirth.dateOfBirth')}
+                {t("signUp.dateOfBirth.dateOfBirth")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -177,21 +184,21 @@ const SignUp = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('signUp.password.password')}
+                {t("signUp.password.password")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FiLock className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('signUp.password.placeholder')}
+                  placeholder={t("signUp.password.placeholder")}
                 />
                 <button
                   type="button"
@@ -213,21 +220,21 @@ const SignUp = () => {
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
-                {t('signUp.confirmPassword.confirmPassword')}
+                {t("signUp.confirmPassword.confirmPassword")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FiLock className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  type={showConfirmPassword ? 'text' : 'password'}
+                  type={showConfirmPassword ? "text" : "password"}
                   id="confirmPassword"
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                  placeholder={t('signUp.confirmPassword.placeholder')}
+                  placeholder={t("signUp.confirmPassword.placeholder")}
                 />
                 <button
                   type="button"
@@ -260,12 +267,12 @@ const SignUp = () => {
                 htmlFor="terms"
                 className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
               >
-                {t('signUp.agreeTo')}{' '}
+                {t("signUp.agreeTo")}{" "}
                 <Link
                   to="/terms"
                   className="text-primary-500 hover:text-primary-600"
                 >
-                  {t('signUp.terms')}
+                  {t("signUp.terms")}
                 </Link>
               </label>
             </div>
@@ -281,7 +288,7 @@ const SignUp = () => {
                   <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin mr-2"></div>
                 </div>
               ) : (
-                t('signUp.signUp')
+                t("signUp.signUp")
               )}
             </button>
           </form>
@@ -289,12 +296,12 @@ const SignUp = () => {
           {/* Login Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {t('signUp.haveAccount')}{' '}
+              {t("signUp.haveAccount")}{" "}
               <Link
                 to="/login"
                 className="font-medium text-primary-500 hover:text-primary-600"
               >
-                {t('signUp.login')}
+                {t("signUp.login")}
               </Link>
             </p>
           </div>

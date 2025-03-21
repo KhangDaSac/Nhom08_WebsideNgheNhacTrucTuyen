@@ -1,20 +1,20 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../contexts/AuthContext';
-import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useAuth } from "../contexts/AuthContext";
+import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,18 +25,25 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+    setError(""); // Xóa lỗi trước đó
+    setIsLoading(true); // Hiển thị trạng thái tải
 
     try {
-      console.log(formData);
-      await login({email: formData.email, password: formData.password});
-      navigate('/');
+      // Gọi hàm login từ AuthContext
+      const response = await login(formData.email, formData.password);
+
+      if (response.success) {
+        // Nếu đăng nhập thành công, điều hướng đến trang chủ
+        navigate("/");
+      } else {
+        // Nếu đăng nhập thất bại, hiển thị lỗi
+        setError(response.error);
+      }
     } catch (error) {
-      setError(error.message);
+      setError("An unexpected error occurred. Please try again.");
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Tắt trạng thái tải
     }
   };
 
@@ -45,9 +52,11 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo & Title */}
         <div className="text-center mb-6 sm:mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-primary-500 mb-2">Music for you</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-primary-500 mb-2">
+            Music for you
+          </h1>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-            {t('login.title')}
+            {t("login.title")}
           </p>
         </div>
 
@@ -60,7 +69,7 @@ const Login = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2"
               >
-                {t('login.username.username')}
+                {t("login.username.username")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -74,7 +83,7 @@ const Login = () => {
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-3 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors text-sm sm:text-base [&:-webkit-autofill]:bg-white dark:[&:-webkit-autofill]:bg-gray-800"
-                  placeholder={t('login.username.placeholder')}
+                  placeholder={t("login.username.placeholder")}
                 />
               </div>
             </div>
@@ -85,21 +94,21 @@ const Login = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2"
               >
-                {t('login.password.password')}
+                {t("login.password.password")}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <FiLock className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   required
                   className="block w-full pl-10 pr-10 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors text-sm sm:text-base [&:-webkit-autofill]:bg-white dark:[&:-webkit-autofill]:bg-gray-800"
-                  placeholder={t('login.password.placeholder')}
+                  placeholder={t("login.password.placeholder")}
                 />
                 <button
                   type="button"
@@ -132,14 +141,14 @@ const Login = () => {
                   htmlFor="remember"
                   className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
                 >
-                  {t('login.rememberMe')}
+                  {t("login.rememberMe")}
                 </label>
               </div>
               <Link
                 to="/forgot-password"
                 className="text-sm text-primary-500 hover:text-primary-600"
               >
-                {t('login.forgotPassword')}
+                {t("login.forgotPassword")}
               </Link>
             </div>
 
@@ -152,10 +161,10 @@ const Login = () => {
               {isLoading ? (
                 <div className="flex items-center">
                   <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin mr-2"></div>
-                  {t('Logging in...')}
+                  {t("Logging in...")}
                 </div>
               ) : (
-                t('login.login')
+                t("login.login")
               )}
             </button>
           </form>
@@ -163,12 +172,12 @@ const Login = () => {
           {/* Sign Up Link */}
           <div className="mt-4 sm:mt-6 text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              {t('login.noAccount')}{' '}
+              {t("login.noAccount")}{" "}
               <Link
                 to="/signup"
                 className="font-medium text-primary-500 hover:text-primary-600"
               >
-                {t('login.signUp')}
+                {t("login.signUp")}
               </Link>
             </p>
           </div>
@@ -178,4 +187,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;

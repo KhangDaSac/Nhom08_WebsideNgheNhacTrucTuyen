@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { Link, useNavigate, useLocation  } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { FiSearch, FiSun, FiMoon, FiBell, FiChevronDown } from 'react-icons/fi';
-import { useTheme } from '../../contexts/ThemeContext';
-import { useSearch } from '../../contexts/SearchContext';
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { FiSearch, FiSun, FiMoon, FiBell, FiChevronDown } from "react-icons/fi";
+import { useTheme } from "../../contexts/ThemeContext";
+import { useSearch } from "../../contexts/SearchContext";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -24,7 +24,7 @@ const Navbar = () => {
             </div>
             <input
               type="text"
-              placeholder={t('navigation.placeholder')}
+              placeholder={t("navigation.placeholder")}
               value={keyword}
               onChange={(e) => {
                 setKeyword(e.target.value);
@@ -45,14 +45,13 @@ const Navbar = () => {
               onClick={toggleTheme}
               className="p-2 text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 rounded-lg"
             >
-              {theme === 'light' ? (
+              {theme === "light" ? (
                 <FiSun className="h-5 w-5" />
               ) : (
                 <FiMoon className="h-5 w-5" />
               )}
             </button>
           </div>
-
 
           {/* Profile Dropdown */}
           <div className="relative">
@@ -75,19 +74,22 @@ const Navbar = () => {
                     to="/profile"
                     className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
-                    {t('Your Profile')}
+                    {t("Your Profile")}
                   </Link>
                   <Link
                     to="/settings"
                     className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
-                    {t('Settings')}
+                    {t("Settings")}
                   </Link>
                   <button
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                    onClick={() => {/* Handle logout */ }}
+                    onClick={() => {
+                      /* Handle logout */
+                      navigate("/login");
+                    }}
                   >
-                    {t('Sign out')}
+                    {t("Sign out")}
                   </button>
                 </div>
               </div>
@@ -99,4 +101,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
