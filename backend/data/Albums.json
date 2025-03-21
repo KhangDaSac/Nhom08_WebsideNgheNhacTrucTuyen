@@ -21,6 +21,11 @@
                 "_id": { "$oid": "3c1337ab3187ea3b485919fb" },
                 "artist_name": "Sơn Tùng M-TP"
             }
+        ],
+        "genres": [
+            "Tình cảm",
+            "Nhạc trẻ",
+            "Hip-hop"
         ]
     }
 ]

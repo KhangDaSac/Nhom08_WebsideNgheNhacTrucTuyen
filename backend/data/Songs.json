@@ -53,7 +53,8 @@
                 "_id": { "$oid": "3c1337ab3187ea3b485919fb" },
                 "artist_name": "Sơn Tùng M-TP"
             }
-        ]
+        ],
+        "album_id": { "$oid": "9aa346a370d1f6962f47fec2" }
     },
     {
         "_id": { "$oid": "67dc0190009bf012ef627d46" },
@@ -72,6 +73,7 @@
                 "_id": { "$oid": "3c1337ab3187ea3b485919fb" },
                 "artist_name": "Sơn Tùng M-TP"
             }
-        ]
+        ],
+        "album_id": { "$oid": "9aa346a370d1f6962f47fec2" }
     }
 ]

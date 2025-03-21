@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';    
-import { FiPlay } from 'react-icons/fi';
 import { format } from 'date-fns';
+import { FaPlay } from "react-icons/fa6";
 
 
 const AlbumCard = ({ album }) => {
@@ -25,7 +25,7 @@ const AlbumCard = ({ album }) => {
                         }}
                         className="p-2 sm:p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
                     >
-                        <FiPlay className="h-4 sm:h-5 w-4 sm:w-5 relative left-[1px]" />
+                        <FaPlay className="h-4 sm:h-5 w-4 sm:w-5 relative left-[1.5px]" />
                     </button>
                 </div>
             </div>

@@ -1,9 +1,10 @@
 import React from 'react';
-import { FiPlay, FiClock } from 'react-icons/fi';
 import { usePlayer } from '../../../contexts/PlayerContext';
+import { FaPlay } from "react-icons/fa6";
+import { FaCompactDisc } from "react-icons/fa";
 
 const SongCard = ({ song }) => {
-    const { currentSong, isPlaying, playSong } = usePlayer();
+    const { currentSong, isPlaying, playSong, setIsPlaying } = usePlayer();
     const isCurrentSong = currentSong?._id === song._id;
 
     return (
@@ -20,14 +21,18 @@ const SongCard = ({ song }) => {
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <button
-                            onClick={() => playSong(song)}
+                            onClick={() => {
+                                if (isCurrentSong) {
+                                    setIsPlaying(!isPlaying);
+                                } else {
+                                    playSong(song);
+                                }
+                            }}
                             className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
                         >
-                            {isCurrentSong && isPlaying ? (
-                                <span className="block w-6 h-6 bg-white rounded-full" />
-                            ) : (
-                                <FiPlay className="w-6 h-6 relative left-[1px]" />
-                            )}
+                            {isCurrentSong && isPlaying
+                                ? <FaCompactDisc className="w-6 h-6 spin-animation" />
+                                : <FaPlay className="w-6 h-6 relative left-[1.5px]" />}
                         </button>
                     </div>
                 </div>

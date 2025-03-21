@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlay } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
+import { FaPlay } from "react-icons/fa6";
 
 const ArtistCard = ({ artist }) => {
     const { t } = useTranslation();
@@ -26,7 +27,7 @@ const ArtistCard = ({ artist }) => {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
                     <button className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center">
-                        <FiPlay className="w-6 h-6 relative left-[1px]" />
+                        <FaPlay className="w-6 h-6 relative left-[1.5px]" />
                     </button>
                 </div>
             </div>

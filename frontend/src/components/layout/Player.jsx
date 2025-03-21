@@ -11,6 +11,7 @@ import {
   FiMaximize2,
   FiHeart,
 } from 'react-icons/fi';
+import { FaPlay, FaPause } from "react-icons/fa6";
 import { HiMiniSpeakerWave, HiMiniSpeakerXMark  } from "react-icons/hi2";
 
 const Player = () => {
@@ -143,9 +144,9 @@ const Player = () => {
                     className="p-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors"
                   >
                     {isPlaying ? (
-                      <FiPause className="w-6 h-6" />
+                      <FaPause className="w-6 h-6" />
                     ) : (
-                      <FiPlay className="w-6 h-6 relative left-0.5" />
+                      <FaPlay className="w-6 h-6 relative left-0.5" />
                     )}
                   </button>
                   <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">

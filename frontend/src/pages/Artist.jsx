@@ -137,7 +137,7 @@ const Artist = () => {
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4">
           <button
-            onClick={() => playSong(popularSongs[0])}
+            onClick={() => playSong(songs[0])}
             className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors text-sm sm:text-base"
           >
             <FaPlay className="w-4 sm:w-5 h-4 sm:h-5 relative left-[1px]" />

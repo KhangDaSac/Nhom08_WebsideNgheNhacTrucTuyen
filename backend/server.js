@@ -56,6 +56,24 @@ app.get('/api/songs/artist=:id', async (req, res) => {
   }
 });
 
+app.get('/api/songs/album=:id', async (req, res) => {
+  try {
+    const songs = await Song.find({ "album_id": new mongoose.Types.ObjectId(req.params.id) })
+      .populate('artist_id', 'artist_name image_url')
+      .populate('album_id', 'album_name image_url');
+    res.json({
+      success: true,
+      data: songs
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false, 
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
+});
+
 app.get('/api/artists', async (req, res) => {
   try {
     const artists = await Artist.find()
@@ -121,6 +139,24 @@ app.get('/api/albums/artist=:id', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({  
+      success: false,
+      message: 'Lỗi server',
+      error: err.message
+    });
+  }
+});
+
+app.get('/api/album/:id', async (req, res) => {
+  try {
+    const album = await Album.findById(req.params.id)
+      .populate('song_id', 'song_name image_url')
+      .populate('artist_id', 'artist_name image_url');  
+    res.json({
+      success: true,
+      data: album
+    });
+  } catch (err) {
+    res.status(500).json({
       success: false,
       message: 'Lỗi server',
       error: err.message
