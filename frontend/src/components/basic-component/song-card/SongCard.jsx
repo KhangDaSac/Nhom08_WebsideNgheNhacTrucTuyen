@@ -11,7 +11,7 @@ const SongCard = ({ song }) => {
         <>
             <div
                 key={song._id}
-                className="group bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300"
+                className="group rounded-xl shadow-sm transition-all duration-300"
             >
                 <div className="relative aspect-square rounded-lg overflow-hidden mb-4">
                     <img

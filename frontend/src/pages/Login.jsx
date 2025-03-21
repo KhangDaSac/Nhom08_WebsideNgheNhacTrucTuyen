@@ -26,13 +26,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     setIsLoading(true);
 
     try {
-      console.log(formData);
-      await login({email: formData.email, password: formData.password});
-      navigate('/');
+      const response = await login(formData.email, formData.password);
+      console.log(response);
     } catch (error) {
       setError(error.message);
     } finally {

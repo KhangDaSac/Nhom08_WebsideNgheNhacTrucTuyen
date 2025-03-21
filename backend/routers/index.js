@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const SongAPI = require('./SongAPI');
+const ArtistAPI = require('./ArtistAPI');
+const AlbumAPI = require('./AlbumAPI');
+const AccessAPI = require('./AccessAPI');
+router.use('/songs', SongAPI);
+router.use('/artists', ArtistAPI);
+router.use('/albums', AlbumAPI);
+router.use('/access', AccessAPI);
+module.exports = router;

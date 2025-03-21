@@ -12,20 +12,11 @@ export const AuthProvider = ({ children }) => {
   }, [user]);
 
   const login = async (email, password) => {
-    setLoading(true);
     try {
-      const newUser = {
-        email: email,
-        password: password,
-      };
-
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
-
-      return { success: true };
+      const response = await axios.post('http://localhost:5000/api/access/login', { email, password });
+      return response.data;
     } catch (error) {
-      setLoading(false);
-      return { success: false, error: error.message };
+      throw new Error('Login failed');
     }
   };
 
