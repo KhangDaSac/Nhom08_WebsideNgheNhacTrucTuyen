@@ -41,6 +41,15 @@
   --accent-800: #9f1239;
   --accent-900: #881337;
   --accent-950: #4c0519;
+
+  --color-gray-200: oklch(92.8% 0.006 264.531);
+  --color-gray-800: oklch(27.8% 0.033 256.848);
+
+  --gradient-end: var(--color-gray-200); 
+}
+
+.dark {
+  --gradient-end: var(--color-gray-800); 
 }
 
 @layer base {
@@ -50,8 +59,6 @@
 }
 
 @layer components {
-  /* Your existing button and component styles... */
-
   .focus\:ring-primary-500\/20 {
     @apply focus:ring-primary-500 focus:ring-opacity-20;
   }

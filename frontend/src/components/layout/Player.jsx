@@ -172,7 +172,7 @@ const Player = () => {
                       }}
                       className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm"
                       style={{
-                        background: `linear-gradient(to right, var(--primary-500) ${progress / duration * 100}%, #ccc ${progress / duration * 100}%)`
+                        background: `linear-gradient(to right, var(--primary-500) 0%, var(--primary-500) ${progress / duration * 100}%, var(--gradient-end) ${progress / duration * 100}%, var(--gradient-end) 100%)`
                       }}
                     />
                   </div>
@@ -227,7 +227,7 @@ const Player = () => {
                     }}
                     className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer range-sm sm:w-32"
                     style={{
-                      background: `linear-gradient(to right, var(--primary-500) ${isMuted ? 0 : volume / 100 * 100}%, #ccc ${isMuted ? 0 : volume / 100 * 100}%)`
+                      background: `linear-gradient(to right, var(--primary-500) 0%, var(--primary-500) ${isMuted ? 0 : volume / 100 * 100}%, var(--gradient-end) ${isMuted ? 0 : volume / 100 * 100}%, var(--gradient-end) 100%)`
                     }}
                   />
               </div>
