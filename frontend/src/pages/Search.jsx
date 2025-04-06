@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { usePlayer } from '../contexts/PlayerContext';
-import { FiSearch, FiPlay, FiClock } from 'react-icons/fi';
 import Songs from '../components/basic-component/song/Songs';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
 import ArtistCards from '../components/basic-component/artist-card/ArtistCards.jsx';
@@ -11,7 +8,6 @@ import { useSearch } from '../contexts/SearchContext';
 
 const Search = () => {
   const { t } = useTranslation();
-  const { playSong, currentSong, isPlaying } = usePlayer();
   const { keyword, setKeyword } = useSearch();
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('all');
@@ -33,7 +29,7 @@ const Search = () => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/songs/search?keyword=' + keyword);
+      const response = await axios.get('http://localhost:5000/api/songs/search=' + keyword);
       setSongs(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -43,7 +39,7 @@ const Search = () => {
 
   const fetchArtists = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/artists/search?keyword=' + keyword);
+      const response = await axios.get('http://localhost:5000/api/artists/search=' + keyword);
       setArtists(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -53,7 +49,7 @@ const Search = () => {
 
   const fetchAlbums = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/albums/search?keyword=' + keyword);
+      const response = await axios.get('http://localhost:5000/api/albums/search=' + keyword);
       setAlbums(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);

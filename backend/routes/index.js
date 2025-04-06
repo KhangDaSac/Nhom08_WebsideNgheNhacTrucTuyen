@@ -1,10 +1,14 @@
+const songRoutes = require('./songRoutes');
+const albumRoutes = require('./albumRoutes');
+const artistRoutes = require('./artistRoutes');
 const express = require('express');
 const router = express.Router();
-const userRoutes = require('./userRoutes');
-const musicRoutes = require('./musicRoutes');
 
-// Mounting routes
-router.use('/api/users', userRoutes);
-router.use('/api/music', musicRoutes);
+router.use('/api/songs', songRoutes);
+router.use('/api/albums', albumRoutes);
+router.use('/api/artists', artistRoutes);
 
 module.exports = router;
+
+
+
