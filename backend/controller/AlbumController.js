@@ -61,7 +61,7 @@ const getByArtistId = async (req, res) => {
 
 const search = async (req, res) => {
     try {
-        const keyword = req.params.keyword || '';
+        const keyword = req.query.keyword || '';
         const albums = await Album.find({
             "$or": [
                 { "album_name": { "$regex": keyword, "$options": "i" } },

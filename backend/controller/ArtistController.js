@@ -43,7 +43,7 @@ const getById = async (req, res) => {
 
 const search = async (req, res) => {
     try {
-        const keyword = req.params.keyword || '';
+        const keyword = req.query.keyword || '';
 
         const artists = await Artist.find({
             "$or": [

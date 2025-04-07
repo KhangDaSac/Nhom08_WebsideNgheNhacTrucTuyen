@@ -29,7 +29,7 @@ const Search = () => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/songs/search=' + keyword);
+      const response = await axios.get('http://localhost:5000/api/songs/search?keyword=' + keyword);
       setSongs(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -39,7 +39,7 @@ const Search = () => {
 
   const fetchArtists = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/artists/search=' + keyword);
+      const response = await axios.get('http://localhost:5000/api/artists/search?keyword=' + keyword);
       setArtists(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -49,7 +49,7 @@ const Search = () => {
 
   const fetchAlbums = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/albums/search=' + keyword);
+      const response = await axios.get('http://localhost:5000/api/albums/search?keyword=' + keyword);
       setAlbums(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -86,11 +86,10 @@ const Search = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === tab.id
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === tab.id
                   ? 'border-primary-500 text-primary-500'
                   : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-              }`}
+                }`}
             >
               {tab.label}
             </button>
