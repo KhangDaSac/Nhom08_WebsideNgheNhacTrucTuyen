@@ -1,0 +1,10 @@
+[
+    {
+        "_id":{"$oid":"10f65f018f7871542b4cb298"},
+        "display_name": "Đào Phúc Khang",
+        "avatar_url": "https://via.placeholder.com/150",
+        "email": "daophuckhang090@gmail.com",
+        "phone": "0948238791",
+        "password_hash": "$2b$10$0x1j5v3Q4Z9z5g7J6G8e1OaXc4Yk5F5m5F5m5F5m5F5m5F5m5F5m"
+    }
+]

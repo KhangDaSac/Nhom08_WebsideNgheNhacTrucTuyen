@@ -6,25 +6,42 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  
 
   useEffect(() => {
-    setUser(localStorage.getItem('user')); 
+    setUser(localStorage.getItem('user'));
   }, [user]);
 
-  const login = async (email, password) => {
-    setLoading(true);
+  const login = async (email, password, setUser) => {
     try {
-      const newUser = {
+      const account = {
         email: email,
         password: password,
       };
 
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(account),
+      });
 
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      const newUser = {
+        _id: data.account._id,
+        email: data.account.email,
+        token: data.token,
+      };
+
+      setUser(newUser);
+
+      localStorage.setItem('user', JSON.stringify(newUser));
       return { success: true };
-    } catch (error) {
-      setLoading(false);
+
+    } catch (error) { // Tắt trạng thái loading khi có lỗi
       return { success: false, error: error.message };
     }
   };
