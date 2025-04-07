@@ -6,9 +6,10 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useSearch } from '../../contexts/SearchContext';
 import { useAuth } from '../../contexts/AuthContext';
 
+
 const Navbar = () => {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
@@ -79,9 +80,11 @@ const Navbar = () => {
                   className="flex items-center focus:outline-none"
                 >
                   <img
-                    src="https://picsum.photos/32"
+                    src={user.avatar_url || ''}
                     alt="Profile"
                     className="rounded-full"
+                    width="32"
+                    height="32"
                   />
                 </button>
 
@@ -90,22 +93,20 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
                       <Link
-                        to="/profile"
+                        to="/account"
                         className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        onClick={() => setIsProfileOpen(false)}
                       >
-                        {t('Your Profile')}
-                      </Link>
-                      <Link
-                        to="/settings"
-                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                      >
-                        {t('Settings')}
+                        {t('navigation.profile')}
                       </Link>
                       <button
                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        onClick={() => {/* Handle logout */ }}
+                        onClick={() => {
+                          logout();
+                          navigate('/');
+                        }}
                       >
-                        {t('Sign out')}
+                        {t('navigation.logout')}
                       </button>
                     </div>
                   </div>

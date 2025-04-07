@@ -6,6 +6,7 @@ export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
   useEffect(() => {
     localStorage.setItem('language', language);
+    
   }, [language]);
 
   const toggleLanguage = () => {
@@ -13,7 +14,7 @@ export const LanguageProvider = ({ children }) => {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, setLanguage, language }}>
       {children}
     </LanguageContext.Provider>
   );

@@ -8,7 +8,8 @@
     "logout": "Logout",
     "placeholder": "What do you want to play?",
     "artists": "Artists",
-    "albums": "Albums"
+    "albums": "Albums",
+    "profile": "Profile"
   },
   "common": {
     "search": "Search",
@@ -105,6 +106,22 @@
     "signUp": "Sign up",
     "haveAccount":"Already have an account?",
     "login": "Login"
+  },
+  "account": {
+    "title": "Account",
+    "profile": "Profile",
+    "subscription": "Subscription",
+    "edit": "Edit Profile",
+    "cancel": "Cancel",
+    "save": "Save",
+    "settings": "Settings",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "changeAvatar": "Change Avatar",
+    "upgrade": "Upgrade",
+    "logout": "Logout",
+    "language": "Language"
   },
   "library": {
     "title": "Your Library",
