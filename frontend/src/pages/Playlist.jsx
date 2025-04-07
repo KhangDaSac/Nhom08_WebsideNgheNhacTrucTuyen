@@ -7,10 +7,13 @@ import { FaPlay } from "react-icons/fa6";
 import Songs from '../components/basic-component/song/Songs';
 import axios from 'axios';
 import { format } from 'date-fns';
+import {FiTrash2} from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const Playlist = () => {
   const { id } = useParams();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { playSong, currentSong } = usePlayer();
   const [playlist, setPlaylist] = useState(null);
   const [songs, setSongs] = useState([]);
@@ -86,6 +89,16 @@ const Playlist = () => {
     }
   };
 
+  const handleDeletePlaylist = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/playlists/${id}`);
+      navigate('/playlists');
+    } catch (error) {
+      console.error('Error fetching songs:', error);
+      setError('Failed to load songs');
+    }
+  }
+
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto">
       <div className='mb-5'>
@@ -107,30 +120,33 @@ const Playlist = () => {
           </h1>
           <div className="flex flex-wrap items-center justify-center sm:justify-start text-sm text-gray-500 dark:text-gray-400 mb-4 gap-2">
             <span>{t('playlist.songs')}: {songs.length}</span>
-            <span className="hidden sm:inline mx-2">•</span>
+            <span className="hidden sm:inline mx-2"></span>
             <span>{t('playlist.createdOn')}: {format(new Date(playlist.created_date), 'dd-MM-yyyy')}</span>
           </div>
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 md:gap-4">
             <button
               onClick={playAllSongs}
-              className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary-500 text-white rounded-full hover:bg-primary-600 transition-colors text-sm sm:text-base"
+              className="px-4 py-3 gap-3 rounded-xl text-sm text-primary-100 bg-primary-600 dark:text-primary-100 hover:bg-primary-400 dark:hover:bg-primary-500 flex items-center"
             >
               <FaPlay className="w-4 sm:w-5 h-4 sm:h-5 relative left-[1px]" />
               {t('playlist.play')}
             </button>
-            <button className="p-2 rounded-full text-gray-400 hover:text-gray-500">
-              <FiMoreHorizontal className="w-5 sm:w-6 h-5 sm:h-6" />
+            <button
+              className="px-4 py-3 gap-2 rounded-xl text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+            onClick={handleDeletePlaylist}
+            >
+              <FiTrash2 className="mr-2" />
+              Delete
             </button>
           </div>
         </div>
       </div>
 
       {/* Songs List */}
-      {console.log(songs)}
       {songs.length > 0 ? (
 
         <div>
-          <Songs songs={songs} collectionTitle="playlist.songs" isRemove/>
+          <Songs songs={songs} collectionTitle="playlist.songs" isRemove />
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">

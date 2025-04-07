@@ -15,8 +15,12 @@ const createPlaylist = async (req, res) => {
 
         await newPlaylist.save();
 
+
+
         const library = await Library.findById(library_id);
+
         library.playlists.push({
+            _id: newPlaylist._id,
             playlist_id: newPlaylist._id,
             playlist_name: newPlaylist.playlist_name,
             image_url: newPlaylist.image_url
@@ -93,8 +97,6 @@ const getPlaylistSongs = async (req, res) => {
             });
         }
 
-        console.log(playlist[0].songs);
-
         res.json({
             success: true,
             data: playlist[0].songs || []
@@ -109,8 +111,33 @@ const getPlaylistSongs = async (req, res) => {
     }
 };
 
+const deletePlaylist = async (req, res) => {
+    try {
+        const playlist = await Playlist.findByIdAndDelete(req.params.id);
+        
+        if (!playlist) {
+            return res.status(404).json({
+                success: false,
+                message: 'Playlist not found'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Playlist deleted successfully'
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: err.message
+        });
+    }
+};
+
 module.exports = {
     createPlaylist,
     getPlaylistById,
-    getPlaylistSongs
+    getPlaylistSongs,
+    deletePlaylist
 };

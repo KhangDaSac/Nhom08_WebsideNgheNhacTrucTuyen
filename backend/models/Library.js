@@ -27,8 +27,7 @@ const librarySchema = new mongoose.Schema({
     }],
     playlists: [{
         playlist_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Playlist'
+            type: mongoose.Schema.Types.ObjectId
         },
         playlist_name: String,
         image_url: String

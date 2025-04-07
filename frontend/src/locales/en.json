@@ -137,7 +137,8 @@
     "title": "Playlist",
     "songs": "Songs",
     "play": "Play",
-    "createdOn": "Created on"
+    "createdOn": "Created on",
+    "noSongs": "No songs in this playlist"
   },
   "library": {
     "title": "Your Library",

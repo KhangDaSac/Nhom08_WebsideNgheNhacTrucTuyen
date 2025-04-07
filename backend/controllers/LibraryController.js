@@ -4,9 +4,9 @@ const Artist = require('../models/Artist');
 const mongoose = require('mongoose');
 const Library = require('../models/Library');
 
-const getPlaylistsByLibraryId = async (req, res) => {   
+const getPlaylistsByLibraryId = async (req, res) => {
     try {
-        const playlists = await Library.findById({_id: req.params.id }, { playlists: 1 })
+        const playlists = await Library.findById({ _id: req.params.id }, { playlists: 1 })
             .populate('playlists')
         res.json({
             success: true,

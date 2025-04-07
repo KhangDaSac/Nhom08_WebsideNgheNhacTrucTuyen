@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Library = require('./Library');
 
 const playlistSchema = new mongoose.Schema({
     playlist_name: {
@@ -17,7 +18,24 @@ const playlistSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Song'
     },
-
+    songs: {
+        type: mongoose.Schema.Types.Array,
+        default: []
+    }
 });
 
-module.exports = mongoose.model('Playlist', playlistSchema); 
+playlistSchema.pre('findOneAndDelete', async function(next) {
+    try {
+        const playlistId = this.getQuery()._id;
+        
+        await Library.updateMany(
+            { 'playlists.playlist_id': playlistId },
+            { $pull: { playlists: { playlist_id: playlistId } } }
+        );
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
+module.exports = mongoose.model('Playlist', playlistSchema);

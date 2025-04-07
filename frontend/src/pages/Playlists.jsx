@@ -46,6 +46,7 @@ const Playlist = () => {
       fetchPlaylists();
       setIsLoading(false);
       setShowCreateModal(false);
+      setNewPlaylistName('');
     } catch (error) {
       console.error('Error creating playlist:', error);
       setIsLoading(false);
@@ -116,7 +117,7 @@ const Playlist = () => {
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-md"
                 >
-                  {t('playlist.create')}
+                  {t('playlists.create')}
                 </button>
               </div>
             </form>
