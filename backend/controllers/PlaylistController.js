@@ -37,6 +37,80 @@ const createPlaylist = async (req, res) => {
     }
 }
 
+const getPlaylistById = async (req, res) => {
+    try {
+        const playlist = await Playlist.findById(req.params.id)
+        
+        if (!playlist) {
+            return res.status(404).json({
+                success: false,
+                message: 'Playlist not found'
+            });
+        }
+
+        res.json({
+            success: true,
+            data: playlist
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: err.message
+        });
+    }
+};
+
+const getPlaylistSongs = async (req, res) => {
+    try {
+        const playlist = await Playlist.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(req.params.id)
+                }
+            },
+            {
+                $lookup: {
+                    from: 'songs',              
+                    localField: 'songs.song_id',      
+                    foreignField: '_id',        
+                    as: 'songs'                 
+                }
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,                   
+                    songs: 1
+                }
+            }
+        ]);
+        
+        if (!playlist) {
+            return res.status(404).json({
+                success: false,
+                message: 'Playlist not found'
+            });
+        }
+
+        console.log(playlist[0].songs);
+
+        res.json({
+            success: true,
+            data: playlist[0].songs || []
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: err.message
+        });
+    }
+};
+
 module.exports = {
     createPlaylist,
+    getPlaylistById,
+    getPlaylistSongs
 };

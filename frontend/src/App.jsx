@@ -18,6 +18,7 @@ import Album from './pages/Album';
 import Artist from './pages/Artist';
 import Search from './pages/Search';
 import Library from './pages/Library';
+import Playlist from './pages/Playlist';
 
 function App() {
   return (
@@ -40,12 +41,10 @@ function App() {
                               <Route path="/search" element={<Search />} />
                               <Route path="/album/:id" element={<Album />} />
                               <Route path="/artist/:id" element={<Artist />} />
-
                               <Route path="/account" element={<Account />} />
                               <Route path="/playlists" element={<Playlists />} />
-                              {/* <Route path="/song/:id" element={<Song />} /> */}
+                              <Route path="/playlist/:id" element={<Playlist />} />
                               <Route path="/library" element={<Library />} />
-
                             </Routes>
                           </Layout>
                       }
@@ -53,7 +52,6 @@ function App() {
                   </Routes>
                 </Router>
               </SearchProvider>
-
             </PlayerProvider>
           </AuthProvider>
         </ThemeProvider>

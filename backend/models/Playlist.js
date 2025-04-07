@@ -13,11 +13,11 @@ const playlistSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    songs: [{
+    song_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Song',
-        default: []
-    }]
+        ref: 'Song'
+    },
+
 });
 
 module.exports = mongoose.model('Playlist', playlistSchema); 

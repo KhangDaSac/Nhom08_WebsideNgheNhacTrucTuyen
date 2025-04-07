@@ -22,7 +22,8 @@
     "language": "Language",
     "theme": "Theme",
     "dark": "Dark",
-    "light": "Light"
+    "light": "Light",
+    "backToPlaylists": "Back to Playlists"
   },
   "auth": {
     "email": "Email",
@@ -132,6 +133,12 @@
     "playlistNamePlaceholder": "Enter playlist name",
     "cancel": "Cancel"
   },
+  "playlist": {
+    "title": "Playlist",
+    "songs": "Songs",
+    "play": "Play",
+    "createdOn": "Created on"
+  },
   "library": {
     "title": "Your Library",
     "description": "Your music collection, playlists, and artists",
@@ -140,28 +147,6 @@
     "likedSongs": "Liked Songs",
     "followingArtists": "Following Artists",
     "placeholder": "Search for your songs, artists, albums, playlists"
-  },
-  "player": {
-    "play": "Play",
-    "pause": "Pause",
-    "next": "Next",
-    "previous": "Previous",
-    "shuffle": "Shuffle",
-    "repeat": "Repeat",
-    "queue": "Queue",
-    "lyrics": "Lyrics",
-    "volume": "Volume",
-    "mute": "Mute",
-    "unmute": "Unmute"
-  },
-  "playlist": {
-    "create": "Create Playlist",
-    "edit": "Edit Playlist",
-    "delete": "Delete Playlist",
-    "addTo": "Add to Playlist",
-    "removeFrom": "Remove from Playlist",
-    "public": "Public",
-    "private": "Private"
   },
   "collection": {
     "song": {
@@ -183,6 +168,7 @@
     "playlist": {
       "playlists": "Playlists"
     },
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "remove": "Remove"
   }
 }

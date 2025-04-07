@@ -2,8 +2,9 @@ import React from 'react';
 import Song from './Song';
 import { FiClock } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
+import {FiTrash2} from 'react-icons/fi';
 
-const Songs = ({ songs, collectionTitle}) => {
+const Songs = ({ songs, collectionTitle, isRemove }) => {
     const { t } = useTranslation();
     return (
         <>
@@ -19,14 +20,17 @@ const Songs = ({ songs, collectionTitle}) => {
                                 <th className="px-4 py-3 font-medium">{t('collection.song.title')}</th>
                                 <th className="px-4 py-3 font-medium hidden md:table-cell">{t('collection.song.view')}</th>
                                 <th className="px-4 py-3 font-medium hidden md:table-cell">{t('collection.song.like')}</th>
+                                {isRemove && <th className="px-4 py-3 font-medium hidden md:table-cell">{t('collection.remove')}</th>}
                             </tr>
                         </thead>
                         <tbody>
                             {songs.map((song) => {
+                                { console.log(song) }
                                 return (
                                     <Song
-                                        key={song._id}
+                                        key={song._id || song.song_id}
                                         song={song}
+                                        isRemove={isRemove}
                                     />
                                 );
                             })}
