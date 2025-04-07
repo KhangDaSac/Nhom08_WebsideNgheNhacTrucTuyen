@@ -117,32 +117,6 @@ const Library = () => {
       ),
     },
     {
-      name: t('Playlists'),
-      icon: FiUser,
-      content: (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {playlists.map((playlist) => (
-            <div
-              key={playlist.id}
-              className="flex flex-col space-y-2 p-4 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            >
-              <img
-                src={playlist.image}
-                alt={playlist.name}
-                className="w-full aspect-square rounded-md object-cover"
-              />
-              <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                {playlist.name}
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {playlist.songCount} {t('songs')}
-              </p>
-            </div>
-          ))}
-        </div>
-      ),
-    },
-    {
       name: t('Albums'),
       icon: FiDisc,
       content: (

@@ -22,7 +22,6 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
     phone: '',
-    dateOfBirth: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -143,30 +142,6 @@ const SignUp = () => {
                   required
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                   placeholder={t('signUp.phone.placeholder')}
-                />
-              </div>
-            </div>
-
-            {/* Date of Birth Field */}
-            <div>
-              <label
-                htmlFor="dateOfBirth"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-              >
-                {t('signUp.dateOfBirth.dateOfBirth')}
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FiCalendar className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  type="date"
-                  id="dateOfBirth"
-                  name="dateOfBirth"
-                  value={formData.dateOfBirth}
-                  onChange={handleChange}
-                  required
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                 />
               </div>
             </div>

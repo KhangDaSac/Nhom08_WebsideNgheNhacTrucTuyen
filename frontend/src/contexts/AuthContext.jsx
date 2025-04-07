@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
         display_name: data.user.display_name,
         avatar_url: data.user.avatar_url,
         phone: data.user.phone,
+        library_id: data.user.library_id,
         token: data.token
       };
 

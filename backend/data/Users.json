@@ -1,10 +1,35 @@
 [
-    {
-        "_id":{"$oid":"10f65f018f7871542b4cb298"},
-        "display_name": "Đào Phúc Khang",
-        "avatar_url": "https://via.placeholder.com/150",
-        "email": "daophuckhang090@gmail.com",
-        "phone": "0948238791",
-        "password_hash": "$2b$10$0x1j5v3Q4Z9z5g7J6G8e1OaXc4Yk5F5m5F5m5F5m5F5m5F5m5F5m"
+  {
+    "_id": {
+      "$oid": "10f65f018f7871542b4cb298"
+    },
+    "display_name": "Đào Phúc Khang",
+    "avatar_url": "https://res.cloudinary.com/dkh3af36d/image/upload/v1744029008/images/s3ylrplne8en81goxma4.jpg",
+    "email": "daophuckhang090@gmail.com",
+    "phone": "0948238791",
+    "password_hash": "$2b$10$DS800T/XevAApahP6vireOFVfjTPSniC7Y1ynzqIek7KG67T4goXW"
+  },
+  {
+    "_id": {
+      "$oid": "67f3943242881ae7384336c7"
+    },
+    "display_name": "Khang",
+    "avatar_url": "https://res.cloudinary.com/dkh3af36d/image/upload/v1744029008/images/s3ylrplne8en81goxma4.jpg",
+    "email": "daophuckhang123@gmail.com",
+    "phone": "0123456789",
+    "password_hash": "$2b$10$MZ9GaKUXEQeIACFRQniCF.LY2tTL71xpNREl0hqqEE5aB/C3KjNly"
+  },
+  {
+    "_id": {
+      "$oid": "67f39cb216ed5042a1aa4572"
+    },
+    "display_name": "Khang",
+    "avatar_url": "https://res.cloudinary.com/dkh3af36d/image/upload/v1744029008/images/s3ylrplne8en81goxma4.jpg",
+    "email": "daophuckhang1234@gmail.com",
+    "phone": "0123456789",
+    "password_hash": "$2b$10$DS800T/XevAApahP6vireOFVfjTPSniC7Y1ynzqIek7KG67T4goXW",
+    "library_id": {
+      "$oid": "d44e7a2bda24b6d0dd90972c"
     }
+  }
 ]

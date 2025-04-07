@@ -9,9 +9,6 @@ const playlistSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    image_url: {
-        type: String
-    },
     songs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Song'

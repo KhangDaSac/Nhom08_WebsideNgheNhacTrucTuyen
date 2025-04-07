@@ -13,7 +13,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Account from './pages/Account';
-import Playlist from './pages/Playlist';
+import Playlists from './pages/Playlists';
 import Album from './pages/Album';
 import Artist from './pages/Artist';
 import Search from './pages/Search';
@@ -42,8 +42,7 @@ function App() {
                               <Route path="/artist/:id" element={<Artist />} />
 
                               <Route path="/account" element={<Account />} />
-                              <Route path="/playlist/:id" element={<Playlist />} />
-                              <Route path="/playlists" element={<Playlist />} />
+                              <Route path="/playlists" element={<Playlists />} />
                               {/* <Route path="/song/:id" element={<Song />} /> */}
                               <Route path="/library" element={<Library />} />
 
