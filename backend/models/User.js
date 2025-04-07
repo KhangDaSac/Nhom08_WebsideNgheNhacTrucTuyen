@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const accountSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     display_name: {
         type: String,
         required: true
@@ -20,7 +20,11 @@ const accountSchema = new mongoose.Schema({
     library_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Library'
+    },
+    history_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'History'
     }
 });
 
-module.exports = mongoose.model('User', accountSchema); 
+module.exports = mongoose.model('User', userSchema); 

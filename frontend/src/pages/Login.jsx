@@ -26,16 +26,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
+    setIsLoading(false);
 
     try {
       await login({email: formData.email, password: formData.password});
       navigate('/');
+      setIsLoading(true);
     } catch (error) {
       setError(error.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 

@@ -4,44 +4,50 @@ const AuthContext = createContext();
 
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : {};
+  });
   const [loading, setLoading] = useState(false);
   
-
   useEffect(() => {
-    setUser(localStorage.getItem('user'));
+    localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
-  const login = async (email, password, setUser) => {
+  const login = async ({email, password}) => {
     try {
-      const account = {
-        email: email,
-        password: password,
+      const user = {
+        email, password
       };
 
-      const response = await fetch('http://localhost:3000/api/auth/login', {
+      console.log(user);
+
+      const response = await fetch('http://localhost:5000/v1/auth/login', {
         method: 'POST',
-        body: JSON.stringify(account),
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       const data = await response.json();
+
+      console.log(data);
 
       if (!data.success) {
         throw new Error(data.message || 'Login failed');
       }
 
       const newUser = {
-        _id: data.account._id,
-        email: data.account.email,
-        token: data.token,
+        _id: data.user._id,
+        email: data.user.email,
+        token: data.token
       };
 
       setUser(newUser);
-
-      localStorage.setItem('user', JSON.stringify(newUser));
       return { success: true };
 
-    } catch (error) { // Tắt trạng thái loading khi có lỗi
+    } catch (error) {
       return { success: false, error: error.message };
     }
   };

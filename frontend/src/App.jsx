@@ -16,7 +16,6 @@ import Account from './pages/Account';
 import Playlist from './pages/Playlist';
 import Album from './pages/Album';
 import Artist from './pages/Artist';
-import ProtectedRoute from './components/auth/ProtectedRoute';
 import Search from './pages/Search';
 import Library from './pages/Library';
 
@@ -30,29 +29,24 @@ function App() {
               <SearchProvider>
                 <Router>
                   <Routes>
-                    {/* Auth Routes */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
-
-                    {/* Protected Routes */}
                     <Route
                       path="/*"
                       element={
-                        <ProtectedRoute>
                           <Layout>
                             <Routes>
-                              <Route path="/" element={<Home />} />
-                              <Route path="/account" element={<Account />} />
-                              <Route path="/playlist/:id" element={<Playlist />} />
+                              <Route path="/" element={<Home />} /> 
+                              <Route path="/search" element={<Search />} />
                               <Route path="/album/:id" element={<Album />} />
                               <Route path="/artist/:id" element={<Artist />} />
+
+                              <Route path="/account" element={<Account />} />
                               <Route path="/playlist/:id" element={<Playlist />} />
                               {/* <Route path="/song/:id" element={<Song />} /> */}
-                              <Route path="/search" element={<Search />} />
                               <Route path="/library" element={<Library />} />
                             </Routes>
                           </Layout>
-                        </ProtectedRoute>
                       }
                     />
                   </Routes>
