@@ -124,6 +124,14 @@
     "logout": "Logout",
     "language": "Language"
   },
+  "playlists": {
+    "title": "My playlists",
+    "createPlaylist": "Create Playlist",
+    "playlistName": "Playlist Name",
+    "create": "Create",
+    "playlistNamePlaceholder": "Enter playlist name",
+    "cancel": "Cancel"
+  },
   "library": {
     "title": "Your Library",
     "description": "Your music collection, playlists, and artists",

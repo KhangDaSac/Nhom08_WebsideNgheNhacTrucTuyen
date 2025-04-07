@@ -14,59 +14,43 @@ const Playlist = () => {
   const [playlists, setPlaylists] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newPlaylistName, setNewPlaylistName] = useState('');
-  const [error, setError] = useState('');
 
   useEffect(() => {
-
-
     fetchPlaylists();
   }, []);
 
   const fetchPlaylists = async () => {
     try {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/library/playlists/${user.library_id}`);
-        const data = response.data.data.playlists;
-        setPlaylists(data);
-        setIsLoading(false);
+      const response = await axios.get(`http://localhost:5000/api/libraries/playlists/${user.library_id}`);
+      const data = response.data.data.playlists;
+      setPlaylists(data);
+      setIsLoading(false);
 
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      }
     } catch (error) {
-      console.error('Error fetching playlists:', error);
-      setError('Failed to load playlists');
+      console.error('Error fetching data:', error);
       setIsLoading(false);
     }
   };
 
   const handleCreatePlaylist = async (e) => {
     e.preventDefault();
-    if (!newPlaylistName.trim()) {
-      setError('Please enter a playlist name');
-      return;
-    }
-
     try {
-      // In a real app, this would be an API call
-      const newPlaylist = {
-        id: playlists.length + 1,
-        name: newPlaylistName,
-        description: '',
-        coverUrl: 'https://picsum.photos/200',
-        songCount: 0,
-        duration: '0m',
-        songs: [],
-      };
-
-      setPlaylists([...playlists, newPlaylist]);
-      setNewPlaylistName('');
+      console.log('Creating playlist:', {
+        playlist_name: newPlaylistName,
+        library_id: user.library_id,
+      });
+      const response = await axios.post('http://localhost:5000/api/playlists/create', {
+        playlist_name: newPlaylistName,
+        library_id: user.library_id,
+      });
+      fetchPlaylists();
+      setIsLoading(false);
       setShowCreateModal(false);
     } catch (error) {
-      setError('Failed to create playlist');
+      console.error('Error creating playlist:', error);
+      setIsLoading(false);
     }
-  };
+};
 
   if (isLoading) {
     return (
@@ -81,14 +65,14 @@ const Playlist = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          {t('My playlists')}
+          {t('playlists.title')}
         </h1>
         <button
           onClick={() => setShowCreateModal(true)}
           className="flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <FiPlus className="w-5 h-5 mr-2" />
-          {t('Create playlist')}
+          {t('playlists.createPlaylist')}
         </button>
       </div>
 
@@ -101,7 +85,7 @@ const Playlist = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              {t('playlist.createNew')}
+              {t('playlists.createPlaylist')}
             </h2>
             <form onSubmit={handleCreatePlaylist}>
               <div className="mb-4">
@@ -109,7 +93,7 @@ const Playlist = () => {
                   htmlFor="playlistName"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
-                  {t('playlist.name')}
+                  {t('playlists.playlistName')}
                 </label>
                 <input
                   type="text"
@@ -117,7 +101,7 @@ const Playlist = () => {
                   value={newPlaylistName}
                   onChange={(e) => setNewPlaylistName(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-primary-500 focus:border-primary-500"
-                  placeholder={t('playlist.namePlaceholder')}
+                  placeholder={t('playlists.playlistNamePlaceholder')}
                 />
               </div>
               <div className="flex justify-end space-x-3">
@@ -126,13 +110,13 @@ const Playlist = () => {
                   onClick={() => setShowCreateModal(false)}
                   className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
                 >
-                  {t('common.cancel')}
+                  {t('playlists.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-md"
                 >
-                  {t('common.create')}
+                  {t('playlist.create')}
                 </button>
               </div>
             </form>
