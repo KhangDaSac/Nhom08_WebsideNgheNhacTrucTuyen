@@ -1,0 +1,33 @@
+{
+    "success": true,
+    "data": [
+      {
+        "_id": "u001",
+        "username": "son_tung",
+        "full_name": "Sơn Tùng M-TP",
+        "email": "sontungmtp@gmail.com",
+        "avatar_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/avatars/5/9/6/9/59696c9dba7a914d587d886049c10df6.jpg",
+        "role": "user",
+        "created_at": "2020-01-01T00:00:00.000Z"
+      },
+      {
+        "_id": "u002",
+        "username": "min",
+        "full_name": "Min",
+        "email": "min.music@gmail.com",
+        "avatar_url": "https://i1.sndcdn.com/avatars-000659730234-wak3y2-t500x500.jpg",
+        "role": "user",
+        "created_at": "2021-06-20T00:00:00.000Z"
+      },
+      {
+        "_id": "u003",
+        "username": "admin",
+        "full_name": "Admin",
+        "email": "admin@musicapp.vn",
+        "avatar_url": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+        "role": "admin",
+        "created_at": "2019-09-10T00:00:00.000Z"
+      }
+    ]
+  }
+  

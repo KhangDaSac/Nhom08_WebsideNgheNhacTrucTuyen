@@ -7,6 +7,11 @@ import { SearchProvider } from "./contexts/SearchContext";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./locales/i18n";
 import Layout from "./components/layout/Layout";
+import ManageAccounts from "./components/admin/ManageAccounts";
+import ManageAlbums from "./components/admin/ManageAlbums";
+import ManageSongs from "./components/admin/ManageSongs";
+import ManageArtists from "./components/admin/ManageArtists";
+import ManagePlaylists from "./components/admin/ManagePlaylists";
 
 // Pages
 import Home from "./pages/Home";
@@ -19,6 +24,7 @@ import Artist from "./pages/Artist";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Search from "./pages/Search";
 import Library from "./pages/Library";
+import Layout_Admin from "./components/layout/Layout_Admin";
 
 function App() {
   return (
@@ -34,6 +40,26 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
 
+                    <Route
+                      path="/admin/*"
+                      element={
+                        <Layout_Admin>
+                          <Routes>
+                            <Route path="albums" element={<ManageAlbums />} />
+                            <Route path="songs" element={<ManageSongs />} />
+                            <Route path="artists" element={<ManageArtists />} />
+                            <Route
+                              path="playlists"
+                              element={<ManagePlaylists />}
+                            />
+                            <Route
+                              path="accounts"
+                              element={<ManageAccounts />}
+                            />
+                          </Routes>
+                        </Layout_Admin>
+                      }
+                    />
                     {/* Protected Routes */}
                     <Route
                       path="/*"
@@ -46,7 +72,7 @@ function App() {
                               <Route
                                 path="/playlist/:id"
                                 element={<Playlist />}
-                              />
+                              />{" "}
                               <Route path="/album/:id" element={<Album />} />
                               <Route path="/artist/:id" element={<Artist />} />
                               <Route path="/search" element={<Search />} />
