@@ -35,10 +35,9 @@ const Login = () => {
       if(result.success){
         navigate('/');
       }else{
-        showErrorToast(t('toast.login.error'));
+        showErrorToast(result.message || t('toast.login.error'));
         setIsLoading(false);
       }
-    
     } catch (error) {
       setError(error.message);
     }

@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
       return data;
 
     } catch (error) {
-      return { success: false, error: error.message };
+      return { ...error.response.data };
     }
   };
 
@@ -66,12 +66,10 @@ export const AuthProvider = ({ children }) => {
             'Content-Type': 'application/json',
           },
         });
-      console.log(response)
-      console.log("hello")
       
       return response.data;
     } catch (error) {
-      return { success: false, error: error.message };
+      return { ...error.response.data };
     }
   };
 

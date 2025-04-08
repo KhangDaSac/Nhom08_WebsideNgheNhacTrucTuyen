@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String
     },
+    avatar_url: {
+        type: String,
+        default: 'https://res.cloudinary.com/dkh3af36d/image/upload/v1744029008/images/s3ylrplne8en81goxma4.jpg'
+    },
     password_hash: {
         type: String,
         required: true

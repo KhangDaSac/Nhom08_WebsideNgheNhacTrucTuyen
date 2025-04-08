@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const Library = require('../models/Library');
 
 
 const JWT_SECRET = process.env.JWT_SECRET || '';
@@ -33,7 +34,7 @@ const login = async (req, res) => {
         }
 
         const isValidPassword = await bcrypt.compare(password, user.password_hash);
-        if (!isValidPassword) { 
+        if (!isValidPassword) {
             return res.status(401).json({
                 success: false,
                 message: 'Invalid password'
@@ -54,6 +55,8 @@ const login = async (req, res) => {
             token,
             user
         });
+
+
 
     } catch (err) {
         return res.status(500).json({
@@ -92,12 +95,27 @@ const register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+
+
+        const newlibrary = new Library(
+            {
+                playlists: [],
+                artists_followed: [],
+                songs_liked: [],
+                albums_liked: []
+            }
+        )
+
+        const library = await newlibrary.save();
+
         const newUser = new User({
             email,
             password_hash: hashedPassword,
             phone,
-            display_name
+            display_name,
+            library_id: library._id
         });
+
 
         const user = await newUser.save();
 
