@@ -181,12 +181,6 @@
     "login": {
       "success": "Login successful",
       "error": "Login failed"
-    },
-    "account": {
-      "update": {
-        "success": "Account updated successfully",
-        "error": "Error updating account"
-      }
     }
   },
   "song": {

@@ -1,0 +1,65 @@
+@import 'flowbite/dist/flowbite.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --primary-50: #f0f7ff;
+  --primary-100: #e0efff;
+  --primary-200: #baddff;
+  --primary-300: #84c5ff;
+  --primary-400: #48a7ff;
+  --primary-500: #1a8cff;
+  --primary-600: #0066ff;
+  --primary-700: #0052cc;
+  --primary-800: #0042a3;
+  --primary-900: #003380;
+  --primary-950: #002266;
+
+  --secondary-50: #f5f3ff;
+  --secondary-100: #ede9fe;
+  --secondary-200: #ddd6fe;
+  --secondary-300: #c4b5fd;
+  --secondary-400: #a78bfa;
+  --secondary-500: #8b5cf6;
+  --secondary-600: #7c3aed;
+  --secondary-700: #6d28d9;
+  --secondary-800: #5b21b6;
+  --secondary-900: #4c1d95;
+  --secondary-950: #2e1065;
+
+  --accent-50: #fff1f2;
+  --accent-100: #ffe4e6;
+  --accent-200: #fecdd3;
+  --accent-300: #fda4af;
+  --accent-400: #fb7185;
+  --accent-500: #f43f5e;
+  --accent-600: #e11d48;
+  --accent-700: #be123c;
+  --accent-800: #9f1239;
+  --accent-900: #881337;
+  --accent-950: #4c0519;
+
+  --color-gray-200: oklch(92.8% 0.006 264.531);
+  --color-gray-800: oklch(27.8% 0.033 256.848);
+
+  --gradient-end: var(--color-gray-200); 
+}
+
+.dark {
+  --gradient-end: var(--color-gray-800); 
+}
+
+@layer base {
+  body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+  }
+}
+
+@layer components {
+  .focus\:ring-primary-500\/20 {
+    @apply focus:ring-primary-500 focus:ring-opacity-20;
+  }
+}

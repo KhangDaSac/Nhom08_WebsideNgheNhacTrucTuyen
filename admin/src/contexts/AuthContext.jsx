@@ -78,21 +78,14 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const updateUser = async (userData) => {
+  const updateProfile = async (userData) => {
     try {
-      const response = await axios.post('http://localhost:5000/v1/auth/update',
-        userData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-      
-      return response.data;
+      setUser({ ...user, ...userData });
+      return { success: true };
     } catch (error) {
-      return { ...error.response.data };
+      return { success: false, error: error.message };
     }
-  }
+  };
 
   return (
     <AuthContext.Provider
@@ -102,7 +95,7 @@ export const AuthProvider = ({ children }) => {
         login,
         register,
         logout,
-        updateUser
+        updateProfile,
       }}
     >
       {children}
