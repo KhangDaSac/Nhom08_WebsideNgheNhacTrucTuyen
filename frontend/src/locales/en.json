@@ -135,12 +135,9 @@
   },
   "library": {
     "title": "Your Library",
-    "description": "Your music collection, playlists, and artists",
-    "search": "Search for songs, artists, albums, playlists",
-    "yourPlaylists": "Your Playlists",
-    "likedSongs": "Liked Songs",
-    "followingArtists": "Following Artists",
-    "placeholder": "Search for your songs, artists, albums, playlists"
+    "songs_liked": "Songs Liked",
+    "albums_liked": "Albums Liked",
+    "artists_followed": "Artists Followed"
   },
   "collection": {
     "song": {
@@ -183,6 +180,7 @@
     "addToPlaylist": "Add to Playlist",
     "genres": "Genres",
     "plays": "Plays",
-    "likes": "Likes"
+    "likes": "Likes",
+    "liked": "Liked"
   }
 }

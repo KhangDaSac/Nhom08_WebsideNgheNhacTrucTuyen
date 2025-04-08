@@ -1,27 +1,36 @@
 [
     {
-        "_id": {"$oid": "52d92237b905b8f58982311e"},
+        "_id": {
+            "$oid": "52d92237b905b8f58982311e"
+        },
         "playlist_name": "Những bài nhạc của Sơn Tùng M-TP",
-        "create_date": {"$date": "2024-10-01T00:00:00.000Z"},
+        "create_date": {
+            "$date": "2024-10-01T00:00:00.000Z"
+        },
         "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/3/a/3a9e48bc4df7bbde3acea30cc267f609_1487066528.jpg",
         "songs": [
             {
+                "_id": {
+                    "$oid": "67dc0190009bf012ef627d45"
+                },
                 "song_id": {
                     "$oid": "67dc0190009bf012ef627d43"
-                  },
+                },
                 "song_name": "Nơi này có anh",
                 "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/3/a/3a9e48bc4df7bbde3acea30cc267f609_1487066528.jpg",
                 "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1743940464/Music/rvwh00cr3hf6c6zyyzmm.mp3"
             },
             {
+                "_id": {
+                    "$oid": "67dc0190009bf012ef627d44"
+                },
                 "song_id": {
                     "$oid": "67dc0190009bf012ef627d44"
-                  },
+                },
                 "song_name": "Ấn nút thả giất mơ",
                 "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/1/9/5/3/1953845641e396f5a7273b2c3655f280.jpg",
                 "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1743940472/Music/ataf0wiynwefhipomtrf.mp3"
             }
         ]
     }
-
 ]

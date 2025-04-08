@@ -23,7 +23,7 @@ const Song = () => {
     const [isFavorite, setIsFavorite] = useState(false);
     const [showPlaylistMenu, setShowPlaylistMenu] = useState(false);
     const menuRef = useRef(null);
-    const { userPlaylists, fetchLibrary, addSongToPlaylist ,playlists } = useLibrary();
+    const { userPlaylists, fetchLibrary, addSongToPlaylist, playlists } = useLibrary();
     const { showSuccessToast, showErrorToast } = useToast();
     const { user } = useAuth();
 
@@ -33,7 +33,7 @@ const Song = () => {
         const fetchData = async () => {
             try {
                 await fetchSong();
-                
+
                 setIsLoading(false);
             } catch (error) {
                 setError(error.message || 'Failed to load song');
@@ -70,23 +70,7 @@ const Song = () => {
         }
     };
 
-    const fetchRelatedSongs = async (currentSong) => {
-        try {
-            console.log('Fetching related songs for:', currentSong);
-            if (currentSong && currentSong.artist_id) {
-                const response = await axios.get(`http://localhost:5000/api/songs/artist=${currentSong.artists[0]._id}`);
-                if (response.data.data) {
-                    const filtered = response.data.data
-                        .filter(s => s._id !== currentSong._id)
-                        .slice(0, 5);
-                    setRelatedSongs(filtered);
-                    console.log('Related songs:', filtered);
-                }
-            }
-        } catch (error) {
-            console.error('Error fetching related songs:', error);
-        }
-    };
+
 
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
@@ -224,7 +208,7 @@ const Song = () => {
                             {isFavorite ? <FaHeart className="w-5 h-5" /> : <FiHeart className="w-5 h-5" />}
                             {isFavorite ? t('song.liked') : t('song.like')}
                         </button>
-                        
+
                         {user && user?._id && (
                             <div className="relative">
                                 <button
@@ -247,7 +231,10 @@ const Song = () => {
                                                     onClick={() => handleAddToPlaylist({ song, playlist })}
                                                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                                 >
-                                                    {playlist.playlist_name}
+                                                    Add to
+                                                    <span className='font-semibold text-gray-900 dark:text-white ms-1'>
+                                                        {playlist.playlist_name}
+                                                    </span>
                                                 </button>
                                             ))
                                         ) : (

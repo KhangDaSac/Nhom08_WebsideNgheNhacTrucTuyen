@@ -7,7 +7,6 @@ const Library = () => {
   const { t } = useTranslation();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // Mock data - thay thế bằng dữ liệu thực từ API sau
   const recentlyPlayed = [
     {
       id: 1,
@@ -55,7 +54,7 @@ const Library = () => {
 
   const categories = [
     {
-      name: t('Recently Played'),
+      name: t('library.songs_liked'),
       icon: FiClock,
       content: (
         <div className="grid gap-4">
@@ -86,7 +85,7 @@ const Library = () => {
       ),
     },
     {
-      name: t('Liked Songs'),
+      name: t('library.albums_liked'),
       icon: FiMusic,
       content: (
         <div className="grid gap-4">
@@ -117,7 +116,7 @@ const Library = () => {
       ),
     },
     {
-      name: t('Albums'),
+      name: t('library.artists_followed'),
       icon: FiDisc,
       content: (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
