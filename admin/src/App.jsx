@@ -11,7 +11,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // Pages
 import Login from './pages/Login';
 import Account from './pages/Account';
-import SongManager from './pages/SongManager';
+// import SongManager from './pages/SongManager';
 
 function App() {
   return (
@@ -36,14 +36,14 @@ function App() {
                               </ProtectedRoute>
                             }
                           />
-                          <Route
+                          {/* <Route
                             path="/song-manager"
                             element={
                               <ProtectedRoute>
                                 <SongManager />
                               </ProtectedRoute>
                             }
-                          />
+                          /> */}
 
                         </Routes>
                       </Layout>
