@@ -3,14 +3,14 @@
         "_id": {"$oid": "d44e7a2bda24b6d0dd90972c"},
         "followings": [
             {
-                "_id": {"$oid": "3c1337ab3187ea3b485919fb"},
+                "artist_id": {"$oid": "3c1337ab3187ea3b485919fb"},
                 "artist_name": "Sơn Tùng M-TP",
                 "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/avatars/5/9/6/9/59696c9dba7a914d587d886049c10df6.jpg"
             }
         ],
         "song_likeds": [
             {
-                "_id": {"$oid": "67dc0190009bf012ef627d45"},
+                "song_id": {"$oid": "67dc0190009bf012ef627d45"},
                 "song_name": "Em của ngày hôm qua",
                 "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/b/1/b1c839bd85e6081614cf770278b8f782_1387164001.jpg",
                 "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1743940472/Music/obd8o3zw3zpogplsummy.mp3"
@@ -18,7 +18,7 @@
         ],
         "album_likeds": [
             {
-                "_id": {"$oid": "9aa346a370d1f6962f47fec2"},
+                "album_id": {"$oid": "9aa346a370d1f6962f47fec2"},
                 "album_name": "Em của ngày hôm qua",
                 "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/b/1/b1c839bd85e6081614cf770278b8f782_1387164001.jpg",
                 "release_date": {"$date": "2013-12-15T00:00:00.000Z"}
@@ -26,7 +26,7 @@
         ],
         "playlists": [
             {
-                "_id": {"$oid": "52d92237b905b8f58982311e"},
+                "playlist_id": {"$oid": "52d92237b905b8f58982311e"},
                 "playlist_name": "Những bài nhạc của Sơn Tùng M-TP",
                 "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/3/a/3a9e48bc4df7bbde3acea30cc267f609_1487066528.jpg"
             }

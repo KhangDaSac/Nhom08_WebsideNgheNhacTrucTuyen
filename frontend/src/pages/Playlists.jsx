@@ -5,32 +5,20 @@ import { usePlayer } from '../contexts/PlayerContext';
 import { FiPlay, FiPlus, FiMoreVertical, FiClock } from 'react-icons/fi';
 import { useAuth } from '../contexts/AuthContext';
 import PlaylistCards from '../components/basic-component/playlist-card/PlaylistCards';
-import axios from 'axios';
+import { useLibrary } from '../contexts/LibraryContext';
 
 const Playlist = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-  const [playlists, setPlaylists] = useState([]);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [newPlaylistName, setNewPlaylistName] = useState('');
+  const { playlists, createPlaylist, fetchPlaylists } = useLibrary();
 
   useEffect(() => {
-    fetchPlaylists();
-  }, []);
-
-  const fetchPlaylists = async () => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/libraries/playlists/${user.library_id}`);
-      const data = response.data.data.playlists;
-      setPlaylists(data);
+    if (playlists)
       setIsLoading(false);
-
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setIsLoading(false);
-    }
-  };
+  }, [playlists]);
 
   const handleCreatePlaylist = async (e) => {
     e.preventDefault();
@@ -39,17 +27,12 @@ const Playlist = () => {
         playlist_name: newPlaylistName,
         library_id: user.library_id,
       });
-      const response = await axios.post('http://localhost:5000/api/playlists/create', {
-        playlist_name: newPlaylistName,
-        library_id: user.library_id,
-      });
+      await createPlaylist({ playlist_name: newPlaylistName })
       fetchPlaylists();
-      setIsLoading(false);
       setShowCreateModal(false);
       setNewPlaylistName('');
     } catch (error) {
       console.error('Error creating playlist:', error);
-      setIsLoading(false);
     }
   };
 
@@ -79,13 +62,13 @@ const Playlist = () => {
 
 
       {/* Playlists */}
-      {playlists.length > 0 ? (
+      {playlists?.length > 0 ? (
         <div>
           <PlaylistCards playlists={playlists}></PlaylistCards>
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">
-          <p className="text-gray-500 dark:text-gray-400">{t('playlist.noSongs')}</p>
+          <p className="text-gray-500 dark:text-gray-400">{t('playlists.noPlaylists')}</p>
         </div>
       )}
 

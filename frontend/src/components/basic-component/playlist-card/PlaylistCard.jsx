@@ -51,7 +51,7 @@ const PlaylistCard = ({ playlist, onDelete }) => {
                         <button
                             className="p-3 bg-primary-500 rounded-full text-white"
                         >
-                            <FaPlay className="h-6 w-6" />
+                            <FaPlay className="w-6 h-6 relative left-[1.5px]" />
                         </button>
                     </div>
                 </div>

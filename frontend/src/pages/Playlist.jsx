@@ -7,9 +7,10 @@ import { FaPlay } from "react-icons/fa6";
 import Songs from '../components/basic-component/song/Songs';
 import axios from 'axios';
 import { format } from 'date-fns';
-import {FiTrash2} from 'react-icons/fi';
+import { FiTrash2 } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import ConfirmationModal from '../components/ui/ConfirmationModal';
+import { useLibrary } from '../contexts/LibraryContext';
 
 const Playlist = () => {
   const { id } = useParams();
@@ -20,8 +21,8 @@ const Playlist = () => {
   const [songs, setSongs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const [isFavorite, setIsFavorite] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { deletePlaylist, fetchPlaylists } = useLibrary();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,9 +35,6 @@ const Playlist = () => {
         setIsLoading(false);
       }
     };
-
-
-
     fetchData();
   }, [id]);
 
@@ -92,13 +90,9 @@ const Playlist = () => {
   };
 
   const handleDeletePlaylist = async () => {
-    try {
-      const response = await axios.delete(`http://localhost:5000/api/playlists/${id}`);
+      deletePlaylist(id);
+      fetchPlaylists();
       navigate('/playlists');
-    } catch (error) {
-      console.error('Error deleting playlist:', error);
-      setError('Failed to delete playlist');
-    }
   }
 
   const confirmDeletePlaylist = () => {

@@ -131,7 +131,8 @@
     "playlistName": "Playlist Name",
     "create": "Create",
     "playlistNamePlaceholder": "Enter playlist name",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "noPlaylists": "No playlists"
   },
   "playlist": {
     "title": "Playlist",
