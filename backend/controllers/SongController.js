@@ -137,10 +137,35 @@ const addToPlaylist = async (req, res) => {
     }
 }
 
+const getById = async (req, res) => {
+    try {
+        const song = await Song.findById(req.params.id)
+            .populate('artist_id', 'artist_name image_url')
+            .populate('album_id', 'album_name image_url');
+        if (!song) {
+            return res.status(404).json({
+                success: false,
+                message: 'Song not found'
+            });
+        }
+        res.json({
+            success: true,
+            data: song
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi server',
+            error: err.message
+        });
+    }
+}
+
 module.exports = {
     getAll,
     getByArtistId,
     getByAlbumId,
     search,
-    addToPlaylist
+    addToPlaylist,
+    getById
 };

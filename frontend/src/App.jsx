@@ -20,6 +20,8 @@ import Search from './pages/Search';
 import Library from './pages/Library';
 import Playlist from './pages/Playlist';
 import Song from './pages/Song';
+import Artist from  './pages/Artist';
+import Album from './pages/Album';
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
                                   <Route path="/playlist/:id" element={<Playlist />} />
                                   <Route path="/library" element={<Library />} />
                                   <Route path="/song/:id" element={<Song />} />
+                                  <Route path="/artist/:id" element={<Artist />} />
+                                  <Route path="/album/:id" element={<Album />} />
                                 </Routes>
                               </Layout>
                           }

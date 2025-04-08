@@ -12,7 +12,7 @@ const Playlist = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [newPlaylistName, setNewPlaylistName] = useState('');
-  const { playlists, createPlaylist, fetchPlaylists } = useLibrary();
+  const { playlists, createPlaylist, fetchLibrary} = useLibrary();
   const { showErrorToast } = useToast();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const Playlist = () => {
         library_id: user.library_id,
       });
       await createPlaylist({ playlist_name: newPlaylistName })
-      fetchPlaylists();
+      fetchLibrary();
       setShowCreateModal(false);
       setNewPlaylistName('');
     } catch (error) {
