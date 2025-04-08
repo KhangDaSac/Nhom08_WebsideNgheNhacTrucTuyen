@@ -4,7 +4,7 @@ import { FiClock } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import {FiTrash2} from 'react-icons/fi';
 
-const Songs = ({ songs, collectionTitle, isRemove, playlist, fetchSongs }) => {
+const Songs = ({ songs, collectionTitle, isRemove, playlist, removeSong }) => {
     const { t } = useTranslation();
     return (
         <>
@@ -31,7 +31,7 @@ const Songs = ({ songs, collectionTitle, isRemove, playlist, fetchSongs }) => {
                                         song={song}
                                         isRemove={isRemove}
                                         playlist={playlist}
-                                        fetchSongs={fetchSongs}
+                                        removeSong={removeSong}
                                     />
                                 );
                             })}

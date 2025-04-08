@@ -71,7 +71,7 @@ export const LibraryProvider = ({ children }) => {
                 song_id: songId,
                 playlist_id: playlistId
             });
-            console.log('removeSongFromPlaylist result:', result);
+            
             return result.data;
         } catch (error) {
             console.error('Error removing song from playlist:', error);

@@ -58,6 +58,10 @@ const Playlist = () => {
     }
   };
 
+  const removeSong = (songId) => {
+    setSongs((prevSongs) => prevSongs.filter((song) => song._id !== songId));
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
@@ -148,7 +152,7 @@ const Playlist = () => {
             collectionTitle="playlist.songs"
             isRemove
             playlist={playlist}
-            fetchSongs={fetchSongs} />
+            removeSong={removeSong}/>
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">

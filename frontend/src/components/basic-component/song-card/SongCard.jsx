@@ -5,6 +5,8 @@ import { FaCompactDisc } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { useLibrary } from '../../../contexts/LibraryContext';
 import { useToast } from '../../../contexts/ToastContext';
+import { useAuth } from '../../../contexts/AuthContext';
+
 
 const SongCard = ({ song }) => {
     const { currentSong, isPlaying, playSong, setIsPlaying } = usePlayer();
@@ -13,6 +15,8 @@ const SongCard = ({ song }) => {
     const menuRef = useRef(null);
     const { playlists, addSongToPlaylist, fetchPlaylists } = useLibrary();
     const { showSuccessToast, showErrorToast } = useToast();
+    const { user } = useAuth();
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -33,11 +37,12 @@ const SongCard = ({ song }) => {
         }
     }, [showPlaylistMenu]);
 
-    const handleAddToPlaylist = async ({song, playlist}) => {
+    const handleAddToPlaylist = async ({ song, playlist }) => {
         try {
             const result = await addSongToPlaylist(playlist._id, song._id);
             if (result?.success) {
                 showSuccessToast(`"${song.song_name}" added to "${playlist.playlist_name}" successfully!`);
+                fetchPlaylists();
             } else {
                 showErrorToast('Failed to add song to playlist');
             }
@@ -95,41 +100,45 @@ const SongCard = ({ song }) => {
                             {song.artists?.map(artist => artist.artist_name).join(', ')}
                         </p>
                     </div>
-                    <div className="relative mx-2">
-                        <button
-                            onClick={togglePlaylistMenu}
-                            className="hover:text-primary-500 transition-colors"
-                        >
-                            <FiPlus className="w-6 h-6" />
-                        </button>
-
-                        {showPlaylistMenu && (
-                            <div
-                                ref={menuRef}
-                                className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 py-1"
-                                style={{ bottom: '100%', marginBottom: '10px' }}
+                    {
+                        user && user?.library_id &&
+                        <div className="relative mx-2">
+                            <button
+                                onClick={togglePlaylistMenu}
+                                className="hover:text-primary-500 transition-colors"
                             >
-                                {playlists.length > 0 ? (
-                                    playlists.map(playlist => (
-                                        <button
-                                            key={playlist._id}
-                                            onClick={() => handleAddToPlaylist({song, playlist})}
-                                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                        >
-                                            Add to
-                                            <span className='font-semibold text-gray-900 dark:text-white ms-1'>
-                                                {playlist.playlist_name}
-                                            </span>
-                                        </button>
-                                    ))
-                                ) : (
-                                    <div className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
-                                        No playlists found
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </div>
+                                <FiPlus className="w-6 h-6" />
+                            </button>
+
+                            {showPlaylistMenu && (
+                                <div
+                                    ref={menuRef}
+                                    className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 py-1"
+                                    style={{ bottom: '100%', marginBottom: '10px' }}
+                                >
+                                    {playlists.length > 0 ? (
+                                        playlists.map(playlist => (
+                                            <button
+                                                key={playlist._id}
+                                                onClick={() => handleAddToPlaylist({ song, playlist })}
+                                                className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                            >
+                                                Add to
+                                                <span className='font-semibold text-gray-900 dark:text-white ms-1'>
+                                                    {playlist.playlist_name}
+                                                </span>
+                                            </button>
+                                        ))
+                                    ) : (
+                                        <div className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
+                                            No playlists found
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    }
+
                 </div>
             </div>
         </>

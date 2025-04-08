@@ -12,19 +12,6 @@
     "playlists": "Playlists",
     "profile": "Profile"
   },
-  "common": {
-    "search": "Search",
-    "login": "Login",
-    "signup": "Sign Up",
-    "logout": "Logout",
-    "profile": "Profile",
-    "settings": "Settings",
-    "language": "Language",
-    "theme": "Theme",
-    "dark": "Dark",
-    "light": "Light",
-    "backToPlaylists": "Back to Playlists"
-  },
   "auth": {
     "email": "Email",
     "password": "Password",
@@ -63,20 +50,20 @@
     "songs": "Songs"
   },
   "login": {
-      "title": "Login",
-      "username": {
-        "username": "Username",
-        "placeholder": "Enter your email or phone number"
-      },
-      "password": {
-        "password": "Password",
-        "placeholder": "Enter your password"
-      },
-      "rememberMe": "Remember me",
-      "forgotPassword": "Forgot Password?",
-      "login": "Login",
-      "noAccount": "Don't have an account?",
-      "signUp": "Sign up"
+    "title": "Login",
+    "username": {
+      "username": "Username",
+      "placeholder": "Enter your email or phone number"
+    },
+    "password": {
+      "password": "Password",
+      "placeholder": "Enter your password"
+    },
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password?",
+    "login": "Login",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up"
   },
   "signUp": {
     "title": "Sign up",
@@ -106,7 +93,7 @@
     "agreeTo": "Agree to",
     "terms": "terms",
     "signUp": "Sign up",
-    "haveAccount":"Already have an account?",
+    "haveAccount": "Already have an account?",
     "login": "Login"
   },
   "account": {
@@ -132,7 +119,8 @@
     "create": "Create",
     "playlistNamePlaceholder": "Enter playlist name",
     "cancel": "Cancel",
-    "noPlaylists": "No playlists"
+    "noPlaylists": "No playlists",
+    "maxPlaylistsError": "You can only create up to 5 playlists"
   },
   "playlist": {
     "title": "Playlist",
@@ -176,5 +164,11 @@
     },
     "viewAll": "View All",
     "remove": "Remove"
+  },
+  "toast": {
+    "removeSong": {
+      "success": "Removed song from playlist",
+      "error": "Error removing song from playlist"
+    }
   }
 }

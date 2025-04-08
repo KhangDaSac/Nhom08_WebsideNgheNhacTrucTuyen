@@ -150,13 +150,30 @@ const removeSongFromPlaylist = async (req, res) => {
 
         playlist.songs = playlist.songs.filter(song => song.song_id.toString() !== song_id);
 
+        let newImageUrl = "https://photo-zmp3.zmdcdn.me/album_default.png";
+        if (playlist.songs.length > 0) {
+            newImageUrl = playlist.songs[0].image_url;
+        }
+
+        if (playlist.image_url !== newImageUrl) {
+            playlist.image_url = newImageUrl;
+            await Library.updateOne(
+                { "playlists.playlist_id": playlist_id },
+                {
+                    $set: {
+                        "playlists.$.image_url": newImageUrl
+                    }
+                }
+            );
+        }
+
         await playlist.save();
 
         res.json({
             success: true,
             message: 'Song removed from playlist'
         });
-        
+
     } catch (err) {
         res.status(500).json({
             success: false,

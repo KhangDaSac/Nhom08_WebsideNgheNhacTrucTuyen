@@ -6,9 +6,10 @@ import { FaCompactDisc } from "react-icons/fa";
 import './Song.css';
 import { FiTrash2 } from 'react-icons/fi';
 import { useLibrary } from '../../../contexts/LibraryContext';
+import { useToast } from '../../../contexts/ToastContext';
 
 
-const Song = ({ song, playlist, isRemove, fetchSongs }) => {
+const Song = ({ song, playlist, isRemove, removeSong }) => {
   const { t } = useTranslation();
   const { currentSong, playSong, isPlaying, setIsPlaying } = usePlayer();
   const isCurrentSong = currentSong && currentSong._id === song._id;
@@ -22,6 +23,7 @@ const Song = ({ song, playlist, isRemove, fetchSongs }) => {
   }
 
   const { removeSongFromPlaylist } = useLibrary();
+  const { showSuccessToast, showErrorToast } = useToast();
 
   return (
     <>
@@ -82,8 +84,13 @@ const Song = ({ song, playlist, isRemove, fetchSongs }) => {
             <button
               className="px-4 py-3 rounded-xl text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
               onClick={() => {
-                removeSongFromPlaylist(playlist._id, song._id);
-                fetchSongs();
+                const resutl = removeSongFromPlaylist(playlist._id, song._id);
+                if (resutl) {
+                  showSuccessToast(t('toast.removeSong.success'));
+                } else {
+                  showErrorToast(t('toast.removeSong.error'));
+                }
+                removeSong(song._id);
               }}
             >
               <FiTrash2 className="mr-2" />

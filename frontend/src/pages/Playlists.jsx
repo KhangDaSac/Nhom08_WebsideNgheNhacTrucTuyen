@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { usePlayer } from '../contexts/PlayerContext';
 import { FiPlay, FiPlus, FiMoreVertical, FiClock } from 'react-icons/fi';
 import { useAuth } from '../contexts/AuthContext';
 import PlaylistCards from '../components/basic-component/playlist-card/PlaylistCards';
 import { useLibrary } from '../contexts/LibraryContext';
+import { useToast } from '../contexts/ToastContext';
 
 const Playlist = () => {
   const { t } = useTranslation();
@@ -14,6 +13,7 @@ const Playlist = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [newPlaylistName, setNewPlaylistName] = useState('');
   const { playlists, createPlaylist, fetchPlaylists } = useLibrary();
+  const { showErrorToast } = useToast();
 
   useEffect(() => {
     if (playlists)
@@ -22,6 +22,12 @@ const Playlist = () => {
 
   const handleCreatePlaylist = async (e) => {
     e.preventDefault();
+    if(playlists.length >= 5){
+      showErrorToast(t('playlists.maxPlaylistsError'));
+      setShowCreateModal(false);
+      return;
+    }
+
     try {
       console.log('Creating playlist:', {
         playlist_name: newPlaylistName,

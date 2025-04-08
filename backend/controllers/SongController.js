@@ -2,6 +2,7 @@ const Song = require('../models/Song');
 const Album = require('../models/Album');
 const Artist = require('../models/Artist');
 const Playlist = require('../models/Playlist');
+const Library = require('../models/Library');
 const mongoose = require('mongoose');
 
 const getAll = async (req, res) => {
@@ -110,6 +111,23 @@ const addToPlaylist = async (req, res) => {
             song_name: song.song_name,
             image_url: song.image_url
         });
+
+        let newImageUrl = "https://photo-zmp3.zmdcdn.me/album_default.png";
+        if (playlist.songs.length > 0) {
+            newImageUrl = playlist.songs[0].image_url;
+        }
+
+        if (playlist.image_url !== newImageUrl) {
+            playlist.image_url = newImageUrl;
+            await Library.updateOne(
+                { "playlists.playlist_id": playlist_id },
+                { 
+                    $set: { 
+                        "playlists.$.image_url": newImageUrl 
+                    }
+                }
+            );
+        }
 
         await playlist.save();
 
