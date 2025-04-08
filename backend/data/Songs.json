@@ -103,5 +103,105 @@
     "album_id": {
       "$oid": "9aa346a370d1f6962f47fec2"
     }
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d47"
+    },
+    "song_name": "Vị nhà",
+    "likes": 25156,
+    "views": 5645120,
+    "genres": [
+      "Tình cảm",
+      "Gia đình"
+    ],
+    "release_date": {
+      "$date": "2022-12-31T00:00:00.000Z"
+    },
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/cover/1/e/0/e/1e0e7020ea5427ab6f3b8f3a28bdef3c.jpg",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744137528/Music/olkdrxrhmt4srky5zwut.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919fc"
+        },
+        "artist_name": "Đen Vâu"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d48"
+    },
+    "song_name": "Wake Me Up",
+    "likes": 68711,
+    "views": 5705556,
+    "genres": [
+      "Tình cảm",
+      "Lãng mạng"
+    ],
+    "release_date": {
+      "$date": "2013-12-15T00:00:00.000Z"
+    },
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/b/0/3/0/b0303e3efb116019ba49c2becddaabe1.jpg",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744137528/Music/wauvlcaorkldumczoqt4.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919fd"
+        },
+        "artist_name": "Avicii"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d49"
+    },
+    "song_name": "The Nights",
+    "likes": 68711,
+    "views": 5705556,
+    "genres": [
+      "Tình cảm",
+      "Lãng mạng"
+    ],
+    "release_date": {
+      "$date": "2013-12-15T00:00:00.000Z"
+    },
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/a/4/c/1/a4c122245a426f1951d592e1932f2577.jpg",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744137528/Music/pxja6skbaxzhqjw8zqeu.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919fd"
+        },
+        "artist_name": "Avicii"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d50"
+    },
+    "song_name": "APT",
+    "likes": 126554,
+    "views": 5440006,
+    "genres": [
+      "Tình cảm",
+      "Lãng mạng"
+    ],
+    "release_date": {
+      "$date": "2024-10-01T00:00:00.000Z"
+    },
+    "image_url": "https://i.scdn.co/image/ab67616d0000b27336032cb4acd9df050bc2e197",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744137527/Music/kts631wn39xy6vqaikko.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919fe"
+        },
+        "artist_name": "Rosé"
+      }
+    ]
   }
 ]

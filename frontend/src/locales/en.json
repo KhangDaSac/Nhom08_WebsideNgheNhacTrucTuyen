@@ -137,7 +137,10 @@
     "title": "Your Library",
     "songs_liked": "Songs Liked",
     "albums_liked": "Albums Liked",
-    "artists_followed": "Artists Followed"
+    "artists_followed": "Artists Followed",
+    "no_liked_songs": "No liked songs",
+    "no_liked_albums": "No liked albums",
+    "no_followed_artists": "No followed artists"
   },
   "collection": {
     "song": {

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { IoLibraryOutline } from "react-icons/io5";
 import { useTranslation } from 'react-i18next';
 import { FiHome, FiSearch, FiMusic, FiRadio, FiHeart, FiPlus, FiX } from 'react-icons/fi';
 import logo from '../../assets/navigation/Logo.svg';
@@ -11,7 +12,7 @@ const Sidebar = ({ onClose }) => {
     { name: 'Home', icon: FiHome, path: '/', label: t('navigation.home') },
     { name: 'Search', icon: FiSearch, path: '/search', label: t('navigation.search') },
     { name: 'Playlist', icon: FiMusic, path: '/playlists', label: t('navigation.playlists') },
-    { name: 'Library', icon: FiMusic, path: '/library', label: t('navigation.library') },
+    { name: 'Library', icon: IoLibraryOutline, path: '/library', label: t('navigation.library') },
   ];
 
   const playlists = [
