@@ -12,8 +12,6 @@ const Sidebar = ({ onClose }) => {
     { name: 'Search', icon: FiSearch, path: '/search', label: t('navigation.search') },
     { name: 'Playlist', icon: FiMusic, path: '/playlists', label: t('navigation.playlists') },
     { name: 'Library', icon: FiMusic, path: '/library', label: t('navigation.library') },
-    { name: 'Artists', icon: FiMusic, path: '/artists', label: t('navigation.artists') },
-    { name: 'Albums', icon: FiMusic, path: '/albums', label: t('navigation.albums') }
   ];
 
   const playlists = [
