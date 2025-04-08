@@ -7,21 +7,34 @@ const LibraryContext = createContext();
 export const LibraryProvider = ({ children }) => {
     const { user } = useAuth();
     const [playlists, setPlaylists] = useState([]);
+    const [songsLiked, setSongsLiked] = useState([]);
+    const [artistsFollowed, setArtistsFollowed] = useState([]);
+    const [albumsLiked, setAlbumsLiked] = useState([]);
+
     const [error, setError] = useState(null);
 
     useEffect(() => {
         if (user?._id) {
-            fetchPlaylists();
+            fetchLibrary();
         } else {
             setPlaylists([]);
         }
     }, [user]);
 
-    const fetchPlaylists = async () => {
+    const fetchLibrary = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/libraries/playlists/${user.library_id}`);
-            const data = response.data.data.playlists;
-            setPlaylists(data);
+            const response = await axios.get(`http://localhost:5000/api/libraries/${user.library_id}`);
+            setPlaylists(response.data.data.playlists);
+            setSongsLiked(response.data.data.songs_liked);
+            setArtistsFollowed(response.data.data.artists_followed);
+            setAlbumsLiked(response.data.data.albums_liked);
+
+            console.log("Playlists:", response.data.data.playlists);
+            console.log("Songs Liked:", response.data.data.songs_liked);
+            console.log("Artists Followed:", response.data.data.artists_followed);
+            console.log("Albums Liked:", response.data.data.albums_liked);
+
+
         } catch (err) {
             console.error('Error fetching user playlists:', err);
             setError('Failed to load playlists');
@@ -45,7 +58,7 @@ export const LibraryProvider = ({ children }) => {
     const deletePlaylist = async (id) => {
         try {
             const response = await axios.delete(`http://localhost:5000/api/playlists/${id}`);
-            fetchPlaylists();
+            fetchLibrary();
         } catch (error) {
             console.error('Error deleting playlist:', error);
             setError('Failed to delete playlist');
@@ -71,7 +84,7 @@ export const LibraryProvider = ({ children }) => {
                 song_id: songId,
                 playlist_id: playlistId
             });
-            
+
             return result.data;
         } catch (error) {
             console.error('Error removing song from playlist:', error);
@@ -84,7 +97,7 @@ export const LibraryProvider = ({ children }) => {
             value={{
                 createPlaylist,
                 deletePlaylist,
-                fetchPlaylists,
+                fetchLibrary,
                 playlists,
                 addSongToPlaylist,
                 removeSongFromPlaylist

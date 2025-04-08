@@ -2,12 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlay, FiMoreVertical, FiTrash2 } from 'react-icons/fi';
 import { FaPlay } from 'react-icons/fa';
-import { useLibrary } from '../../../contexts/LibraryContext';
 
-const PlaylistCard = ({ playlist, onDelete }) => {
+const PlaylistCard = ({ playlist }) => {
     const [showMenu, setShowMenu] = useState(false);
     const menuRef = useRef(null);
-    const { addTo } = useLibrary();
+    console.log(playlist);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -30,10 +29,10 @@ const PlaylistCard = ({ playlist, onDelete }) => {
 
     return (
         <div
-            key={playlist._id}
+            key={playlist.playlist_id}
             className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
         >
-            <Link to={`/playlist/${playlist._id}`}>
+            <Link to={`/playlist/${playlist.playlist_id}`}>
                 <div className="relative aspect-square">
                     <img
                         src={playlist.image_url}
@@ -52,7 +51,7 @@ const PlaylistCard = ({ playlist, onDelete }) => {
             <div className="p-4">
                 <div className="flex items-center justify-between">
                     <Link
-                        to={`/playlist/${playlist._id}`}
+                        to={`/playlist/${playlist.playlist_id}`}
                         className="text-md font-semibold text-gray-900 dark:text-white hover:text-primary-500 dark:hover:text-primary-400"
                     >
                         <p className='break-words'>

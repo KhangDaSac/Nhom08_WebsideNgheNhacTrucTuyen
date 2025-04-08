@@ -1,14 +1,14 @@
 [
     {
         "_id": {"$oid": "d44e7a2bda24b6d0dd90972c"},
-        "followings": [
+        "artists_followed": [
             {
                 "artist_id": {"$oid": "3c1337ab3187ea3b485919fb"},
                 "artist_name": "Sơn Tùng M-TP",
                 "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/avatars/5/9/6/9/59696c9dba7a914d587d886049c10df6.jpg"
             }
         ],
-        "song_likeds": [
+        "songs_liked": [
             {
                 "song_id": {"$oid": "67dc0190009bf012ef627d45"},
                 "song_name": "Em của ngày hôm qua",
@@ -16,7 +16,7 @@
                 "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1743940472/Music/obd8o3zw3zpogplsummy.mp3"
             }
         ],
-        "album_likeds": [
+        "albums_liked": [
             {
                 "album_id": {"$oid": "9aa346a370d1f6962f47fec2"},
                 "album_name": "Em của ngày hôm qua",

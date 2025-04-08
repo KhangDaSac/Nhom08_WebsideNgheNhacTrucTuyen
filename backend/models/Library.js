@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const librarySchema = new mongoose.Schema({
-    following: [{
+    artists_followed: [{
         artist_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Artist'
@@ -9,7 +9,7 @@ const librarySchema = new mongoose.Schema({
         artist_name: String,
         image_url: String
     }],
-    song_liked: [{
+    songs_liked: [{
         song_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Song'
@@ -17,7 +17,7 @@ const librarySchema = new mongoose.Schema({
         song_name: String,
         image_url: String
     }],
-    album_liked: [{
+    albums_liked: [{
         album_id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Album'

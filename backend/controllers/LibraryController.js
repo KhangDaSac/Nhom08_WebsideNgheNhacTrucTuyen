@@ -4,10 +4,10 @@ const Artist = require('../models/Artist');
 const mongoose = require('mongoose');
 const Library = require('../models/Library');
 
-const getPlaylistsByLibraryId = async (req, res) => {
+const getLibraryById = async (req, res) => {
     try {
-        const playlists = await Library.findById({ _id: req.params.id }, { playlists: 1 })
-            .populate('playlists')
+        const playlists = await Library.findById({ _id: req.params.id }, 
+            { playlists: 1, artists_followed: 1, songs_liked: 1, albums_liked: 1 })
         res.json({
             success: true,
             data: playlists
@@ -22,5 +22,5 @@ const getPlaylistsByLibraryId = async (req, res) => {
 }
 
 module.exports = {
-    getPlaylistsByLibraryId,
+    getLibraryById,
 };
