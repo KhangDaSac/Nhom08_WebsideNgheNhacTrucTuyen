@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import Footer from './Footer';
-import Player from './Player';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
-import { usePlayer } from '../../contexts/PlayerContext';
 
 const Layout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { currentSong } = usePlayer();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -67,16 +63,8 @@ const Layout = ({ children }) => {
         </button>
       }
 
-      
-      {/* Main content - Adjusted margin for desktop sidebar */}
       <div className="flex-1 flex flex-col min-h-0 md:ml-64">
         <Navbar />
-        <main className={`flex-1 p-4 md:p-6 pt-16 md:pt-6 pb-24 overflow-y-auto ${currentSong ? 'md:mb-20' : ''}`}>
-          {children}
-        </main>
-        {currentSong && (
-          <Player className="fixed bottom-0 left-0 right-0 md:left-64" />
-        )}
       </div>
     </div>
   );

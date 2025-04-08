@@ -45,7 +45,14 @@ function App() {
                               <Routes>
                                 <Route path="/" element={<Home />} />
                                 <Route path="/search" element={<Search />} />
-                                <Route path="/account" element={<Account />} />
+                                <Route
+                                  path="/account"
+                                  element={
+                                    <ProtectedRoute>
+                                      <Account />
+                                    </ProtectedRoute>
+                                  }
+                                />
                                 <Route
                                   path="/playlists"
                                   element={
