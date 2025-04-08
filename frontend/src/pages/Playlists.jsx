@@ -51,7 +51,7 @@ const Playlist = () => {
       console.error('Error creating playlist:', error);
       setIsLoading(false);
     }
-};
+  };
 
   if (isLoading) {
     return (
@@ -78,10 +78,18 @@ const Playlist = () => {
       </div>
 
 
-      {/* Playlists Grid */}
-      <PlaylistCards playlists={playlists}></PlaylistCards>
+      {/* Playlists */}
+      {playlists.length > 0 ? (
+        <div>
+          <PlaylistCards playlists={playlists}></PlaylistCards>
+        </div>
+      ) : (
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">
+          <p className="text-gray-500 dark:text-gray-400">{t('playlist.noSongs')}</p>
+        </div>
+      )}
 
-      {/* Create Playlist Modal */}
+      {/* Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">

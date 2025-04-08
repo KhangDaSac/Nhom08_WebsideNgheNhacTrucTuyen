@@ -9,6 +9,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import {FiTrash2} from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import ConfirmationModal from '../components/ui/ConfirmationModal';
 
 const Playlist = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ const Playlist = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,10 +96,14 @@ const Playlist = () => {
       const response = await axios.delete(`http://localhost:5000/api/playlists/${id}`);
       navigate('/playlists');
     } catch (error) {
-      console.error('Error fetching songs:', error);
-      setError('Failed to load songs');
+      console.error('Error deleting playlist:', error);
+      setError('Failed to delete playlist');
     }
   }
+
+  const confirmDeletePlaylist = () => {
+    setShowDeleteModal(true);
+  };
 
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto">
@@ -133,7 +139,7 @@ const Playlist = () => {
             </button>
             <button
               className="px-4 py-3 gap-2 rounded-xl text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
-            onClick={handleDeletePlaylist}
+              onClick={confirmDeletePlaylist}
             >
               <FiTrash2 className="mr-2" />
               Delete
@@ -153,6 +159,20 @@ const Playlist = () => {
           <p className="text-gray-500 dark:text-gray-400">{t('playlist.noSongs')}</p>
         </div>
       )}
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={showDeleteModal}
+        title={t('playlist.confirmDelete')}
+        message={t('playlist.deleteWarning', { name: playlist?.playlist_name })}
+        confirmText={t('playlist.delete')}
+        cancelText={t('playlist.cancel')}
+        onConfirm={() => {
+          setShowDeleteModal(false);
+          handleDeletePlaylist();
+        }}
+        onCancel={() => setShowDeleteModal(false)}
+      />
     </div>
   );
 };
