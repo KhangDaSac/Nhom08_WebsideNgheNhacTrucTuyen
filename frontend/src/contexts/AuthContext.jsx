@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
@@ -10,31 +11,29 @@ export const AuthProvider = ({ children }) => {
   });
 
   const [loading, setLoading] = useState(false);
-  
-  
+
+
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
-  const login = async ({email, password}) => {
+  const login = async ({ email, password }) => {
     try {
       const user = {
         email, password
       };
 
-      console.log(user);
 
-      const response = await fetch('http://localhost:5000/v1/auth/login', {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await axios.post('http://localhost:5000/v1/auth/login',
+        user,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      ;
 
-      const data = await response.json();
-
-      console.log(data);
+      const data = response.data;
 
       if (!data.success) {
         throw new Error(data.message || 'Login failed');
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       };
 
       setUser(newUser);
-      return { success: true };
+      return data;
 
     } catch (error) {
       return { success: false, error: error.message };
@@ -60,9 +59,17 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      localStorage.setItem('user', userData);
-      setUser(userData);
-      return { success: true };
+      const response = await axios.post('http://localhost:5000/v1/auth/register',
+        userData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      console.log(response)
+      console.log("hello")
+      
+      return response.data;
     } catch (error) {
       return { success: false, error: error.message };
     }

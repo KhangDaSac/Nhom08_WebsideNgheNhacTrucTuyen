@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { useToast } from '../contexts/ToastContext';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -15,6 +16,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { showErrorToast } = useToast();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +31,14 @@ const Login = () => {
     setIsLoading(false);
 
     try {
-      await login({email: formData.email, password: formData.password});
-      navigate('/');
-      setIsLoading(true);
+      const result = await login({email: formData.email, password: formData.password});
+      if(result.success){
+        navigate('/');
+      }else{
+        showErrorToast(t('toast.login.error'));
+        setIsLoading(false);
+      }
+    
     } catch (error) {
       setError(error.message);
     }

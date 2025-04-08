@@ -5,7 +5,6 @@ import { FaPlay } from "react-icons/fa6";
 
 
 const AlbumCard = ({ album }) => {
-    console.log(album);
     return (
         <Link
             key={album._id}

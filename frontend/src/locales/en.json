@@ -170,6 +170,14 @@
     "addSong": {
       "success": "Added song '{{songName}}' to playlist '{{playlistName}}'",
       "error": "Error adding song to playlist"
+    },
+    "signUp": {
+      "success": "Sign up successful",
+      "error": "Error signing up"
+    },
+    "login": {
+      "success": "Login successful",
+      "error": "Login failed"
     }
   },
   "song": {

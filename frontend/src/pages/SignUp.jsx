@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../contexts/AuthContext';
 import {
   FiMail,
   FiLock,
   FiUser,
   FiEye,
   FiEyeOff,
-  FiCalendar,
   FiPhone,
 } from 'react-icons/fi';
+
+import { useAuth } from '../contexts/AuthContext';
+import { useToast } from '../contexts/ToastContext';
 
 const SignUp = () => {
   const { t } = useTranslation();
@@ -27,6 +28,8 @@ const SignUp = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { showErrorToast, showSuccessToast } = useToast();
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,12 +51,22 @@ const SignUp = () => {
     setIsLoading(true);
 
     try {
-      await signup(formData);
-      navigate('/');
+      const result = await register({
+        display_name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        phone: formData.phone
+      });
+      console.log(result)
+      if (result.success) {
+        showSuccessToast(t('toast.signUp.success'));
+        navigate('/login');
+      } else {
+        showErrorToast(result.message || t('toast.signUp.error'));
+        setIsLoading(false);
+      }
     } catch (error) {
       setError(error.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
