@@ -3,7 +3,6 @@ import { usePlayer } from '../../../contexts/PlayerContext';
 import { FaPlay } from "react-icons/fa6";
 import { FaCompactDisc } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
-import axios from 'axios';
 import { useLibrary } from '../../../contexts/LibraryContext';
 
 const SongCard = ({ song }) => {

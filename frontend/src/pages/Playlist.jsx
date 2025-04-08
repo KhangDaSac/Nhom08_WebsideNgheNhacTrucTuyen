@@ -52,7 +52,6 @@ const Playlist = () => {
     try {
       const response = await axios.get(`http://localhost:5000/api/playlists/${id}/songs`);
       setSongs(response.data.data || []);
-      console.log(response.data.data);
     } catch (error) {
       console.error('Error fetching songs:', error);
       setError('Failed to load songs');
@@ -90,8 +89,8 @@ const Playlist = () => {
   };
 
   const handleDeletePlaylist = async () => {
-      deletePlaylist(id);
-      navigate('/playlists');
+    deletePlaylist(id);
+    navigate('/playlists');
   }
 
   const confirmDeletePlaylist = () => {
@@ -142,10 +141,15 @@ const Playlist = () => {
       </div>
 
       {/* Songs List */}
+      {console.log(fetchSongs)}
       {songs.length > 0 ? (
-
         <div>
-          <Songs songs={songs} collectionTitle="playlist.songs" isRemove playlist={playlist}/>
+          <Songs
+            songs={songs}
+            collectionTitle="playlist.songs"
+            isRemove
+            playlist={playlist}
+            fetchSongs={fetchSongs} />
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">

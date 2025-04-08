@@ -5,10 +5,10 @@ import { FaPlay } from "react-icons/fa6";
 import { FaCompactDisc } from "react-icons/fa";
 import './Song.css';
 import { FiTrash2 } from 'react-icons/fi';
-// import { useLibrary } from '../../../contexts/LibraryContext';
+import { useLibrary } from '../../../contexts/LibraryContext';
 
 
-const Song = ({ song, playlist, isRemove }) => {
+const Song = ({ song, playlist, isRemove, fetchSongs }) => {
   const { t } = useTranslation();
   const { currentSong, playSong, isPlaying, setIsPlaying } = usePlayer();
   const isCurrentSong = currentSong && currentSong._id === song._id;
@@ -21,7 +21,8 @@ const Song = ({ song, playlist, isRemove }) => {
     return number;
   }
 
-  // const { removeSongFromPlaylist } = useLibrary();
+  const { removeSongFromPlaylist } = useLibrary();
+  console.log(fetchSongs)
 
   return (
     <>
@@ -81,9 +82,10 @@ const Song = ({ song, playlist, isRemove }) => {
           <td className="text-gray-700 dark:text-gray-300 hidden md:table-cell">
             <button
               className="px-4 py-3 rounded-xl text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
-              // onClick={() => {
-              //   removeSongFromPlaylist(playlist._id, song._id);
-              // }}
+              onClick={() => {
+                removeSongFromPlaylist(playlist._id, song._id);
+                fetchSongs();
+              }}
             >
               <FiTrash2 className="mr-2" />
               Remove
