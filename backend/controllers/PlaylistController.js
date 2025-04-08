@@ -6,7 +6,7 @@ const Playlist = require('../models/Playlist');
 const mongoose = require('mongoose');
 
 const createPlaylist = async (req, res) => {
-    const { playlist_name, library_id} = req.body;
+    const { playlist_name, library_id } = req.body;
 
     try {
         const newPlaylist = new Playlist({
@@ -44,7 +44,7 @@ const createPlaylist = async (req, res) => {
 const getPlaylistById = async (req, res) => {
     try {
         const playlist = await Playlist.findById(req.params.id)
-        
+
         if (!playlist) {
             return res.status(404).json({
                 success: false,
@@ -75,21 +75,21 @@ const getPlaylistSongs = async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'songs',              
-                    localField: 'songs.song_id',      
-                    foreignField: '_id',        
-                    as: 'songs'                 
+                    from: 'songs',
+                    localField: 'songs.song_id',
+                    foreignField: '_id',
+                    as: 'songs'
                 }
             },
             {
                 $project: {
                     _id: 1,
-                    name: 1,                   
+                    name: 1,
                     songs: 1
                 }
             }
         ]);
-        
+
         if (!playlist) {
             return res.status(404).json({
                 success: false,
@@ -114,7 +114,7 @@ const getPlaylistSongs = async (req, res) => {
 const deletePlaylist = async (req, res) => {
     try {
         const playlist = await Playlist.findByIdAndDelete(req.params.id);
-        
+
         if (!playlist) {
             return res.status(404).json({
                 success: false,
@@ -135,9 +135,42 @@ const deletePlaylist = async (req, res) => {
     }
 };
 
+const removeSongFromPlaylist = async (req, res) => {
+    try {
+        const { song_id, playlist_id } = req.body;
+
+        const playlist = await Playlist.findById(playlist_id);
+
+        if (!playlist) {
+            return res.status(404).json({
+                success: false,
+                message: 'Playlist not found'
+            });
+        }
+
+        playlist.songs = playlist.songs.filter(song => song.song_id.toString() !== song_id);
+
+        await playlist.save();
+
+        res.json({
+            success: true,
+            message: 'Song removed from playlist'
+        });
+        
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            error: err.message
+        });
+    }
+}
+
+
 module.exports = {
     createPlaylist,
     getPlaylistById,
     getPlaylistSongs,
-    deletePlaylist
+    deletePlaylist,
+    removeSongFromPlaylist
 };

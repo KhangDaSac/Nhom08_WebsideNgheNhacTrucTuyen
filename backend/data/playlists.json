@@ -4,6 +4,7 @@
         "playlist_name": "Những bài nhạc của Sơn Tùng M-TP",
         "create_date": {"$date": "2024-10-01T00:00:00.000Z"},
         "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/covers/3/a/3a9e48bc4df7bbde3acea30cc267f609_1487066528.jpg",
+        "num_of_songs": 2,
         "songs": [
             {
                 "song_id": {

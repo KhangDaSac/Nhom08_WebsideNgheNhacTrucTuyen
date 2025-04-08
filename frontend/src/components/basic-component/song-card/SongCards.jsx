@@ -3,7 +3,7 @@ import SongCard from './SongCard';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-const SongCards = ({ songs, collectionTitle, currentSong, play, formatDuration, viewAll }) => {
+const SongCards = ({ songs, collectionTitle, viewAll }) => {
     const { t } = useTranslation();
     return (
         <>

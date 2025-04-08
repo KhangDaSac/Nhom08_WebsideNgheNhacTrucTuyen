@@ -17,10 +17,6 @@ export const LibraryProvider = ({ children }) => {
         }
     }, [user]);
 
-    useEffect(() => {
-        console.log('Playlists updated:', playlists);
-    }, [playlists]);
-
     const fetchPlaylists = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/api/libraries/playlists/${user.library_id}`);
@@ -56,13 +52,39 @@ export const LibraryProvider = ({ children }) => {
         }
     };
 
+    const addToPlaylist = async (playlistId, songId) => {
+        try {
+            await axios.post(`http://localhost:5000/api/songs/addToPlaylist`, {
+                song_id: songId,
+                playlist_id: playlistId
+            });
+        } catch (error) {
+            console.error('Error adding song to playlist:', error);
+            setError('Failed to add song to playlist');
+        }
+    }
+
+    const removeSongFromPlaylist = async (playlistId, songId) => {
+        try {
+            await axios.post(`http://localhost:5000/api/playlists/removeSong`, {
+                song_id: songId,
+                playlist_id: playlistId
+            });
+        } catch (error) {
+            console.error('Error removing song from playlist:', error);
+            setError('Failed to remove song from playlist');
+        }
+    }
+
     return (
         <LibraryContext.Provider
             value={{
                 createPlaylist,
                 deletePlaylist,
                 fetchPlaylists,
-                playlists
+                playlists,
+                addToPlaylist,
+                removeSongFromPlaylist
             }}
         >
             {children}

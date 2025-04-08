@@ -5,9 +5,10 @@ import { FaPlay } from "react-icons/fa6";
 import { FaCompactDisc } from "react-icons/fa";
 import './Song.css';
 import { FiTrash2 } from 'react-icons/fi';
+// import { useLibrary } from '../../../contexts/LibraryContext';
 
 
-const Song = ({ song, isRemove }) => {
+const Song = ({ song, playlist, isRemove }) => {
   const { t } = useTranslation();
   const { currentSong, playSong, isPlaying, setIsPlaying } = usePlayer();
   const isCurrentSong = currentSong && currentSong._id === song._id;
@@ -19,6 +20,9 @@ const Song = ({ song, isRemove }) => {
     }
     return number;
   }
+
+  // const { removeSongFromPlaylist } = useLibrary();
+
   return (
     <>
       <tr
@@ -53,8 +57,8 @@ const Song = ({ song, isRemove }) => {
             <div>
               <span
                 className={`font-medium block ${isCurrentSong
-                    ? 'text-primary-500'
-                    : 'text-gray-900 dark:text-white'
+                  ? 'text-primary-500'
+                  : 'text-gray-900 dark:text-white'
                   }`}
               >
                 {song.song_name}
@@ -75,13 +79,16 @@ const Song = ({ song, isRemove }) => {
         {
           isRemove &&
           <td className="text-gray-700 dark:text-gray-300 hidden md:table-cell">
-          <button
-            className="px-4 py-3 rounded-xl text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
-          >
-            <FiTrash2 className="mr-2" />
-            Remove
-          </button>
-        </td>
+            <button
+              className="px-4 py-3 rounded-xl text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+              // onClick={() => {
+              //   removeSongFromPlaylist(playlist._id, song._id);
+              // }}
+            >
+              <FiTrash2 className="mr-2" />
+              Remove
+            </button>
+          </td>
         }
       </tr>
     </>

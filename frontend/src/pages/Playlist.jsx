@@ -22,7 +22,7 @@ const Playlist = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { deletePlaylist, fetchPlaylists } = useLibrary();
+  const { deletePlaylist } = useLibrary();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,7 +91,6 @@ const Playlist = () => {
 
   const handleDeletePlaylist = async () => {
       deletePlaylist(id);
-      fetchPlaylists();
       navigate('/playlists');
   }
 
@@ -146,7 +145,7 @@ const Playlist = () => {
       {songs.length > 0 ? (
 
         <div>
-          <Songs songs={songs} collectionTitle="playlist.songs" isRemove />
+          <Songs songs={songs} collectionTitle="playlist.songs" isRemove playlist={playlist}/>
         </div>
       ) : (
         <div className="bg-white dark:bg-gray-800 rounded-lg p-8 text-center">

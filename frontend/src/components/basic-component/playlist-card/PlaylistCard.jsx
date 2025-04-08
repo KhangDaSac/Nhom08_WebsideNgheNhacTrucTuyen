@@ -2,12 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlay, FiMoreVertical, FiTrash2 } from 'react-icons/fi';
 import { FaPlay } from 'react-icons/fa';
+import { useLibrary } from '../../../contexts/LibraryContext';
 
 const PlaylistCard = ({ playlist, onDelete }) => {
     const [showMenu, setShowMenu] = useState(false);
     const menuRef = useRef(null);
+    const { addTo } = useLibrary();
 
-    // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -20,14 +21,6 @@ const PlaylistCard = ({ playlist, onDelete }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
-
-    const handleDeleteClick = (e) => {
-        e.stopPropagation();
-        if (onDelete) {
-            onDelete(playlist.id);
-        }
-        setShowMenu(false);
-    };
 
     const toggleMenu = (e) => {
         e.stopPropagation();

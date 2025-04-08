@@ -4,16 +4,16 @@ import { FaPlay } from "react-icons/fa6";
 import { FaCompactDisc } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import axios from 'axios';
+import { useLibrary } from '../../../contexts/LibraryContext';
 
 const SongCard = ({ song }) => {
     const { currentSong, isPlaying, playSong, setIsPlaying } = usePlayer();
     const isCurrentSong = currentSong?._id === song._id;
     const [showPlaylistMenu, setShowPlaylistMenu] = useState(false);
-    const [playlists, setPlaylists] = useState([]);
     const menuRef = useRef(null);
+    const { playlists, addToPlaylist, fetchPlaylists } = useLibrary();
 
     useEffect(() => {
-        // Close menu when clicking outside
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setShowPlaylistMenu(false);
@@ -32,25 +32,6 @@ const SongCard = ({ song }) => {
         }
     }, [showPlaylistMenu]);
 
-    const fetchPlaylists = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/playlists');
-            setPlaylists(response.data.data);
-        } catch (error) {
-            console.error('Error fetching playlists:', error);
-        }
-    };
-
-    const addToPlaylist = async (playlistId) => {
-        try {
-            await axios.post(`http://localhost:5000/api/playlists/${playlistId}/songs`, {
-                song_id: song._id
-            });
-            setShowPlaylistMenu(false);
-        } catch (error) {
-            console.error('Error adding song to playlist:', error);
-        }
-    };
 
     const togglePlaylistMenu = (e) => {
         e.stopPropagation();
@@ -112,17 +93,18 @@ const SongCard = ({ song }) => {
                                 className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 py-1"
                                 style={{ bottom: '100%', marginBottom: '10px' }}
                             >
-                                <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
-                                    Add to playlist
-                                </div>
                                 {playlists.length > 0 ? (
                                     playlists.map(playlist => (
                                         <button
                                             key={playlist._id}
-                                            onClick={() => addToPlaylist(playlist._id)}
+                                            onClick={() => addToPlaylist(playlist._id, song._id)}
                                             className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         >
-                                            {playlist.playlist_name}
+                                            Add to
+                                            <span className='font-semibold text-gray-900 dark:text-white ms-1'>
+                                                {playlist.playlist_name}
+                                        
+                                            </span>
                                         </button>
                                     ))
                                 ) : (
