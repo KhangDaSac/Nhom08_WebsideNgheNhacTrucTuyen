@@ -89,7 +89,7 @@ const Home = () => {
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Recent Songs */}
         <section>
-            <SongCards songs={popularSongs} collectionTitle={t('collection.song.popularSongs')} />
+            <SongCards songs={popularSongs} collectionTitle={t('collection.song.popularSongs')} isAddToPlaylist/>
         </section>
 
         {/* Featured Albums */}

@@ -1,152 +1,100 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useLibrary } from '../contexts/LibraryContext';
+import { useAuth } from '../contexts/AuthContext';
+import { usePlayer } from '../contexts/PlayerContext';
 import { Tab } from '@headlessui/react';
-import { FiClock, FiMusic, FiUser, FiDisc } from 'react-icons/fi';
+import { FiMusic, FiUser, FiDisc } from 'react-icons/fi';
+import { FaPlay } from 'react-icons/fa';
+import SongCards from '../components/basic-component/song-card/SongCards';
+import AlbumCards from '../components/basic-component/album-card/AlbumCards';
+import ArtistCards from '../components/basic-component/artist-card/ArtistCards';
 
 const Library = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+  const {
+    fetchLibrary,
+    songsLiked,
+    artistsFollowed,
+    albumsLiked
+  } = useLibrary();
+  const { playSong } = usePlayer();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const recentlyPlayed = [
-    {
-      id: 1,
-      title: 'Shape of You',
-      artist: 'Ed Sheeran',
-      album: '÷ (Divide)',
-      duration: '3:53',
-      image: '/album-covers/1.jpg'
-    },
-    // Thêm các bài hát khác...
-  ];
+  useEffect(() => {
+    if (user?._id) {
+      fetchLibrary();
+      setIsLoading(false);
+    }
+  }, [user]);
 
-  const likedSongs = [
-    {
-      id: 1,
-      title: 'Blinding Lights',
-      artist: 'The Weeknd',
-      album: 'After Hours',
-      duration: '3:20',
-      image: '/album-covers/2.jpg'
-    },
-    // Thêm các bài hát khác...
-  ];
+  const renderLoadingState = () => (
+    <div className="flex justify-center items-center p-8">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
+    </div>
+  );
 
-  const playlists = [
-    {
-      id: 1,
-      name: 'My Playlist #1',
-      songCount: 15,
-      image: '/playlist-covers/1.jpg'
-    },
-    // Thêm các playlist khác...
-  ];
-
-  const albums = [
-    {
-      id: 1,
-      name: 'Future Nostalgia',
-      artist: 'Dua Lipa',
-      year: 2020,
-      image: '/album-covers/3.jpg'
-    },
-    // Thêm các album khác...
-  ];
+  const renderEmptyState = (message) => (
+    <div className="flex flex-col items-center justify-center p-8 text-gray-500 dark:text-gray-400">
+      <p className="mb-4">{message}</p>
+    </div>
+  );
 
   const categories = [
     {
       name: t('library.songs_liked'),
-      icon: FiClock,
-      content: (
+      icon: FiMusic,
+      content: isLoading ? renderLoadingState() : (
         <div className="grid gap-4">
-          {recentlyPlayed.map((song) => (
-            <div
-              key={song.id}
-              className="flex items-center space-x-4 p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              <img
-                src={song.image}
-                alt={song.title}
-                className="w-12 h-12 rounded-md object-cover"
-              />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                  {song.title}
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                  {song.artist}
-                </p>
-              </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {song.duration}
-              </span>
-            </div>
-          ))}
+          {songsLiked && songsLiked.length > 0 ? (
+            <SongCards songs={songsLiked} ></SongCards>
+          ) : (
+            renderEmptyState(t('library.no_liked_songs'))
+          )}
         </div>
       ),
     },
     {
       name: t('library.albums_liked'),
-      icon: FiMusic,
-      content: (
+      icon: FiDisc,
+      content: isLoading ? renderLoadingState() : (
         <div className="grid gap-4">
-          {likedSongs.map((song) => (
-            <div
-              key={song.id}
-              className="flex items-center space-x-4 p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              <img
-                src={song.image}
-                alt={song.title}
-                className="w-12 h-12 rounded-md object-cover"
-              />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                  {song.title}
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-                  {song.artist}
-                </p>
-              </div>
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {song.duration}
-              </span>
-            </div>
-          ))}
+          {console.log(albumsLiked)}
+          {albumsLiked && albumsLiked.length > 0 ? (
+            
+            <AlbumCards albums={albumsLiked} />
+          ) : (
+            renderEmptyState(t('library.no_liked_albums'))
+          )}
         </div>
       ),
     },
     {
       name: t('library.artists_followed'),
-      icon: FiDisc,
-      content: (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {albums.map((album) => (
-            <div
-              key={album.id}
-              className="flex flex-col space-y-2 p-4 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            >
-              <img
-                src={album.image}
-                alt={album.name}
-                className="w-full aspect-square rounded-md object-cover"
-              />
-              <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                {album.name}
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {album.artist} • {album.year}
-              </p>
-            </div>
-          ))}
+      icon: FiUser,
+      content: isLoading ? renderLoadingState() : (
+        <div className="grid gap-4">
+          {artistsFollowed && artistsFollowed.length > 0 ? (
+            <ArtistCards artists={artistsFollowed}  />
+          ) : (
+            renderEmptyState(t('library.no_followed_artists'))
+          )}
         </div>
       ),
     },
   ];
 
+  if (!user) {
+
+  }
+
   return (
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-        {t('Your Library')}
+        {t('library.title')}
       </h1>
 
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
@@ -156,10 +104,9 @@ const Library = () => {
               key={index}
               className={({ selected }) =>
                 `flex items-center space-x-2 w-full rounded-lg py-2.5 px-3 text-sm font-medium leading-5
-                ${
-                  selected
-                    ? 'bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 shadow'
-                    : 'text-gray-700 dark:text-gray-400 hover:bg-white/[0.12] hover:text-gray-900 dark:hover:text-white'
+                ${selected
+                  ? 'bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 shadow'
+                  : 'text-gray-700 dark:text-gray-400 hover:bg-white/[0.12] hover:text-gray-900 dark:hover:text-white'
                 }`
               }
             >
@@ -184,4 +131,4 @@ const Library = () => {
   );
 };
 
-export default Library; 
+export default Library;

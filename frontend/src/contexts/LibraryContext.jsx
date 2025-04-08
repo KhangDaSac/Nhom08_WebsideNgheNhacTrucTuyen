@@ -93,7 +93,10 @@ export const LibraryProvider = ({ children }) => {
                 fetchLibrary,
                 playlists,
                 addSongToPlaylist,
-                removeSongFromPlaylist
+                removeSongFromPlaylist,
+                songsLiked,
+                artistsFollowed,
+                albumsLiked
             }}
         >
             {children}

@@ -9,7 +9,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 
-const SongCard = ({ song }) => {
+const SongCard = ({ song, isAddToPlaylist }) => {
     const { currentSong, isPlaying, playSong, setIsPlaying } = usePlayer();
     const isCurrentSong = currentSong?._id === song._id;
     const [showPlaylistMenu, setShowPlaylistMenu] = useState(false);
@@ -101,7 +101,7 @@ const SongCard = ({ song }) => {
                         </p>
                     </div>
                     {
-                        user && user?.library_id &&
+                        isAddToPlaylist && user && user?.library_id &&
                         <div className="relative mx-2">
                             <button
                                 onClick={togglePlaylistMenu}
