@@ -28,13 +28,6 @@ export const LibraryProvider = ({ children }) => {
             setSongsLiked(response.data.data.songs_liked);
             setArtistsFollowed(response.data.data.artists_followed);
             setAlbumsLiked(response.data.data.albums_liked);
-
-            console.log("Playlists:", response.data.data.playlists);
-            console.log("Songs Liked:", response.data.data.songs_liked);
-            console.log("Artists Followed:", response.data.data.artists_followed);
-            console.log("Albums Liked:", response.data.data.albums_liked);
-
-
         } catch (err) {
             console.error('Error fetching user playlists:', err);
             setError('Failed to load playlists');
