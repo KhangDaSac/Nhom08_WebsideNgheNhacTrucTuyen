@@ -26,7 +26,7 @@ const likeSong = async (req, res) => {
         const libraryId = req.params.id;
         const songId = req.body.song_id;
         const like = req.body.like;
-        
+
         const library = await Library.findById(libraryId);
         if (!library) {
             return res.status(404).json({ success: false, message: 'Library not found' });
@@ -59,4 +59,5 @@ const likeSong = async (req, res) => {
 
 module.exports = {
     getLibraryById,
+    likeSong
 };
