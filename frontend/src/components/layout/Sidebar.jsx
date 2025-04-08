@@ -15,13 +15,6 @@ const Sidebar = ({ onClose }) => {
     { name: 'Library', icon: IoLibraryOutline, path: '/library', label: t('navigation.library') },
   ];
 
-  const playlists = [
-    { id: 1, name: 'Favorite Songs' },
-    { id: 2, name: 'Recently Played' },
-    { id: 3, name: 'Recommended' },
-    { id: 4, name: 'My Playlist #1' },
-  ];
-
   const isActive = (path) => location.pathname === path;
 
   return (

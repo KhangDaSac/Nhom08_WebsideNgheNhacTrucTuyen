@@ -68,7 +68,7 @@ const Home = () => {
       <div className="relative h-[60vh] min-h-[400px] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://picsum.photos/1920/1080"
+            src="https://res.cloudinary.com/dkh3af36d/image/upload/v1744138222/images/grszcsgspx5zxcucrcz3.png"
             alt="Hero"
             className="w-full h-full object-cover"
           />

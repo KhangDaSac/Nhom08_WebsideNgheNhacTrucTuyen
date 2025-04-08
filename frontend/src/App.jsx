@@ -9,6 +9,7 @@ import i18n from './locales/i18n';
 import Layout from './components/layout/Layout';
 import { LibraryProvider } from './contexts/LibraryContext';
 import { ToastProvider } from './contexts/ToastContext';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Pages
 import Home from './pages/Home';
@@ -20,7 +21,7 @@ import Search from './pages/Search';
 import Library from './pages/Library';
 import Playlist from './pages/Playlist';
 import Song from './pages/Song';
-import Artist from  './pages/Artist';
+import Artist from './pages/Artist';
 import Album from './pages/Album';
 
 function App() {
@@ -40,19 +41,41 @@ function App() {
                         <Route
                           path="/*"
                           element={
-                              <Layout>
-                                <Routes>
-                                  <Route path="/" element={<Home />} /> 
-                                  <Route path="/search" element={<Search />} />
-                                  <Route path="/account" element={<Account />} />
-                                  <Route path="/playlists" element={<Playlists />} />
-                                  <Route path="/playlist/:id" element={<Playlist />} />
-                                  <Route path="/library" element={<Library />} />
-                                  <Route path="/song/:id" element={<Song />} />
-                                  <Route path="/artist/:id" element={<Artist />} />
-                                  <Route path="/album/:id" element={<Album />} />
-                                </Routes>
-                              </Layout>
+                            <Layout>
+                              <Routes>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/search" element={<Search />} />
+                                <Route path="/account" element={<Account />} />
+                                <Route
+                                  path="/playlists"
+                                  element={
+                                    <ProtectedRoute>
+                                      <Playlists />
+                                    </ProtectedRoute>
+                                  }
+                                />
+                                <Route
+                                  path="/playlist/:id"
+                                  element={
+                                    <ProtectedRoute>
+                                      <Playlist />
+                                    </ProtectedRoute>
+                                  }
+                                />
+                                <Route
+                                  path="/library"
+                                  element={
+                                    <ProtectedRoute>
+                                      <Library />
+                                    </ProtectedRoute>
+                                  }
+                                />
+                                <Route path="/song/:id" element={<Song />} />
+                                <Route path="/artist/:id" element={<Artist />} />
+                                <Route path="/album/:id" element={<Album />} />
+                              </Routes>
+
+                            </Layout>
                           }
                         />
                       </Routes>

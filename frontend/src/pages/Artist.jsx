@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { usePlayer } from '../contexts/PlayerContext';
-import { FiHeart, FiShare2, FiClock, FiMusic } from 'react-icons/fi';
 import { FaPlay } from "react-icons/fa6";
 import Songs from '../components/basic-component/song/Songs';
 import AlbumCards from '../components/basic-component/album-card/AlbumCards.jsx';
@@ -152,9 +151,6 @@ const Artist = () => {
             }`}
           >
             {isFollowing ? t('artist.unfollow') : t('artist.follow')}
-          </button>
-          <button className="p-2 rounded-full text-gray-400 hover:text-gray-500">
-            <FiShare2 className="w-5 sm:w-6 h-5 sm:h-6" />
           </button>
         </div>
 
