@@ -4,13 +4,15 @@ import { FaPlay } from "react-icons/fa6";
 import { FaCompactDisc } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import { useLibrary } from '../../../contexts/LibraryContext';
+import { useToast } from '../../../contexts/ToastContext';
 
 const SongCard = ({ song }) => {
     const { currentSong, isPlaying, playSong, setIsPlaying } = usePlayer();
     const isCurrentSong = currentSong?._id === song._id;
     const [showPlaylistMenu, setShowPlaylistMenu] = useState(false);
     const menuRef = useRef(null);
-    const { playlists, addToPlaylist, fetchPlaylists } = useLibrary();
+    const { playlists, addSongToPlaylist, fetchPlaylists } = useLibrary();
+    const { showSuccessToast, showErrorToast } = useToast();
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -31,6 +33,21 @@ const SongCard = ({ song }) => {
         }
     }, [showPlaylistMenu]);
 
+    const handleAddToPlaylist = async ({song, playlist}) => {
+        try {
+            const result = await addSongToPlaylist(playlist._id, song._id);
+            if (result?.success) {
+                showSuccessToast(`"${song.song_name}" added to "${playlist.playlist_name}" successfully!`);
+            } else {
+                showErrorToast('Failed to add song to playlist');
+            }
+
+            setShowPlaylistMenu(false);
+        } catch (error) {
+            console.error('Error adding song to playlist:', error);
+            showErrorToast('Error adding song to playlist');
+        }
+    };
 
     const togglePlaylistMenu = (e) => {
         e.stopPropagation();
@@ -81,7 +98,7 @@ const SongCard = ({ song }) => {
                     <div className="relative mx-2">
                         <button
                             onClick={togglePlaylistMenu}
-                            className=""
+                            className="hover:text-primary-500 transition-colors"
                         >
                             <FiPlus className="w-6 h-6" />
                         </button>
@@ -96,13 +113,12 @@ const SongCard = ({ song }) => {
                                     playlists.map(playlist => (
                                         <button
                                             key={playlist._id}
-                                            onClick={() => addToPlaylist(playlist._id, song._id)}
+                                            onClick={() => handleAddToPlaylist({song, playlist})}
                                             className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         >
                                             Add to
                                             <span className='font-semibold text-gray-900 dark:text-white ms-1'>
                                                 {playlist.playlist_name}
-                                        
                                             </span>
                                         </button>
                                     ))

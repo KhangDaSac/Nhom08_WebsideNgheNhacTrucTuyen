@@ -141,7 +141,6 @@ const Playlist = () => {
       </div>
 
       {/* Songs List */}
-      {console.log(fetchSongs)}
       {songs.length > 0 ? (
         <div>
           <Songs

@@ -52,12 +52,13 @@ export const LibraryProvider = ({ children }) => {
         }
     };
 
-    const addToPlaylist = async (playlistId, songId) => {
+    const addSongToPlaylist = async (playlistId, songId) => {
         try {
-            await axios.post(`http://localhost:5000/api/songs/addToPlaylist`, {
+            const result = await axios.post(`http://localhost:5000/api/songs/addToPlaylist`, {
                 song_id: songId,
                 playlist_id: playlistId
             });
+            return result.data;
         } catch (error) {
             console.error('Error adding song to playlist:', error);
             setError('Failed to add song to playlist');
@@ -66,10 +67,12 @@ export const LibraryProvider = ({ children }) => {
 
     const removeSongFromPlaylist = async (playlistId, songId) => {
         try {
-            await axios.post(`http://localhost:5000/api/playlists/removeSong`, {
+            const result = await axios.post(`http://localhost:5000/api/playlists/removeSong`, {
                 song_id: songId,
                 playlist_id: playlistId
             });
+            console.log('removeSongFromPlaylist result:', result);
+            return result.data;
         } catch (error) {
             console.error('Error removing song from playlist:', error);
             setError('Failed to remove song from playlist');
@@ -83,7 +86,7 @@ export const LibraryProvider = ({ children }) => {
                 deletePlaylist,
                 fetchPlaylists,
                 playlists,
-                addToPlaylist,
+                addSongToPlaylist,
                 removeSongFromPlaylist
             }}
         >

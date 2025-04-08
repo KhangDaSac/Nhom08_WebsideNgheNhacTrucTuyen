@@ -22,7 +22,6 @@ const Song = ({ song, playlist, isRemove, fetchSongs }) => {
   }
 
   const { removeSongFromPlaylist } = useLibrary();
-  console.log(fetchSongs)
 
   return (
     <>

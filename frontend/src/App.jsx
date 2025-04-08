@@ -8,6 +8,7 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './locales/i18n';
 import Layout from './components/layout/Layout';
 import { LibraryProvider } from './contexts/LibraryContext';
+import { ToastProvider } from './contexts/ToastContext';
 
 // Pages
 import Home from './pages/Home';
@@ -30,29 +31,31 @@ function App() {
             <PlayerProvider>
               <SearchProvider>
                 <LibraryProvider>
-                  <Router>
-                    <Routes>
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/signup" element={<SignUp />} />
-                      <Route
-                        path="/*"
-                        element={
-                            <Layout>
-                              <Routes>
-                                <Route path="/" element={<Home />} /> 
-                                <Route path="/search" element={<Search />} />
-                                <Route path="/album/:id" element={<Album />} />
-                                <Route path="/artist/:id" element={<Artist />} />
-                                <Route path="/account" element={<Account />} />
-                                <Route path="/playlists" element={<Playlists />} />
-                                <Route path="/playlist/:id" element={<Playlist />} />
-                                <Route path="/library" element={<Library />} />
-                              </Routes>
-                            </Layout>
-                        }
-                      />
-                    </Routes>
-                  </Router>
+                  <ToastProvider>
+                    <Router>
+                      <Routes>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<SignUp />} />
+                        <Route
+                          path="/*"
+                          element={
+                              <Layout>
+                                <Routes>
+                                  <Route path="/" element={<Home />} /> 
+                                  <Route path="/search" element={<Search />} />
+                                  <Route path="/album/:id" element={<Album />} />
+                                  <Route path="/artist/:id" element={<Artist />} />
+                                  <Route path="/account" element={<Account />} />
+                                  <Route path="/playlists" element={<Playlists />} />
+                                  <Route path="/playlist/:id" element={<Playlist />} />
+                                  <Route path="/library" element={<Library />} />
+                                </Routes>
+                              </Layout>
+                          }
+                        />
+                      </Routes>
+                    </Router>
+                  </ToastProvider>
                 </LibraryProvider>
               </SearchProvider>
             </PlayerProvider>
