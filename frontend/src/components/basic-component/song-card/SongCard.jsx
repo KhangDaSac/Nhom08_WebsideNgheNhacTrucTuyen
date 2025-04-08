@@ -1,11 +1,61 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { usePlayer } from '../../../contexts/PlayerContext';
 import { FaPlay } from "react-icons/fa6";
 import { FaCompactDisc } from "react-icons/fa";
+import { FiPlus } from "react-icons/fi";
+import axios from 'axios';
 
 const SongCard = ({ song }) => {
     const { currentSong, isPlaying, playSong, setIsPlaying } = usePlayer();
     const isCurrentSong = currentSong?._id === song._id;
+    const [showPlaylistMenu, setShowPlaylistMenu] = useState(false);
+    const [playlists, setPlaylists] = useState([]);
+    const menuRef = useRef(null);
+
+    useEffect(() => {
+        // Close menu when clicking outside
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setShowPlaylistMenu(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (showPlaylistMenu) {
+            fetchPlaylists();
+        }
+    }, [showPlaylistMenu]);
+
+    const fetchPlaylists = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/playlists');
+            setPlaylists(response.data.data);
+        } catch (error) {
+            console.error('Error fetching playlists:', error);
+        }
+    };
+
+    const addToPlaylist = async (playlistId) => {
+        try {
+            await axios.post(`http://localhost:5000/api/playlists/${playlistId}/songs`, {
+                song_id: song._id
+            });
+            setShowPlaylistMenu(false);
+        } catch (error) {
+            console.error('Error adding song to playlist:', error);
+        }
+    };
+
+    const togglePlaylistMenu = (e) => {
+        e.stopPropagation();
+        setShowPlaylistMenu(!showPlaylistMenu);
+    };
 
     return (
         <>
@@ -20,28 +70,70 @@ const SongCard = ({ song }) => {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <button
-                            onClick={() => {
-                                if (isCurrentSong) {
-                                    setIsPlaying(!isPlaying);
-                                } else {
-                                    playSong(song);
-                                }
-                            }}
-                            className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
-                        >
-                            {isCurrentSong && isPlaying
-                                ? <FaCompactDisc className="w-6 h-6 spin-animation" />
-                                : <FaPlay className="w-6 h-6 relative left-[1.5px]" />}
-                        </button>
+                        <div className="flex space-x-2">
+                            <button
+                                onClick={() => {
+                                    if (isCurrentSong) {
+                                        setIsPlaying(!isPlaying);
+                                    } else {
+                                        playSong(song);
+                                    }
+                                }}
+                                className="p-3 bg-primary-500 rounded-full text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center justify-center"
+                            >
+                                {isCurrentSong && isPlaying
+                                    ? <FaCompactDisc className="w-6 h-6 spin-animation" />
+                                    : <FaPlay className="w-6 h-6 relative left-[1.5px]" />}
+                            </button>
+
+                        </div>
                     </div>
                 </div>
-                <h3 className="font-medium text-gray-900 dark:text-white mb-1">
-                    {song.song_name}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {song.artists?.map(artist => artist.artist_name).join(', ')}
-                </p>
+                <div className='flex justify-between items-center'>
+                    <div>
+                        <h3 className="font-medium text-gray-900 dark:text-white mb-1">
+                            {song.song_name}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                            {song.artists?.map(artist => artist.artist_name).join(', ')}
+                        </p>
+                    </div>
+                    <div className="relative mx-2">
+                        <button
+                            onClick={togglePlaylistMenu}
+                            className=""
+                        >
+                            <FiPlus className="w-6 h-6" />
+                        </button>
+
+                        {showPlaylistMenu && (
+                            <div
+                                ref={menuRef}
+                                className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 py-1"
+                                style={{ bottom: '100%', marginBottom: '10px' }}
+                            >
+                                <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                                    Add to playlist
+                                </div>
+                                {playlists.length > 0 ? (
+                                    playlists.map(playlist => (
+                                        <button
+                                            key={playlist._id}
+                                            onClick={() => addToPlaylist(playlist._id)}
+                                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        >
+                                            {playlist.playlist_name}
+                                        </button>
+                                    ))
+                                ) : (
+                                    <div className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
+                                        No playlists found
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </>
     );
