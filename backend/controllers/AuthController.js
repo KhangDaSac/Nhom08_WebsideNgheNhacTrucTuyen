@@ -19,9 +19,6 @@ const login = async (req, res) => {
             });
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
         const user = await User.findOne({
             email: email
         });
@@ -95,8 +92,6 @@ const register = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-
-
         const newlibrary = new Library(
             {
                 playlists: [],
@@ -133,6 +128,7 @@ const register = async (req, res) => {
         });
     }
 };
+
 
 
 module.exports = { login, register };

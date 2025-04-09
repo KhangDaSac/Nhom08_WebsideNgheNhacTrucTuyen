@@ -3,6 +3,7 @@ import { Pencil, Trash2, PlusCircle, AlertCircle, Loader2, Music, Upload, X, Cal
 import axios from "axios";
 import Songs from "../components/basic-component/song/Songs";
 import { handleUploadImage, handleUploadAudio } from "../utils/UploadFile";
+import { useToast } from "../contexts/ToastContext";
 
 const SongManager = () => {
   const [songs, setSongs] = useState([]);
@@ -10,6 +11,7 @@ const SongManager = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
+    const { showErrorToast, showSuccessToast } = useToast();
 
   const [formData, setFormData] = useState({
     song_name: '',
@@ -193,6 +195,7 @@ const SongManager = () => {
       const submitData = new FormData();
       submitData.append('song_name', formData.song_name);
       submitData.append('artist_id', formData.artist_id);
+      console.log(formData.genres);
       submitData.append('genres', formData.genres);
 
       if (formData.release_date) {
@@ -218,15 +221,19 @@ const SongManager = () => {
       console.log(dataObject);
 
 
-      const response = await axios.post('http://localhost:5000/api/songs/add', dataObject, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      const response = await axios.post('http://localhost:5000/api/songs/add', dataObject,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
       if (response.data.success) {
         fetchSongs();
+        showSuccessToast('Song saved successfully!');
         setShowModal(false);
+      }else {
+        showErrorToast(response.data.message || 'Failed to save song!');
       }
     } catch (error) {
       console.error('Error saving song:', error);

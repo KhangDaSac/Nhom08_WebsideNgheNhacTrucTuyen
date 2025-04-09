@@ -46,7 +46,8 @@ export const AuthProvider = ({ children }) => {
         avatar_url: data.user.avatar_url,
         phone: data.user.phone,
         library_id: data.user.library_id,
-        token: data.token
+        token: data.token,
+        admin: data.user.admin,
       };
 
       setUser(newUser);
