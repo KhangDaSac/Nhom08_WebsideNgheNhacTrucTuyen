@@ -162,19 +162,6 @@ const Login = () => {
               )}
             </button>
           </form>
-
-          {/* Sign Up Link */}
-          <div className="mt-4 sm:mt-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              {t('login.noAccount')}{' '}
-              <Link
-                to="/signup"
-                className="font-medium text-primary-500 hover:text-primary-600"
-              >
-                {t('login.signUp')}
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
     </div>

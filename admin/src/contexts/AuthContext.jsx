@@ -49,26 +49,13 @@ export const AuthProvider = ({ children }) => {
         token: data.token,
         admin: data.user.admin
       };
-
+      if(newUser.admin){
       setUser(newUser);
-      return data;
+        return data;
+      }else{
+        return {success: false, message: 'You are not authorized to login as admin'}
+      }
 
-    } catch (error) {
-      return { ...error.response.data };
-    }
-  };
-
-  const register = async (userData) => {
-    try {
-      const response = await axios.post('http://localhost:5000/v1/auth/register',
-        userData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-      
-      return response.data;
     } catch (error) {
       return { ...error.response.data };
     }
@@ -94,9 +81,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         login,
-        register,
-        logout,
-        updateProfile,
+        logout
       }}
     >
       {children}
