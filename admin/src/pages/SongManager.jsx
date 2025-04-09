@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Pencil, Trash2, PlusCircle, AlertCircle, Loader2, Music, Upload, X, Calendar } from "lucide-react";
 import axios from "axios";
 import Songs from "../components/basic-component/song/Songs";
-import { handleUploadImage, handleUploadAudio } from "../utils/UploadFile";
+import { handleUploadImage, handleUploadAudio } from  "../components/utils/UploadFile";
 import { useToast } from "../contexts/ToastContext";
 
 const SongManager = () => {

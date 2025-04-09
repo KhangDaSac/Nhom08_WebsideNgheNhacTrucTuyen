@@ -33,7 +33,7 @@ const Login = () => {
     try {
       const result = await login({email: formData.email, password: formData.password});
       if(result.success){
-        navigate('/');
+        navigate('/song-manager');
       }else{
         showErrorToast(result.message || t('toast.login.error'));
         setIsLoading(false);
