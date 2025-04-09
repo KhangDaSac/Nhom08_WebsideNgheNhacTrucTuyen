@@ -51,7 +51,7 @@ const SongManager = () => {
         <p className="text-gray-600 dark:text-gray-400">{error}</p>
         <button 
           onClick={fetchSongs}
-          className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white rounded transition-colors"
+          className="px-4 py-3 gap-3 rounded-xl text-sm text-primary-100 bg-primary-600 dark:text-primary-100 hover:bg-primary-400 dark:hover:bg-primary-500 flex items-center"
         >
           Try Again
         </button>
@@ -66,7 +66,7 @@ const SongManager = () => {
           <Music className="inline mr-2" /> Quản lý bài hát
         </h1>
         <button 
-          className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white px-4 py-2 rounded flex items-center transition-colors"
+          className="px-4 py-3 gap-3 rounded-xl text-sm text-primary-100 bg-primary-600 dark:text-primary-100 hover:bg-primary-400 dark:hover:bg-primary-500 flex items-center"
           onClick={() => {
             setCurrentSong(null);
             setShowModal(true);
@@ -82,15 +82,6 @@ const SongManager = () => {
           <Music className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">No songs found</h3>
           <p className="mt-2 text-gray-500 dark:text-gray-400">Get started by creating a new song.</p>
-          <button
-            onClick={() => {
-              setCurrentSong(null);
-              setShowModal(true);
-            }}
-            className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white rounded transition-colors"
-          >
-            Add your first song
-          </button>
         </div>
       ) : (
         <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">
