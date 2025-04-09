@@ -1,7 +1,32 @@
 import React from 'react';
 import { Pencil, Trash2, Music } from "lucide-react";
+import axios from "axios";
+import { useToast } from "../../../contexts/ToastContext";
 
 const Song = ({ song }) => {
+  const { showSuccessToast, showErrorToast } = useToast();
+
+  const deleteSong= async (songId) => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/api/songs/delete/${songId}`);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return { ...error.response.data };
+    }
+  }
+
+  const handleDelete = async () => {
+    const result = await deleteSong(song._id);
+    if(result.success) {
+      showSuccessToast("Song deleted successfully!");
+    }else {
+      showErrorToast("Failed to delete song. Please try again.");
+    }
+  }
+
+
+
   return (
     <tr key={song._id} className="hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
       <td className="p-3">
@@ -10,10 +35,6 @@ const Song = ({ song }) => {
             src={song.image_url}
             alt={song.song_name}
             className="w-12 h-12 object-cover rounded ring-1 ring-gray-200 dark:ring-gray-700"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = 'https://placehold.co/100x100?text=Music';
-            }}
           />
         ) : (
           <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
@@ -57,18 +78,10 @@ const Song = ({ song }) => {
         )}
       </td>
       <td className="p-3">
-        <div className="flex gap-2">
+        <div className="flex justify-center gap-2">
           <button
-            onClick={() => handleEditClick(song)}
-            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            title="Edit song"
-          >
-            <Pencil size={18} />
-          </button>
-          <button
-            onClick={() => handleDeleteClick(song._id)}
+            onClick={() => handleDelete(song._id)}
             className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            title="Delete song"
           >
             <Trash2 size={18} />
           </button>

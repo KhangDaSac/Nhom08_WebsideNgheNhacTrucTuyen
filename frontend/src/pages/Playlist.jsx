@@ -160,7 +160,7 @@ const Playlist = () => {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
+
       <ConfirmationModal
         isOpen={showDeleteModal}
         title={t('playlist.confirmDelete')}

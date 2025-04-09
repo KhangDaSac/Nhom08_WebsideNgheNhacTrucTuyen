@@ -161,11 +161,38 @@ const getById = async (req, res) => {
     }
 }
 
+const deleteSong = async (req, res) => {
+    try {
+        const song = await Song.findByIdAndDelete(req.params.id);
+        if (!song) {
+            return res.status(404).json({
+                success: false,
+                message: 'Song not found'
+            });
+        }
+        await Playlist.updateMany(
+            { "songs.song_id": req.params.id },
+            { $pull: { songs: { song_id: req.params.id } } }
+        );
+        res.json({
+            success: true,
+            message: 'Song deleted successfully'
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi server',
+            error: err.message
+        });
+    }
+}
+
 module.exports = {
     getAll,
     getByArtistId,
     getByAlbumId,
     search,
     addToPlaylist,
-    getById
+    getById,
+    deleteSong
 };
