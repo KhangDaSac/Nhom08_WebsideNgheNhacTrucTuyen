@@ -8,14 +8,14 @@ const SongCards = ({ songs, collectionTitle, viewAll, isAddToPlaylist }) => {
     const { t } = useTranslation();
     const [currentPage, setCurrentPage] = useState(1);
     
-    // Calculate pagination
+
     const itemsPerPage = 4;
     const totalPages = Math.ceil(songs.length / itemsPerPage);
     const indexOfLastSong = currentPage * itemsPerPage;
     const indexOfFirstSong = indexOfLastSong - itemsPerPage;
     const currentSongs = songs.slice(indexOfFirstSong, indexOfLastSong);
     
-    // Handle page change
+
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     
     return (
@@ -40,7 +40,7 @@ const SongCards = ({ songs, collectionTitle, viewAll, isAddToPlaylist }) => {
                 })}
             </div>
             
-            {/* Pagination */}
+
             {songs.length > itemsPerPage && (
                 <div className="flex justify-center mt-6">
                     <nav className="flex space-x-2" aria-label="Pagination">
