@@ -15,16 +15,7 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-      <div className="flex items-center justify-between h-16 px-4 sm:px-6">
-        {/* Search */}
-        <div className="flex-1 max-w-lg">
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="h-5 w-5 text-gray-400" />
-            </div>
-          </div>
-        </div>
-
+      <div className="flex items-center justify-end   h-16 px-4 sm:px-6">
         {/* Right Section */}
         <div className="flex items-center space-x-4">
           {/* Theme Toggle */}

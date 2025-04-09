@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import Footer from './Footer';
 import Player from './Player';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import { usePlayer } from '../../contexts/PlayerContext';
