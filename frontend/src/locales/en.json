@@ -199,5 +199,21 @@
     "plays": "Plays",
     "likes": "Likes",
     "liked": "Liked"
+  },
+  "songManager": {
+    "title": "Song Manager",
+    "addSong": "Add Song",
+    "editSong": "Edit Song",
+    "deleteSong": "Delete Song",
+    "songName": "Song Name",
+    "artistName": "Artist Name",
+    "albumName": "Album Name",
+    "genre": "Genre",
+    "duration": "Duration",
+    "releaseDate": "Release Date",
+    "coverImage": "Cover Image",
+    "audioFile": "Audio File",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel"
   }
 }
