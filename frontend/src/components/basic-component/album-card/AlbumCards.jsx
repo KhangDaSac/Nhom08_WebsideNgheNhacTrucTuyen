@@ -16,7 +16,7 @@ const AlbumCards = ({ albums, collectionTitle, viewAll }) => {
     
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    
+
     return (
         <>
             <div className="flex items-center justify-between mb-6">

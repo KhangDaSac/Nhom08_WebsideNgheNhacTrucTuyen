@@ -4,6 +4,7 @@ import axios from "axios";
 import Songs from "../components/basic-component/song/Songs";
 import { handleUploadImage, handleUploadAudio } from  "../components/utils/UploadFile";
 import { useToast } from "../contexts/ToastContext";
+import { useTranslation } from "react-i18next";
 
 const SongManager = () => {
   const [songs, setSongs] = useState([]);
@@ -12,6 +13,7 @@ const SongManager = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
     const { showErrorToast, showSuccessToast } = useToast();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     song_name: '',
@@ -268,7 +270,8 @@ const SongManager = () => {
     <div className="p-6 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-          <Music className="inline mr-2" /> Quản lý bài hát
+          <Music className="inline mr-2" />
+          {t('songManager.title')}
         </h1>
         <button
           className="px-4 py-3 gap-3 rounded-xl text-sm text-primary-100 bg-primary-600 dark:text-primary-100 hover:bg-primary-400 dark:hover:bg-primary-500 flex items-center"

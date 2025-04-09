@@ -98,6 +98,7 @@ const Account = () => {
                       <FiUser className="h-5 w-5 text-gray-400" />
                     </div>
                     <input
+                      disabled
                       type="text"
                       name="name"
                       value={formData.display_name}
@@ -116,6 +117,7 @@ const Account = () => {
                       <FiMail className="h-5 w-5 text-gray-400" />
                     </div>
                     <input
+                      disabled
                       type="email"
                       name="email"
                       value={formData.email}
@@ -134,6 +136,7 @@ const Account = () => {
                       <FiPhone className="h-5 w-5 text-gray-400" />
                     </div>
                     <input
+                      disabled
                       type="tel"
                       name="phone"
                       value={formData.phone}
@@ -150,7 +153,7 @@ const Account = () => {
             )}
           </div>
 
-      
+
 
           {/*Setting*/}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
