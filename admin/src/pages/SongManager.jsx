@@ -20,29 +20,15 @@ const SongManager = () => {
       } else {
         setError("Invalid response format from API");
       }
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching songs:", error);
       setError(error.message || "Error loading songs");
-    } finally {
-      setLoading(false);
     }
   };
 
-  const handleEditClick = (song) => {
-    setCurrentSong(song);
-    setShowModal(true);
-  };
-
-  const handleDeleteClick = async (songId) => {
-    if (!window.confirm("Are you sure you want to delete this song?")) return;
-    
-    try {
-      await axios.delete(`http://localhost:5000/api/songs/${songId}`);
-      fetchSongs(); // Refresh the songs list
-    } catch (error) {
-      console.error("Error deleting song:", error);
-      alert("Failed to delete song. Please try again.");
-    }
+  const removeSong = (songId) => {
+    setSongs((prevSongs) => prevSongs.filter((song) => song._id !== songId));
   };
 
   useEffect(() => {
@@ -108,7 +94,7 @@ const SongManager = () => {
         </div>
       ) : (
         <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">
-          <Songs songs={songs}></Songs>
+          <Songs songs={songs} removeSong={removeSong}></Songs>
         </div>
       )}
 

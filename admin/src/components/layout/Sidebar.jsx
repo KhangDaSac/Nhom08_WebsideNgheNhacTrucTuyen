@@ -9,7 +9,7 @@ const Sidebar = ({ onClose }) => {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Song manager', icon: FiHome, path: '/song-manager', label: t('navigation.home') },
+    { name: 'Song manager', icon: FiMusic, path: '/song-manager', label: t('navigation.songManager') },
   ];
 
   const isActive = (path) => location.pathname === path;

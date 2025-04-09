@@ -3,7 +3,7 @@ import { Pencil, Trash2, Music } from "lucide-react";
 import axios from "axios";
 import { useToast } from "../../../contexts/ToastContext";
 
-const Song = ({ song }) => {
+const Song = ({ song, removeSong }) => {
   const { showSuccessToast, showErrorToast } = useToast();
 
   const deleteSong= async (songId) => {
@@ -19,6 +19,7 @@ const Song = ({ song }) => {
   const handleDelete = async () => {
     const result = await deleteSong(song._id);
     if(result.success) {
+       removeSong(song._id);
       showSuccessToast("Song deleted successfully!");
     }else {
       showErrorToast("Failed to delete song. Please try again.");

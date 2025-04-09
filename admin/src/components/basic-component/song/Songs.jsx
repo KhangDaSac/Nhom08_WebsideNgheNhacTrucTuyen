@@ -3,7 +3,7 @@ import Song from './Song';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-const Songs = ({ songs }) => {
+const Songs = ({ songs, removeSong }) => {
     const { t } = useTranslation();
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(5);
@@ -53,7 +53,7 @@ const Songs = ({ songs }) => {
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         {currentSongs.length > 0 ? (
                             currentSongs.map((song) => (
-                                <Song key={song._id} song={song} />
+                                <Song key={song._id} song={song} removeSong={removeSong}/>
                             ))
                         ) : (
                             <tr>
@@ -108,7 +108,6 @@ const Songs = ({ songs }) => {
                                     <ChevronLeft className="h-5 w-5" aria-hidden="true" />
                                 </button>
                                 
-                                {/* Page numbers */}
                                 {[...Array(totalPages)].map((_, index) => (
                                     <button
                                         key={index}

@@ -10,7 +10,8 @@
     "artists": "Artists",
     "albums": "Albums",
     "playlists": "Playlists",
-    "profile": "Profile"
+    "profile": "Profile",
+    "songManager": "Song Manager"
   },
   "auth": {
     "email": "Email",
@@ -205,15 +206,19 @@
     "addSong": "Add Song",
     "editSong": "Edit Song",
     "deleteSong": "Delete Song",
+    "image": "Image",
     "songName": "Song Name",
     "artistName": "Artist Name",
-    "albumName": "Album Name",
     "genre": "Genre",
-    "duration": "Duration",
     "releaseDate": "Release Date",
+    "view": "View",
+    "like": "Like",
+    "audio": "Audio",
+    "actions": "Actions",
+    "duration": "Duration",
     "coverImage": "Cover Image",
     "audioFile": "Audio File",
-    "saveChanges": "Save Changes",
-    "cancel": "Cancel"
+    "add": "Add",
+    "update": "Update"
   }
 }

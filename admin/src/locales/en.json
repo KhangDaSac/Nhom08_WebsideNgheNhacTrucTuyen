@@ -10,7 +10,8 @@
     "artists": "Artists",
     "albums": "Albums",
     "playlists": "Playlists",
-    "profile": "Profile"
+    "profile": "Profile",
+    "songManager": "Song Manager"
   },
   "auth": {
     "email": "Email",
