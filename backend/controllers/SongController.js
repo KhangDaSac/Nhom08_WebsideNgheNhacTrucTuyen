@@ -24,8 +24,6 @@ const getAll = async (req, res) => {
 const getByArtistId = async (req, res) => {
     try {
         const songs = await Song.find({ "artists._id": new mongoose.Types.ObjectId(req.params.id) })
-            .populate('artist_id', 'artist_name image_url')
-            .populate('album_id', 'album_name image_url');
         res.json({
             success: true,
             data: songs
@@ -43,8 +41,6 @@ const getByArtistId = async (req, res) => {
 const getByAlbumId = async (req, res) => {
     try {
         const songs = await Song.find({ "album_id": new mongoose.Types.ObjectId(req.params.id) })
-            .populate('artist_id', 'artist_name image_url')
-            .populate('album_id', 'album_name image_url');
         res.json({
             success: true,
             data: songs
@@ -69,7 +65,6 @@ const search = async (req, res) => {
                 { "artists.artist_name": { "$regex": keyword, "$options": "i" } }
             ]
         })
-            .populate('artist_id', 'artist_name image_url');
 
         res.json({
             success: true,
@@ -138,8 +133,6 @@ const addToPlaylist = async (req, res) => {
 const getById = async (req, res) => {
     try {
         const song = await Song.findById(req.params.id)
-            .populate('artist_id', 'artist_name image_url')
-            .populate('album_id', 'album_name image_url');
         if (!song) {
             return res.status(404).json({
                 success: false,
