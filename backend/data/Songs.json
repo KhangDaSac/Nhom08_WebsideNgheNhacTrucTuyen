@@ -203,5 +203,105 @@
         "artist_name": "Rosé"
       }
     ]
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d51"
+    },
+    "song_name": "Nước Mắt Cá Sấu",
+    "likes": 126554,
+    "views": 5440006,
+    "genres": [
+      "Tình cảm",
+      "Lãng mạng"
+    ],
+    "release_date": {
+      "$date": "2024-10-01T00:00:00.000Z"
+    },
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/0/8/9/a/089a2e63ec1d49c3f6be611f1aff1a89.jpg",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744190285/Music/bnagflhpjnl9u82tm9gd.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919ff"
+        },
+        "artist_name": "HIEUTHUHAI"
+      } 
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d52"
+    },
+    "song_name": "Không Thế Say",
+    "likes": 126554,
+    "views": 5440006,
+    "genres": [
+      "Tình cảm",
+      "Lãng mạng"
+    ],
+    "release_date": {
+      "$date": "2024-10-01T00:00:00.000Z"
+    },
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/6/b/4/9/6b494b2bf5815a3b74c09bb46608504c.jpg",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744190285/Music/abs5be6xdzryl1enpm1l.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919ff"
+        },
+        "artist_name": "HIEUTHUHAI"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d53"
+    },
+    "song_name": "Hẹn Gặp Em Dưới Ánh Trăng",
+    "likes": 126554,
+    "views": 5440006,
+    "genres": [
+      "Tình cảm",
+      "Lãng mạng"
+    ],
+    "release_date": {
+      "$date": "2024-10-01T00:00:00.000Z"
+    },
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/2/6/2/7/2627c10c924237d129a289cc89cd695c.jpg",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744190285/Music/abs5be6xdzryl1enpm1l.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919ff"
+        },
+        "artist_name": "HIEUTHUHAI"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "67dc0190009bf012ef627d54"
+    },
+    "song_name": "Exit Sign",
+    "likes": 126554,
+    "views": 5440006,
+    "genres": [
+      "Tình cảm",
+      "Lãng mạng"
+    ],
+    "release_date": {
+      "$date": "2024-10-01T00:00:00.000Z"
+    },
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/d/4/a/c/d4acc6335d41bd7164173312c6123706.jpg",
+    "audio_url": "https://res.cloudinary.com/dkh3af36d/video/upload/v1744190285/Music/hngga1b35eqnbmlxyam6.mp3",
+    "artists": [
+      {
+        "_id": {
+          "$oid": "3c1337ab3187ea3b485919ff"
+        },
+        "artist_name": "HIEUTHUHAI"
+      }
+    ]
   }
 ]

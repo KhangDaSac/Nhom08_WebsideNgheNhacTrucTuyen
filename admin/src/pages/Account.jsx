@@ -150,40 +150,7 @@ const Account = () => {
             )}
           </div>
 
-          {/* Subscription Section */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-primary-50 dark:bg-primary-900/20">
-                <FiCreditCard className="w-5 h-5 text-primary-500" />
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {t('account.subscription')}
-                </h2>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-              <div className="flex items-center gap-3">
-                <TfiCrown className="w-6 h-6 text-yellow-500" />
-                <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">
-                    {user?.isPremium ? 'Premium Plan' : 'Free Plan'}
-                  </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {user?.isPremium
-                      ? 'Enjoy ad-free music and offline listening'
-                      : 'Upgrade to Premium for better features'}
-                  </p>
-                </div>
-              </div>
-              {!user?.isPremium && (
-                <button className="px-4 py-2 text-sm font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-600">
-                  {t('account.upgrade')}
-                </button>
-              )}
-            </div>
-          </div>
+      
 
           {/*Setting*/}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">

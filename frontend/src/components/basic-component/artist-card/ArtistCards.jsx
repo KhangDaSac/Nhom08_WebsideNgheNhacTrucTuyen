@@ -8,7 +8,7 @@ const ArtistCards = ({ artists, collectionTitle, viewAll }) => {
     const [currentPage, setCurrentPage] = useState(1);
     
 
-    const itemsPerPage = 4;
+    const itemsPerPage = 5;
     const totalPages = Math.ceil(artists.length / itemsPerPage);
     const indexOfLastArtist = currentPage * itemsPerPage;
     const indexOfFirstArtist = indexOfLastArtist - itemsPerPage;

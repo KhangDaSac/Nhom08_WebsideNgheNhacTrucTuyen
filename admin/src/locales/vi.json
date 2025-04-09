@@ -4,24 +4,14 @@
     "search": "Tìm kiếm",
     "library": "Thư viện",
     "account": "Tài khoản",
-    "settings": "Cài đặt",  
+    "settings": "Cài đặt",
     "logout": "Đăng xuất",
     "placeholder": "Bạn muốn nghe gì?",
     "artists": "Nghệ sĩ",
-    "albums": "Album"
-  },
-
-  "common": {
-    "search": "Tìm kiếm",
-    "login": "Đăng nhập",
-    "signup": "Đăng ký",
-    "logout": "Đăng xuất",
+    "albums": "Album",
+    "playlists": "Danh sách phát",
     "profile": "Hồ sơ",
-    "settings": "Cài đặt",
-    "language": "Ngôn ngữ",
-    "theme": "Giao diện",
-    "dark": "Tối",
-    "light": "Sáng"
+    "songManager": "Quản lý bài hát"
   },
   "auth": {
     "email": "Email",
@@ -36,10 +26,10 @@
     "loginNow": "Đăng nhập ngay"
   },
   "home": {
-    "welcome": "Chào mừng đến với Music for you",
-    "title": "Âm nhạc kết nối mọi người",
-    "trending": "Thịnh hành",
-    "newReleases": "Mới phát hành",
+    "welcome": "Chào mừng đến với Music For You",
+    "title": "Âm nhạc cho mọi người",
+    "trending": "Đang thịnh hành",
+    "newReleases": "Phát hành mới",
     "popularArtists": "Nghệ sĩ nổi bật",
     "featuredPlaylists": "Danh sách phát nổi bật",
     "exploreMore": "Khám phá thêm"
@@ -48,16 +38,8 @@
     "play": "Phát",
     "follow": "Theo dõi",
     "unfollow": "Bỏ theo dõi",
-    "about": "Thông tin về nghệ sĩ"
-  },
-  "library": {
-    "title": "Thư viện của bạn",
-    "description": "Bài hát, danh sách phát, và nghệ sĩ của bạn",
-    "search": "Tìm kiếm bài hát, nghệ sĩ, album, danh sách phát",
-    "yourPlaylists": "Danh sách phát của bạn",
-    "likedSongs": "Bài hát đã thích",
-    "followingArtists": "Nghệ sĩ đang theo dõi",
-    "placeholder": "Tìm kiếm bài hát, nghệ sĩ, album, danh sách phát của bạn"
+    "about": "Giới thiệu",
+    "biography": "Tiểu sử"
   },
   "search": {
     "placeholder": "Tìm kiếm bài hát, nghệ sĩ, album, danh sách phát",
@@ -69,93 +51,174 @@
     "songs": "Bài hát"
   },
   "login": {
-      "title": "Đăng nhập",
-      "username": {
-        "username": "Tên đăng nhập",
-        "placeholder": "Nhập email hoặc số điện thoại"
-      },
-      "password": {
-        "password": "Mật khẩu",
-        "placeholder": "Nhập mật khẩu"
-      },
-      "rememberMe": "Lưu đăng nhập",
-      "forgotPassword": "Quên mật khẩu?",
-      "login": "Đăng nhập",
-      "noAccount": "Chưa có tài khoản?",
-      "signUp": "Đăng ký"
+    "title": "Đăng nhập",
+    "username": {
+      "username": "Tên người dùng",
+      "placeholder": "Nhập email hoặc số điện thoại của bạn"
+    },
+    "password": {
+      "password": "Mật khẩu",
+      "placeholder": "Nhập mật khẩu của bạn"
+    },
+    "rememberMe": "Ghi nhớ tôi",
+    "forgotPassword": "Quên mật khẩu?",
+    "login": "Đăng nhập",
+    "noAccount": "Chưa có tài khoản?",
+    "signUp": "Đăng ký"
   },
   "signUp": {
     "title": "Đăng ký",
     "displayName": {
       "displayName": "Tên hiển thị",
-      "placeholder": "Nhập tên hiển thị"
+      "placeholder": "Nhập tên hiển thị của bạn"
     },
     "email": {
       "email": "Email",
-      "placeholder": "Nhập email"
+      "placeholder": "Nhập email của bạn"
     },
     "phone": {
-      "phone": "Số điện thoại",
-      "placeholder": "Nhập số điện thoại"
+      "phone": "Điện thoại",
+      "placeholder": "Nhập số điện thoại của bạn"
     },
     "dateOfBirth": {
       "dateOfBirth": "Ngày sinh"
     },
     "password": {
       "password": "Mật khẩu",
-      "placeholder": "Nhập mật khẩu"
+      "placeholder": "Nhập mật khẩu của bạn"
     },
     "confirmPassword": {
       "confirmPassword": "Xác nhận mật khẩu",
       "placeholder": "Xác nhận mật khẩu"
     },
     "agreeTo": "Đồng ý với",
-    "terms": "Điều khoản",
+    "terms": "điều khoản",
     "signUp": "Đăng ký",
-    "haveAccount":"Đã có tài khoản?",
+    "haveAccount": "Đã có tài khoản?",
     "login": "Đăng nhập"
   },
-  "player": {
-    "play": "Phát",
-    "pause": "Tạm dừng",
-    "next": "Tiếp theo",
-    "previous": "Trước đó",
-    "shuffle": "Phát ngẫu nhiên",
-    "repeat": "Lặp lại",
-    "queue": "Danh sách chờ",
-    "lyrics": "Lời bài hát",
-    "volume": "Âm lượng",
-    "mute": "Tắt tiếng",
-    "unmute": "Bật tiếng"
+  "account": {
+    "title": "Tài khoản",
+    "profile": "Hồ sơ",
+    "subscription": "Gói đăng ký",
+    "edit": "Chỉnh sửa hồ sơ",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "settings": "Cài đặt",
+    "name": "Tên",
+    "email": "Email",
+    "phone": "Điện thoại",
+    "changeAvatar": "Thay đổi ảnh đại diện",
+    "upgrade": "Nâng cấp",
+    "logout": "Đăng xuất",
+    "language": "Ngôn ngữ"
+  },
+  "playlists": {
+    "title": "Danh sách phát của tôi",
+    "createPlaylist": "Tạo danh sách phát",
+    "playlistName": "Tên danh sách phát",
+    "create": "Tạo",
+    "playlistNamePlaceholder": "Nhập tên danh sách phát",
+    "cancel": "Hủy",
+    "noPlaylists": "Không có danh sách phát",
+    "maxPlaylistsError": "Bạn chỉ có thể tạo tối đa 5 danh sách phát"
   },
   "playlist": {
-    "create": "Tạo danh sách phát",
-    "edit": "Chỉnh sửa danh sách phát",
-    "delete": "Xóa danh sách phát",
-    "addTo": "Thêm vào danh sách phát",
-    "removeFrom": "Xóa khỏi danh sách phát",
-    "public": "Công khai",
-    "private": "Riêng tư"
+    "title": "Danh sách phát",
+    "songs": "Bài hát",
+    "play": "Phát",
+    "createdOn": "Được tạo vào",
+    "noSongs": "Không có bài hát trong danh sách phát này",
+    "confirmDelete": "Xác nhận xóa",
+    "deleteWarning": "Bạn có chắc muốn xóa danh sách phát này không?",
+    "delete": "Xóa",
+    "cancel": "Hủy"
+  },
+  "library": {
+    "title": "Thư viện của bạn",
+    "songs_liked": "Bài hát đã thích",
+    "albums_liked": "Album đã thích",
+    "artists_followed": "Nghệ sĩ đang theo dõi",
+    "no_liked_songs": "Không có bài hát nào được thích",
+    "no_liked_albums": "Không có album nào được thích",
+    "no_followed_artists": "Không có nghệ sĩ nào đang theo dõi"
   },
   "collection": {
     "song": {
       "songs": "Bài hát",
-      "popularSongs": "Bài hát nổi bật",
+      "popularSongs": "Bài hát phổ biến",
       "title": "Tiêu đề",
-      "view": "Lượt nghe",
+      "view": "Xem",
       "like": "Thích"
     },
     "album": {
       "albums": "Album",
-      "popularAlbums": "Album nổi bật"
+      "popularAlbums": "Album phổ biến"
     },
     "artist": {
       "artists": "Nghệ sĩ",
+      "popularArtists": "Nghệ sĩ phổ biến",
       "followers": "Người theo dõi"
     },
     "playlist": {
       "playlists": "Danh sách phát"
     },
-    "viewAll": "Xem tất cả"
+    "viewAll": "Xem tất cả",
+    "remove": "Xóa"
+  },
+  "toast": {
+    "removeSong": {
+      "success": "Đã xóa bài hát khỏi danh sách phát",
+      "error": "Lỗi khi xóa bài hát khỏi danh sách phát"
+    },
+    "addSong": {
+      "success": "Đã thêm bài hát '{{songName}}' vào danh sách phát '{{playlistName}}'",
+      "error": "Lỗi khi thêm bài hát vào danh sách phát"
+    },
+    "signUp": {
+      "success": "Đăng ký thành công",
+      "error": "Lỗi khi đăng ký"
+    },
+    "login": {
+      "success": "Đăng nhập thành công",
+      "error": "Đăng nhập thất bại"
+    },
+    "account": {
+      "update": {
+        "success": "Cập nhật tài khoản thành công",
+        "error": "Lỗi khi cập nhật tài khoản"
+      }
+    }
+  },
+  "song": {
+    "play": "Phát",
+    "pause": "Tạm dừng",
+    "like": "Thích",
+    "dislike": "Không thích",
+    "addToPlaylist": "Thêm vào danh sách phát",
+    "genres": "Thể loại",
+    "plays": "Lượt phát",
+    "likes": "Lượt thích",
+    "liked": "Đã thích"
+  },
+  "songManager": {
+    "title": "Quản lý bài hát",
+    "addSong": "Thêm bài hát",
+    "editSong": "Chỉnh sửa bài hát",
+    "deleteSong": "Xóa bài hát",
+    "image": "Hình ảnh",
+    "songName": "Tên bài hát",
+    "artistName": "Tên nghệ sĩ",
+    "genre": "Thể loại",
+    "releaseDate": "Ngày phát hành",
+    "view": "Xem",
+    "like": "Thích",
+    "audio": "Âm thanh",
+    "actions": "Hành động",
+    "duration": "Thời lượng",
+    "coverImage": "Ảnh bìa",
+    "audioFile": "Tệp âm thanh",
+    "add": "Thêm",
+    "update": "Cập nhật"
   }
-} 
+}

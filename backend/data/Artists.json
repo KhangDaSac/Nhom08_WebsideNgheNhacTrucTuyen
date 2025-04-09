@@ -135,5 +135,51 @@
         "image_url": "https://i.scdn.co/image/ab67616d0000b27336032cb4acd9df050bc2e197"
       }
     ]
+  },
+  {
+    "_id": {
+      "$oid": "3c1337ab3187ea3b485919ff"
+    },
+    "artist_name": "HIEUTHUHAI",
+    "date_of_birth": {
+      "$date": "1997-01-01T00:00:00.000Z"
+    },
+    "followers": 150000,
+    "image_url": "https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/avatars/e/c/6/c/ec6cb19cfded44f239c48132ba77082f.jpg",
+    "genres": [
+      "Rap",
+      "Hip-hop"
+    ],
+    "description": "Trần Minh Hiếu (sinh ngày 28 tháng 9 năm 1999), thường được biết đến với nghệ danh Hieuthuhai (viết cách điệu là HIEUTHUHAI hoặc hieuthuhai), là một nam rapper và ca sĩ kiêm sáng tác nhạc người Việt Nam. Anh là thành viên của tổ đội Gerdnang.",
+    "songs": [
+      {
+        "_id": {
+          "$oid": "67dc0190009bf012ef627d51"
+        },
+        "song_name": "Nước Mắt Cá Sấu",
+        "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/0/8/9/a/089a2e63ec1d49c3f6be611f1aff1a89.jpg"
+      },
+      {
+        "_id": {
+          "$oid": "67dc0190009bf012ef627d52"
+        },
+        "song_name": "Không Thế Say",
+        "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/6/b/4/9/6b494b2bf5815a3b74c09bb46608504c.jpg"
+      },
+      {
+        "_id": {
+          "$oid": "67dc0190009bf012ef627d53"
+        },
+        "song_name": "Hẹn Gặp Em Dưới Ánh Trăng",
+        "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/2/6/2/7/2627c10c924237d129a289cc89cd695c.jpg"
+      },
+      {
+        "_id": {
+          "$oid": "67dc0190009bf012ef627d54"
+        },
+        "song_name": "Exit Sign",
+        "image_url": "https://photo-resize-zmp3.zmdcdn.me/w600_r1x1_jpeg/cover/d/4/a/c/d4acc6335d41bd7164173312c6123706.jpg"
+      }
+    ]
   }
 ]
