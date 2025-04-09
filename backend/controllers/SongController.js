@@ -187,6 +187,46 @@ const deleteSong = async (req, res) => {
     }
 }
 
+const addSong = async (req, res) => {
+    try {
+        const { song_name, genres, release_date, audio_url, image_url, artist_id } = req.body;
+        const newSong = new Song({
+            song_name,
+            genres,
+            release_date,
+            audio_url,
+            image_url
+        });
+
+        const artist = await Artist.findById(artist_id);
+        if (!artist) {
+            return res.status(404).json({
+                success: false,
+                message: 'Artist not found'
+            });
+        }
+        
+        newSong.artists.push({
+            _id: artist._id,
+            artist_name: artist.artist_name,
+            image_url: artist.image_url
+        });
+
+        await newSong.save();
+        res.json({
+            success: true,
+            message: 'Song added successfully',
+            data: newSong
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi server',
+            error: err.message
+        });
+    }
+}
+
 module.exports = {
     getAll,
     getByArtistId,
@@ -194,5 +234,6 @@ module.exports = {
     search,
     addToPlaylist,
     getById,
-    deleteSong
+    deleteSong,
+    addSong
 };
