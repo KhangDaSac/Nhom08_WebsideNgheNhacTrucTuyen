@@ -50,7 +50,6 @@ const Song = ({ song }) => {
           <audio
             controls
             src={song.audio_url}
-            className="bg-transparent"
             controlsList="nodownload"
           />
         ) : (

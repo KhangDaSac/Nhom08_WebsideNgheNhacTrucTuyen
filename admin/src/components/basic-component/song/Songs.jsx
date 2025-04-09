@@ -1,44 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import Song from './Song';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Songs = ({ songs }) => {
+    const { t } = useTranslation();
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(5);
     
-    // Reset to first page when songs array changes
     useEffect(() => {
         setCurrentPage(1);
     }, [songs]);
     
-    // Calculate current songs to display
     const indexOfLastSong = currentPage * songsPerPage;
     const indexOfFirstSong = indexOfLastSong - songsPerPage;
     const currentSongs = songs.slice(indexOfFirstSong, indexOfLastSong);
-    
-    // Calculate total pages
+
     const totalPages = Math.ceil(songs.length / songsPerPage);
     
-    // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
     const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
 
+    /*
+    "image": "Image",
+    "songName": "Song Name",
+    "artistName": "Artist Name",
+    "genre": "Genre",
+    "releaseDate": "Release Date",
+    "view": "View",
+    "like": "Like",
+    "audio": "Audio",
+    "actions": "Actions",
+     */
     return (
         <div>
             <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">
                 <table className="w-full text-left">
                     <thead className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                         <tr>
-                            <th className="p-3 border-b dark:border-gray-600">Ảnh</th>
-                            <th className="p-3 border-b dark:border-gray-600">Tên bài hát</th>
-                            <th className="p-3 border-b dark:border-gray-600">Nghệ sĩ</th>
-                            <th className="p-3 border-b dark:border-gray-600">Thể loại</th>
-                            <th className="p-3 border-b dark:border-gray-600">Phát hành</th>
-                            <th className="p-3 border-b dark:border-gray-600">Lượt xem</th>
-                            <th className="p-3 border-b dark:border-gray-600">Lượt thích</th>
-                            <th className="p-3 border-b dark:border-gray-600">Nghe thử</th>
-                            <th className="p-3 border-b dark:border-gray-600">Hành động</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.image')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.songName')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.artistName')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.genre')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.releaseDate')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.view')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.like')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.audio')}</th>
+                            <th className="p-3 border-b dark:border-gray-600">{t('songManager.actions')}</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -57,7 +66,6 @@ const Songs = ({ songs }) => {
                 </table>
             </div>
             
-            {/* Pagination Controls */}
             {totalPages > 1 && (
                 <div className="flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-4 rounded-lg shadow">
                     <div className="flex-1 flex justify-between sm:hidden">
