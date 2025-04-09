@@ -30,7 +30,6 @@ const Layout = ({ children }) => {
         <Sidebar />
       </aside>
 
-      {/* Mobile Sidebar - Slide from left with shadow */}
       <div
         className={`fixed inset-y-0 left-0 transform ${isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
           } transition-all duration-300 ease-in-out md:hidden z-50 w-64`}
@@ -38,14 +37,12 @@ const Layout = ({ children }) => {
         <Sidebar onClose={closeSidebar} />
       </div>
 
-      {/* Overlay for mobile sidebar */}
       <div
         className={`fixed inset-0 bg-gray-900/50 transition-opacity duration-300 md:hidden ${isSidebarOpen ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
           }`}
         onClick={closeSidebar}
       />
 
-      {/* Mobile toggle button - Centered on left edge */}
       {!isSidebarOpen &&
         <button
           onClick={toggleSidebar}
@@ -65,6 +62,9 @@ const Layout = ({ children }) => {
 
       <div className="flex-1 flex flex-col min-h-0 md:ml-64">
         <Navbar />
+        <main className="flex-1 p-4 md:p-6 pt-16 md:pt-6 pb-24 overflow-y-auto">
+          {children}
+        </main>
       </div>
     </div>
   );

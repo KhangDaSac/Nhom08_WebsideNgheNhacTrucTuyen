@@ -7,17 +7,8 @@
     "avatar_url": "https://res.cloudinary.com/dkh3af36d/image/upload/v1744029008/images/s3ylrplne8en81goxma4.jpg",
     "email": "daophuckhang090@gmail.com",
     "phone": "0948238791",
+    "admin": true,
     "password_hash": "$2b$10$DS800T/XevAApahP6vireOFVfjTPSniC7Y1ynzqIek7KG67T4goXW"
-  },
-  {
-    "_id": {
-      "$oid": "67f3943242881ae7384336c7"
-    },
-    "display_name": "Khang",
-    "avatar_url": "https://res.cloudinary.com/dkh3af36d/image/upload/v1744029008/images/s3ylrplne8en81goxma4.jpg",
-    "email": "daophuckhang123@gmail.com",
-    "phone": "0123456789",
-    "password_hash": "$2b$10$MZ9GaKUXEQeIACFRQniCF.LY2tTL71xpNREl0hqqEE5aB/C3KjNly"
   },
   {
     "_id": {
@@ -28,6 +19,7 @@
     "email": "daophuckhang1234@gmail.com",
     "phone": "0123456789",
     "password_hash": "$2b$10$DS800T/XevAApahP6vireOFVfjTPSniC7Y1ynzqIek7KG67T4goXW",
+    "admin": false,
     "library_id": {
       "$oid": "d44e7a2bda24b6d0dd90972c"
     }
