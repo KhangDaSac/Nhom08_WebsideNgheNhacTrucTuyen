@@ -193,10 +193,7 @@ const SongManager = () => {
       const submitData = new FormData();
       submitData.append('song_name', formData.song_name);
       submitData.append('artist_id', formData.artist_id);
-
-      formData.genres.forEach(genre => {
-        submitData.append('genres[]', genre);
-      });
+      submitData.append('genres', formData.genres);
 
       if (formData.release_date) {
         submitData.append('release_date', formData.release_date);

@@ -30,11 +30,11 @@ const songSchema = new mongoose.Schema({
     image_url: {
         type: String
     },
-    artist_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Artist',
-        required: true
-    }
+    artists: [{
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' },
+        artist_name: { type: String },
+        image_url: { type: String }
+    }]
 });
 
 module.exports = mongoose.model('Song', songSchema); 

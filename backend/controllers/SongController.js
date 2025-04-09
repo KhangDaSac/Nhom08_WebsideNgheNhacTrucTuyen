@@ -7,9 +7,7 @@ const mongoose = require('mongoose');
 
 const getAll = async (req, res) => {
     try {
-        const songs = await Song.find()
-            .populate('artist_id', 'artist_name image_url')
-            .populate('album_id', 'album_name image_url');
+        const songs = await Song.find();
         res.json({
             success: true,
             data: songs
@@ -195,7 +193,8 @@ const addSong = async (req, res) => {
             genres,
             release_date,
             audio_url,
-            image_url
+            image_url,
+            artists: []
         });
 
         const artist = await Artist.findById(artist_id);
@@ -205,9 +204,10 @@ const addSong = async (req, res) => {
                 message: 'Artist not found'
             });
         }
-        
+
         newSong.artists.push({
             _id: artist._id,
+            artist_id: artist._id,
             artist_name: artist.artist_name,
             image_url: artist.image_url
         });
